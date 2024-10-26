@@ -1,554 +1,712 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Construction Website</title>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Construction Website</title>
 
-  <!-- font awesome cdn link  -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
 
-  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+   <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
-  <!-- custom css file link  -->
-  <link rel="stylesheet" href="css/style.css">
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
 
 </head>
-
 <body>
+   
+<!-- header section starts  -->
 
-  <!-- header section starts  -->
+<header class="header">
 
-  <header class="header" style="position: relative; padding: 20px 30px; background: #fff; display: flex; align-items: center; justify-content: space-between;">
+   <a href="#" class="logo">Alazab<span>Construction</span></a>
 
-    <a href="https://alazab-co.daftra.com/" class="btn" style="background: #ff6600; color: #fff; padding: 10px 20px; border-radius: 5px; text-decoration: none; position: absolute; top: 20px; right: 20px; z-index: 1000;">Visit Daftra</a>
-    <a href="#" class="logo" style="display: flex; align-items: center;"><img src="https://alazab-co.daftra.com/files/images/site-logos/66e5d94e6ffda_aazz.png" alt="Al-Azab Logo" style="height: 60px; margin-right: 10px;"> <span style="font-size: 24px; font-weight: bold; color: #333;">Al-azab Construction</span></a>
+   <nav class="navbar">
+      <a href="#home">home</a>
+      <a href="#about">about</a>
+      <a href="#services">services</a>
+      <a href="#projects">projects</a>
+      <a href="#pricing">pricing</a>
+      <a href="#contact">contact</a>
+      <a href="#blogs">blogs</a>
+   </nav>
 
-    <nav class="navbar" style="flex-grow: 1; margin-left: 40px;">$1</nav>
+   <div class="icons">
+      <div id="menu-btn" class="fas fa-bars"></div>
+      <div id="info-btn" class="fas fa-info-circle"></div>
+      <div id="search-btn" class="fas fa-search"></div>
+      <div id="login-btn" class="fas fa-user"></div>
+   </div>
 
-    <div class="icons" style="display: flex; gap: 15px;">$1</div>
-    <div id="info-btn" class="fas fa-info-circle"></div>
-    <div id="search-btn" class="fas fa-search"></div>
-    <div id="login-btn" class="fas fa-user"></div>
-    </div>
-
-    <form action="" class="search-form" style="position: absolute; top: 80px; right: 20px; background: #fff; padding: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); border-radius: 5px;">
+   <form action="" class="search-form">
       <input type="search" name="" placeholder="search here..." id="search-box">
       <label for="search-box" class="fas fa-search"></label>
-    </form>
+   </form>
 
-    <form action="" class="login-form" style="position: absolute; top: 80px; right: 20px; background: #fff; padding: 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); border-radius: 5px; width: 300px;">
-      <h3 style="font-size: 24px; color: #333; margin-bottom: 15px;"></h3>
+   <form action="" class="login-form">
+      <h3>login form</h3>
       <input type="email" placeholder="enter your email" class="box">
       <input type="password" placeholder="enter your password" class="box">
       <div class="flex">
-        <input type="checkbox" name="" id="remember-me">
-        <label for="remember-me">remember me</label>
-        <a href="#">forgot password?</a>
+         <input type="checkbox" name="" id="remember-me">
+         <label for="remember-me">remember me</label>
+         <a href="#">forgot password?</a>
       </div>
       <input type="submit" value="login now" class="btn">
-      <p style="font-size: 16px; color: #666; line-height: 1.5;"></p>
-    </form>
+      <p>don't have an account <a href="#">create one!</a></p>
+   </form>
 
-  </header>
+</header>
 
-  <div class="contact-info">
+<div class="contact-info">
 
-    <div id="close-contact-info" class="fas fa-times"></div>
+   <div id="close-contact-info" class="fas fa-times"></div>
 
-    <div class="info">
+   <div class="info">
       <i class="fas fa-phone"></i>
       <h3>phone number</h3>
       <p>+201004006620</p>
       <p>+201014536600</p>
-    </div>
+   </div>
 
-    <div class="info">
+   <div class="info">
       <i class="fas fa-envelope"></i>
       <h3>email address</h3>
       <p>info@al-azab.co</p>
       <p>mohamed@al-azab.co</p>
-    </div>
+   </div>
 
-    <div class="info">
+   <div class="info">
       <i class="fas fa-map-marker-alt"></i>
       <h3>office address</h3>
-      <p>500st, Maadi, Cairo, Egypt</p>
-    </div>
+      <p>8/500st Maadi, Cairo, Egypt</p>
+   </div>
 
-    <div class="share">
+   <div class="share">
       <a href="https://www.facebook.com/alazab24" class="fab fa-facebook-f"></a>
       <a href="https://x.com/MahamedAzab2" class="fab fa-twitter"></a>
       <a href="https://www.instagram.com/alazab.co/" class="fab fa-instagram"></a>
       <a href="https://www.linkedin.com/in/mohamed-azab-109a70274/" class="fab fa-linkedin"></a>
-    </div>
+   </div>
 
-  </div>
+</div>
 
-  <!-- header section ends -->
+<!-- header section ends -->
 
-  <!-- home section starts  -->
+<!-- home section starts  -->
 
-  <section class="home" id="home" style="position: relative;">
-    <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1;"></div>
+<section class="home" id="home">
 
-    <div class="swiper home-slider" style="position: relative; z-index: 2;">
+   <div class="swiper home-slider">
 
       <div class="swiper-wrapper">
 
-        <section class="swiper-slide slide" style="background: url(images/home-slide-1.jpg) no-repeat;">
-          <div class="content">
-            <h3>we provide best service</h3>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur beatae iusto pariatur laborum magnam eos!</p>
-            <a href="#about" class="btn">get started</a>
-          </div>
-        </section>
+         <section class="swiper-slide slide" style="background: url(images/home-slide-1.jpg) no-repeat;">
+            <div class="content">
+               <h3>we provide best service</h3>
+               <p>At Al-Azab Construction', we provide high-quality building services for residential, commercial, and administrative units, focusing on quality, safety, and sustainable materials</p>
+               <a href="alazab-co.daftra.com" class="btn">get started</a>
+            </div>
+         </section>
 
-        <section class="swiper-slide slide" style="background: url(images/home-slide-2.jpg) no-repeat;">
-          <div class="content">
-            <h3>making dream come to life</h3>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur beatae iusto pariatur laborum magnam eos!</p>
-            <a href="#about" class="btn">get started</a>
-          </div>
-        </section>
+         <section class="swiper-slide slide" style="background: url(images/home-slide-2.jpg) no-repeat;">
+            <div class="content">
+               <h3>making dream come to life</h3>
+               <p>Al-Azab Construction', we strive to bring our clients' dreams to life by providing high-quality building services for residential, commercial, and administrative units, with a focus on quality, safety, and sustainable materials</p>
+               <a href="alazab-co.daftra.com" class="btn">get started</a>
+            </div>
+         </section>
 
-        <section class="swiper-slide slide" style="background: url(images/home-slide-3.jpg) no-repeat;">
-          <div class="content">
-            <h3>from concept to creation</h3>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur beatae iusto pariatur laborum magnam eos!</p>
-            <a href="#about" class="btn">get started</a>
-          </div>
-        </section>
+         <section class="swiper-slide slide" style="background: url(images/home-slide-3.jpg) no-repeat;">
+            <div class="content">
+               <h3>from concept to creation</h3>
+               <p>At 'Al-Azab Construction', we bring ideas to life, from concept to creation, by providing high-quality building services for residential, commercial, and administrative units, focusing on quality, safety, and sustainable materials</p>
+               <a href="alazab-co.daftra.com" class="btn">get started</a>
+            </div>
+         </section>
 
       </div>
 
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
 
-    </div>
+   </div>
 
-  </section>
+</section>
 
-  <!-- home section ends -->
+<!-- home section ends -->
 
-  <!-- about section starts  -->
+<!-- about section starts  -->
 
-  <section class="about" id="about">
+<section class="about" id="about">
 
-    <h1 class="heading"> about us </h1>
+   <h1 class="heading"> about us </h1>
 
-    <div class="row">
+   <div class="row">
 
       <div class="video">
-        <video src="images/about-vid.mp4" loop muted autoplay></video>
+         <video src="images/about-vid.mp4" loop muted autoplay></video>
       </div>
 
       <div class="content">
-        <h3>We will provide you the best work which you dreamt for!</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas et vero mollitia nemo corporis consequatur aspernatur distinctio dignissimos velit nam.</p>
-        <a href="#services" class="btn">read more</a>
+         <h3>We will provide you the best work which you dreamt for!</h3>
+         <p>At 'Al-Azab Construction', we bring ideas to life, from concept to creation, providing you the best work you've dreamed of through high-quality building services for residential, commercial, and administrative units, focusing on quality, safety, and sustainable materials</p>
+         <a href="#services" class="btn">read more</a>
       </div>
 
-    </div>
+   </div>
 
-    <div class="box-container">
-
-      <div class="box" style="flex: 0 1 calc(33.333% - 30px); background: #fff; box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); border-radius: 10px; overflow: hidden; transition: transform 0.3s;">
-        <div style="padding: 20px;"></div>
-
-        <div class="box">
-          <h3>1500+</h3>
-          <p>project completed</p>
-        </div>
-
-        <div class="box">
-          <h3>790+</h3>
-          <p>satisfied clients</p>
-        </div>
-
-        <div class="box">
-          <h3>450+</h3>
-          <p>active workers</p>
-        </div>
-
-      </div>
-
-  </section>
-
-  <!-- about section ends -->
-
-  <!-- services section starts  -->
-
-  <section class="services" id="services" style="padding: 50px 0;">
-
-    <h1 class="heading" style="text-align: center; font-size: 36px; margin-bottom: 40px;"> our services </h1>
-
-    <div class="box-container" style="display: flex; flex-wrap: wrap; justify-content: space-around; gap: 30px;">
+   <div class="box-container">
 
       <div class="box">
-        <img src="images/" alt="" style="width: 100%; height: auto;">
-        <h3>building construction</h3>
-        <p>We provide complete building construction services, including planning, management, and execution, ensuring quality and safety.</p>
+         <h3>10+</h3>
+         <p>years of experience</p>
       </div>
 
       <div class="box">
-        <img src="images/service-2.png" alt="">
-        <h3>house renovation</h3>
-        <p>Transform your existing space with our professional renovation services, giving your home a fresh and modern look.</p>
+         <h3>1500+</h3>
+         <p>project completed</p>
       </div>
 
       <div class="box">
-        <img src="images/service-3.png" alt="">
-        <h3>architectural design</h3>
-        <p>Our architectural design services are tailored to create innovative and sustainable solutions that fit your needs.</p>
+         <h3>790+</h3>
+         <p>satiesfied clients</p>
       </div>
 
       <div class="box">
-        <img src="images/service-4.png" alt="">
-        <h3>material supply</h3>
-        <p>We supply high-quality construction materials, ensuring your project meets the highest standards of quality and durability.</p>
+         <h3>450+</h3>
+         <p>active workers</p>
+      </div>
+
+   </div>
+
+</section>
+
+<!-- about section ends -->
+
+<!-- services section starts  -->
+
+<section class="services" id="services">
+
+   <h1 class="heading"> our services </h1>
+
+   <div class="box-container">
+
+      <div class="box">
+         <img src="images/service-1.png" alt="">
+         <h3>building construction</h3>
+         <p>turns your dreams into reality with quality, safety, and excellence in construction</p>
       </div>
 
       <div class="box">
-        <img src="images/service-5.png" alt="">
-        <h3>construction consultant</h3>
-        <p>Get expert advice from our experienced consultants to ensure the success of your construction projects.</p>
+         <img src="images/service-2.png" alt="">
+         <h3>house renovation</h3>
+         <p>We renovate your home to match your dreams, with high quality and attention to detail</p>
       </div>
 
       <div class="box">
-        <img src="images/service-6.png" alt="">
-        <h3>interior design</h3>
-        <p>Our interior design services bring elegance and functionality to your living or working space, reflecting your style and vision.</p>
+         <img src="images/service-3.png" alt="">
+         <h3>architechture design</h3>
+         <p>We transform your ideas into creative architectural designs that blend beauty and functionality.
+
+         </p>
       </div>
 
       <div class="box">
-        <img src="images/service-7.png" alt="">
-        <h3>building maintenance</h3>
-        <p>We provide reliable building maintenance services to keep your property in excellent condition year-round.</p>
+         <img src="images/service-4.png" alt="">
+         <h3>material supply</h3>
+         <p>We supply building materials of the highest quality to ensure the success of your projects</p>
       </div>
 
       <div class="box">
-        <img src="images/service-8.png" alt="">
-        <h3>building renovation</h3>
-        <p>Our building renovation services will enhance the value and aesthetics of your property, ensuring a modern and functional space.</p>
+         <img src="images/service-5.png" alt="">
+         <h3>construction consultant</h3>
+         <p>We provide specialized construction consultancy to help you make the best decisions for your projects</p>
       </div>
 
       <div class="box">
-        <img src="images/service-9.png" alt="">
-        <h3>project management</h3>
-        <p>Our project management services ensure that your construction projects are completed on time, within budget, and to the highest standards of quality.</p>
+         <img src="images/service-6.png" alt="">
+         <h3>interior design</h3>
+         <p>We create interior designs that reflect your style and provide comfort and elegance to your home or office</p>
       </div>
 
-    </div>
+      <div class="box">
+         <img src="images/service-7.png" alt="">
+         <h3>building maintenance</h3>
+         <p>We provide comprehensive building maintenance solutions to ensure continued quality and top performance</p>
+      </div>
 
-  </section>
+      <div class="box">
+         <img src="images/service-8.png" alt="">
+         <h3>building renovation</h3>
+         <p>We renovate buildings to give them new life, with quality and a modern touch</p>
+      </div>
+      
+   </div>
 
-  <!-- services section ends -->
+</section>
 
-  <!-- projects section starts  -->
+<!-- services section ends -->
 
-  <section class="projects" id="projects">
+<!-- projects section starts  -->
 
-    <h1 class="heading"> our projects </h1>
+<section class="projects" id="projects">
 
-    <div class="box-container">
+   <h1 class="heading"> our projects </h1>
+
+   <div class="box-container">
 
       <a href="images/project-1.jpg" class="box">
-        <div class="image">
-          <img src="images/project-1.jpg" alt="">
-        </div>
-        <div class="content">
-          <div class="info">
-            <h3>luxury villa</h3>
-            <p>architecture, interior design</p>
-          </div>
-          <i class="fas fa-plus"></i>
-        </div>
+         <div class="image">
+            <img src="images/project-1.jpg" alt="">
+         </div>
+         <div class="content">
+            <div class="info">
+               <h3>dream home</h3>
+               <p>construction, design</p>
+            </div>
+            <i class="fas fa-plus"></i>
+         </div>
       </a>
 
       <a href="images/project-2.jpg" class="box">
-        <div class="image">
-          <img src="images/project-2.jpg" alt="">
-        </div>
-        <div class="content">
-          <div class="info">
-            <h3>modern office space</h3>
-            <p>construction, refurbishment</p>
-          </div>
-          <i class="fas fa-plus"></i>
-        </div>
+         <div class="image">
+            <img src="images/project-2.jpg" alt="">
+         </div>
+         <div class="content">
+            <div class="info">
+               <h3>dream home</h3>
+               <p>luxury villa</p>
+            </div>
+            <i class="fas fa-plus"></i>
+         </div>
       </a>
 
       <a href="images/project-3.jpg" class="box">
-        <div class="image">
-          <img src="images/project-3.jpg" alt="">
-        </div>
-        <div class="content">
-          <div class="info">
-            <h3>residential building</h3>
-            <p>full construction, design</p>
-          </div>
-          <i class="fas fa-plus"></i>
-        </div>
+         <div class="image">
+            <img src="images/project-3.jpg" alt="">
+         </div>
+         <div class="content">
+            <div class="info">
+               <h3>dream home</h3>
+               <p>construction, refurbishment</p>
+            </div>
+            <i class="fas fa-plus"></i>
+         </div>
       </a>
 
       <a href="images/project-4.jpg" class="box">
-        <div class="image">
-          <img src="images/project-4.jpg" alt="">
-        </div>
-        <div class="content">
-          <div class="info">
-            <h3>commercial complex</h3>
-            <p>planning, construction</p>
-          </div>
-          <i class="fas fa-plus"></i>
-        </div>
+         <div class="image">
+            <img src="images/project-4.jpg" alt="">
+         </div>
+         <div class="content">
+            <div class="info">
+               <h3>dream home</h3>
+               <p>full construction, design</p>
+            </div>
+            <i class="fas fa-plus"></i>
+         </div>
       </a>
 
       <a href="images/project-5.jpg" class="box">
-        <div class="image">
-          <img src="images/project-5.jpg" alt="">
-        </div>
-        <div class="content">
-          <div class="info">
-            <h3>renovated apartment</h3>
-            <p>renovation, interior design</p>
-          </div>
-          <i class="fas fa-plus"></i>
-        </div>
+         <div class="image">
+            <img src="images/project-5.jpg" alt="">
+         </div>
+         <div class="content">
+            <div class="info">
+               <h3>dream home</h3>
+               <p>commercial complex</p>
+            </div>
+            <i class="fas fa-plus"></i>
+         </div>
       </a>
 
       <a href="images/project-6.jpg" class="box">
-        <div class="image">
-          <img src="images/project-6.jpg" alt="">
-        </div>
-        <div class="content">
-          <div class="info">
-            <h3>eco-friendly house</h3>
-            <p>sustainable construction, design</p>
-          </div>
-          <i class="fas fa-plus"></i>
-        </div>
+         <div class="image">
+            <img src="images/project-6.jpg" alt="">
+         </div>
+         <div class="content">
+            <div class="info">
+               <h3>dream home</h3>
+               <p>renovation, interior design</p>
+            </div>
+            <i class="fas fa-plus"></i>
+         </div>
       </a>
 
-    </div>
+   </div>
 
-  </section>
+</section>
 
-  <!-- projects section ends -->
+<!-- projects section ends -->
 
-  <!-- reviews section starts  -->
+<!-- reviews section starts  -->
 
-  <section class="reviews" style="padding: 50px 0; background: #f9f9f9;">
+<section class="reviews">
 
-    <h1 class="heading" style="text-align: center; font-size: 36px; margin-bottom: 40px;"> آراء العملاء </h1>
+   <h1 class="heading"> clients reviews </h1>
 
-    <div class="swiper reviews-slider" style="max-width: 800px; margin: 0 auto;">
+   <div class="swiper reviews-slider">
 
-      <div class="swiper-wrapper" style="display: flex; flex-direction: column; gap: 30px;">
-
-        <div class="swiper-slide slide" style="background: #fff; padding: 20px; box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); border-radius: 10px;">
-          <p style="font-size: 16px; color: #666; line-height: 1.6;"></p>
-          <div class="user" style="display: flex; align-items: center; margin-top: 20px;">
-            <img src="images/pic-1.png" alt="" style="width: 60px; height: 60px; border-radius: 50%; margin-right: 15px;">
-            <div class="info">
-    <div class="swiper-slide slide">
-      <p>They exceeded our expectations in terms of quality and efficiency. The team was professional and communicated well throughout the project.</p>
-      <div class="user">
-        <img src="images/pic-2.png" alt="">
-        <div class="info">
-          <h3>Fatima Khaled</h3>
-          <div class="stars">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="swiper-slide slide">
-      <p>Working with Al-Azab Construction was a smooth process. They handled everything professionally and ensured we were satisfied with every detail.</p>
-      <div class="user">
-        <img src="images/pic-3.png" alt="">
-        <div class="info">
-          <h3>Kareem Hassan</h3>
-          <div class="stars">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="swiper-slide slide">
-      <p>We were very impressed with their work ethic and commitment. The project was delivered on time, and we were thrilled with the results.</p>
-      <div class="user">
-        <img src="images/pic-4.png" alt="">
-        <div class="info">
-          <h3>Sara Ahmed</h3>
-          <div class="stars">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="swiper-slide slide">
-      <p>Al-Azab Construction's team was friendly and professional. They made sure everything was perfect, and we love the finished product.</p>
-      <div class="user">
-        <img src="images/pic-5.png" alt="">
-        <div class="info">
-          <h3>Mohamed Youssef</h3>
-          <div class="stars">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="swiper-slide slide">
-      <p>The team went above and beyond to meet our needs. The quality of their work was exceptional, and we would highly recommend them.</p>
-      <div class="user">
-        <img src="images/pic-6.png" alt="">
-        <div class="info">
-          <h3>Layla Hassan</h3>
-          <div class="stars">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    </div>
-
-    </div>
-
-  </section>
-
-  <!-- reviews section ends -->
-
-  <!-- pricing section starts  -->
-
-  <section class="pricing" id="pricing">
-
-    <h1 class="heading"> our pricing </h1>
-
-    <div class="box-container">
-
-      <div class="box">
-        <i class="fas fa-home"></i>
-        <h3>basic plan</h3>
-        <div class="price"><span>$</span>250<span>/mo</span></div>
-        <div class="list">
-          <p>interior design</p>
-          <p>refurbishment</p>
-          <p>material supply</p>
-          <p>maintenance</p>
-          <p>24/7 support</p>
-        </div>
-        <a href="#" class="btn">choose plan</a>
-      </div>
-
-      <div class="box">
-        <i class="fas fa-building"></i>
-        <h3>premium plan</h3>
-        <div class="price"><span>$</span>650<span>/mo</span></div>
-        <div class="list">
-          <p>interior design</p>
-          <p>refurbishment</p>
-          <p>material supply</p>
-          <p>maintenance</p>
-          <p>24/7 support</p>
-        </div>
-        <a href="#" class="btn">choose plan</a>
-      </div>
-
-      <div class="box">
-        <i class="fas fa-city"></i>
-        <h3>ultimate plan</h3>
-        <div class="price"><span>$</span>1250<span>/mo</span></div>
-        <div class="list">
-          <p>interior design</p>
-          <p>refurbishment</p>
-          <p>material supply</p>
-          <p>maintenance</p>
-          <p>24/7 support</p>
-        </div>
-        <a href="#" class="btn">choose plan</a>
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- pricing section ends -->
-
-  <!-- contact section starts  -->
-
-  <section class="contact" id="contact">
-
-    <h1 class="heading"> contact us </h1>
-
-    <div class="row">
-
-      <iframe class="map" src="https://maps.app.goo.gl/JX5R7Xmt3krceG7V8" allowfullscreen="" loading="lazy" style="width: 100%; height: 300px; border: none; margin-bottom: 20px;"></iframe>
-
-      <form id="contact-form" style="width: 100%; max-width: 500px; margin: 0 auto; padding: 20px; background: #fff; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); border-radius: 5px;">
-        <h3>get in touch</h3>
-        <input type="text" placeholder="name" class="box">
-        <input type="email" placeholder="email" class="box">
-        <input type="number" placeholder="phone" class="box">
-        <textarea name="" placeholder="message" class="box" id="" cols="30" rows="10"></textarea>
-        <input type="submit" value="send message" class="btn">
-      </form>
-
-    </div>
-
-  </section>
-
-  <!-- contact section ends -->
-
-  <!-- client logo section starts -->
-
-  <section class="logo-container">
-    <div class="swiper logo-slider">
       <div class="swiper-wrapper">
-        <div class="swiper-slide slide"><img src="https://i.ibb.co/3TB24jh/logo-abbu-auf.png" alt=""></div>
-        <div class="swiper-slide slide"><img src="https://i.ibb.co/yybNmZx/45393206.jpg" alt=""></div>
-        <div class="swiper-slide slide"><img src="https://i.ibb.co/CvtqmhR/images.jpg" alt=""></div>
-        <div class="swiper-slide slide"><img src="https://i.ibb.co/BnwwqkB/images-1.png" alt=""></div>
-        <div class="swiper-slide slide"><img src="https://i.ibb.co/k546MqR/1.png" alt=""></div>
-        <div class="swiper-slide slide"><img src="https://i.ibb.co/WNrpvSh/lacoste-logo.jpg" alt=""></div>
-        <div class="swiper-slide slide"><img src="https://i.ibb.co/WGxjFss/images.png" alt=""></div>
+
+         <div class="swiper-slide slide">
+            <p>They exceeded our expectations in terms of quality and efficiency. The team was professional and communicated well throughout the project.</p>
+            <div class="user">
+               <img src="images/pic-1.png" alt="">
+               <div class="info">
+                  <h3>Fatima Khaled</h3>
+                  <div class="stars">
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="swiper-slide slide">
+            <p>Working with Al-Azab Construction was a smooth process. They handled everything professionally and ensured we were satisfied with every detail.</p>
+            <div class="user">
+               <img src="images/pic-2.png" alt="">
+               <div class="info">
+                  <h3>Kareem Hassan</h3>
+                  <div class="stars">
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="swiper-slide slide">
+            <p>We were very impressed with their work ethic and commitment. The project was delivered on time, and we were thrilled with the results.</p>
+            <div class="user">
+               <img src="images/pic-3.png" alt="">
+               <div class="info">
+                  <h3>Sara Ahmed</h3>
+                  <div class="stars">
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="swiper-slide slide">
+            <p>Al-Azab Construction's team was friendly and professional. They made sure everything was perfect, and we love the finished product.</p>
+            <div class="user">
+               <img src="images/pic-4.png" alt="">
+               <div class="info">
+                  <h3>Mohamed Youssef</h3>
+                  <div class="stars">
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="swiper-slide slide">
+            <p>The team went above and beyond to meet our needs. The quality of their work was exceptional, and we would highly recommend them.</p>
+            <div class="user">
+               <img src="images/pic-5.png" alt="">
+               <div class="info">
+                  <h3>Layla Hassan</h3>
+                  <div class="stars">
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="swiper-slide slide">
+            <p>Working with Al-Azab Construction was a smooth process. They handled everything professionally and ensured we were satisfied with every detail.</p>
+            <div class="user">
+               <img src="images/pic-6.png" alt="">
+               <div class="info">
+                  <h3>Mohamed Rada</h3>
+                  <div class="stars">
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                  </div>
+               </div>
+            </div>
+         </div>
+
       </div>
-    </div>
-  </section>
 
-  <!-- client logo section ends -->
+   </div>
 
-  <!-- footer section starts  -->
+</section>
 
-  <section class="footer">
+<!-- reviews section ends -->
 
+<!-- pricing section starts  -->
+
+<section class="pricing" id="pricing">
+
+   <h1 class="heading"> our pricing Annual Maintenance Packages</h1>
+
+   <div class="box-container">
+
+      <div class="box">
+         <i class="fas fa-home"></i>
+         <h3>basic plan</h3>
+         <div class="price"><span>EGP</span>4000<span>/mo</span></div>
+         <div class="list">
+            <p>interior design</p>
+            <p>refurbishment</p>
+            <p>material supply</p>
+            <p>maintenance</p>
+            <p>24/7 support</p>
+         </div>
+         <a href="#" class="btn">choose plan</a>
+      </div>
+
+      <div class="box">
+         <i class="fas fa-building"></i>
+         <h3>premium plan</h3>
+         <div class="price"><span>EGP</span>8000<span>/mo</span></div>
+         <div class="list">
+            <p>interior design</p>
+            <p>refurbishment</p>
+            <p>material supply</p>
+            <p>maintenance</p>
+            <p>24/7 support</p>
+         </div>
+         <a href="#" class="btn">choose plan</a>
+      </div>
+
+      <div class="box">
+         <i class="fas fa-city"></i>
+         <h3>ultimate plan</h3>
+         <div class="price"><span>EGP</span>12000<span>/mo</span></div>
+         <div class="list">
+            <p>interior design</p>
+            <p>refurbishment</p>
+            <p>material supply</p>
+            <p>maintenance</p>
+            <p>24/7 support</p>
+         </div>
+         <a href="#" class="btn">choose plan</a>
+      </div>
+
+   </div>
+
+</section>
+
+<!-- pricing section ends -->
+
+<!-- contact section starts  -->
+
+<section class="contact" id="contact">
+
+   <h1 class="heading"> contact us </h1>
+
+   <div class="row">
+
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2054.77338057068!2d31.27657031425044!3d29.987960326252388!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1458396f8a2923f3%3A0x7ab2af7892693ced!2sSmart%20Lights!5e0!3m2!1sar!2seg!4v1729982253704!5m2!1sar!2seg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+      
+نسخ الكود
+<form id="contact-form">
+   <h3>get in touch</h3>
+   <input type="text" placeholder="name" name="name" class="box" required>
+   <input type="email" placeholder="email" name="email" class="box" required>
+   <input type="number" placeholder="phone" name="phone" class="box">
+   <textarea name="message" placeholder="message" class="box" cols="30" rows="10" required></textarea>
+   <input type="submit" value="send message" class="btn">
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+   (function() {
+      emailjs.init("18ygGgryRoGve-Tpw"); 
+   })();
+
+   document.getElementById('contact-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // منع التحديث الافتراضي للنموذج
+
+      emailjs.sendForm('service_Alazab.co', 'template_tvn06ki', this)
+         .then(function() {
+            alert('Message sent successfully!');
+         }, function(error) {
+            alert('Failed to send message, please try again.');
+            console.error('Error:', error);
+         });
+   });
+</script>
+
+   </div>
+
+</section>
+
+<!-- contact section ends -->
+
+<!-- blogs section starts  -->
+
+<section class="blogs" id="blogs">
+
+   <h1 class="heading"> our blogs </h1>
+
+   <div class="swiper blogs-slider">
+
+      <div class="swiper-wrapper">
+
+         <div class="swiper-slide slide">
+            <div class="image">
+               <img src="images/blog-1.jpg" alt="">
+            </div>
+            <div class="content">
+               <h3>Constructions</h3>
+               <p>them new life, with quality and a modern touch</p>
+               <a href="#" class="btn">read more</a>
+            </div>
+         </div>
+
+         <div class="swiper-slide slide">
+            <div class="image">
+               <img src="images/blog-2.jpg" alt="">
+            </div>
+            <div class="content">
+               <h3>building maintenance</h3>
+               <p>We provide comprehensive building maintenance solutions to ensure continued quality</p>
+               <a href="#" class="btn">read more</a>
+            </div>
+         </div>
+
+         <div class="swiper-slide slide">
+            <div class="image">
+               <img src="images/blog-3.jpg" alt="">
+            </div>
+            <div class="content">
+               <h3>blog title goes here</h3>
+               <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda, nobis!</p>
+               <a href="#" class="btn">read more</a>
+            </div>
+         </div>
+
+         <div class="swiper-slide slide">
+            <div class="image">
+               <img src="images/blog-4.jpg" alt="">
+            </div>
+            <div class="content">
+               <h3>blog title goes here</h3>
+               <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda, nobis!</p>
+               <a href="#" class="btn">read more</a>
+            </div>
+         </div>
+
+         <div class="swiper-slide slide">
+            <div class="image">
+               <img src="images/blog-5.jpg" alt="">
+            </div>
+            <div class="content">
+               <h3>blog title goes here</h3>
+               <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda, nobis!</p>
+               <a href="#" class="btn">read more</a>
+            </div>
+         </div>
+         
+         <div class="swiper-slide slide">
+            <div class="image">
+               <img src="images/blog-6.jpg" alt="">
+            </div>
+            <div class="content">
+               <h3>blog title goes here</h3>
+               <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda, nobis!</p>
+               <a href="#" class="btn">read more</a>
+            </div>
+         </div>
+
+      </div>
+
+   </div>
+
+</section>
+
+<!-- blogs section ends -->
+
+<!-- client logo section starts -->
+
+<section class="logo-container">
+   <div class="swiper logo-slider">
+      <div class="swiper-wrapper">
+         <div class="swiper-slide slide"><img src="https://i.ibb.co/3TB24jh/logo-abbu-auf.png" alt=""></div>
+         <div class="swiper-slide slide"><img src="https://i.ibb.co/yybNmZx/45393206.jpg" alt=""></div>
+         <div class="swiper-slide slide"><img src="https://i.ibb.co/3TB24jh/logo-abbu-auf.png" alt=""></div>
+         <div class="swiper-slide slide"><img src="https://i.ibb.co/CvtqmhR/images.jpg" alt=""></div>
+         <div class="swiper-slide slide"><img src="https://i.ibb.co/k546MqR/1.png" alt=""></div>
+         <div class="swiper-slide slide"><img src="https://i.ibb.co/WGxjFss/images.png" alt=""></div>
+      </div>
+   </div>
+</section>
+
+<!-- client logo section ends -->
+
+<!-- footer section starts  -->
+
+<section class="footer">
+
+   <div class="links">
+      <a class="btn" href="#home">home</a>
+      <a class="btn" href="#about">about</a>
+      <a class="btn" href="#services">services</a>
+      <a class="btn" href="#projects">projects</a>
+      <a class="btn" href="#pricing">pricing</a>
+      <a class="btn" href="#contact">contact</a>
+      <a class="btn" href="#blogs">blogs</a>
+   </div>
+
+   <div class="credit"> created by <span>ALAZAB CONSTRUCTION</span> | <a href="https://fato.me/s/alazzab/p199887" class="all rights reserved! Privacy Notice © 2023."></div>
+
+</section>
+
+<!-- footer section ends -->
+
+
+
+
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
+
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+<script>
+
+lightGallery(document.querySelector('.projects .box-container'));
+
+</script>
+
+</body>
+</html>
