@@ -32,6 +32,7 @@
       <a href="#projects">projects</a>
       <a href="#pricing">pricing</a>
       <a href="#contact">contact</a>
+      <a href="#blogs">blogs</a>
    </nav>
 
    <div class="icons">
@@ -95,6 +96,73 @@
 </div>
 
 <!-- header section ends -->
+
+<!-- home section starts  -->
+
+<section class="home" id="home">
+
+   <div class="swiper home-slider">
+
+      <div class="swiper-wrapper">
+
+         <section class="swiper-slide slide" style="background: url(images/home-slide-1.jpg) no-repeat;">
+            <div class="content">
+               <h3>we provide best service construction</h3>
+               <p>Providing high quality architectural and construction services, while adhering to international standards, to ensure complete customer satisfaction and support them in achieving their vision.</p>
+               <a href="#about" class="btn">get started</a>
+            </div>
+         </section>
+
+         <section class="swiper-slide slide" style="background: url(images/home-slide-2.jpg) no-repeat;">
+            <div class="content">
+               <h3>Make your dream come true for your website</h3>
+               <p>Alazab Team consists of a group of experts specialized in the fields of architecture and construction, who have extensive experience and an unwavering passion for providing the best solutions to clients.</p>
+               <a href="#about" class="btn">get started</a>
+            </div>
+         </section>
+
+         <section class="swiper-slide slide" style="background: url(images/home-slide-2.jpg) no-repeat;">
+            <div class="content">
+               <h3>Make your dream come true for your store</h3>
+               <p>We are committed to providing the highest levels of quality and professionalism in the field of construction and architectural services. We are a leading company in providing integrated architectural solutions, from the initial idea to the final</p>
+               <a href="#about" class="btn">get started</a>
+            </div>
+         </section>
+
+      </div>
+
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+
+   </div>
+
+</section>
+
+<!-- home section ends -->
+
+<!-- about section starts  -->
+
+<section class="about" id="about">
+
+   <h1 class="heading"> about us </h1>
+
+   <div class="row">
+
+      <div class="video">
+         <video src="images/about-vid.mp4" loop muted autoplay></video>
+      </div>
+
+      <div class="content">
+         <h3>We will provide you the best work which you dreamt for!</h3>
+         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas et vero mollitia nemo corporis consequatur aspernatur distinctio dignissimos velit nam.</p>
+         <a href="#services" class="btn">read more</a>
+      </div>
+
+   </div>
+
+   <div class="box-container">
+
+      <!-- header section ends -->
 
 <!-- home section starts  -->
 
@@ -535,50 +603,21 @@
 <!-- contact section starts  -->
 
 <section class="contact" id="contact">
-    <div class="overlay"></div>
-    <h1 class="heading">اتصل بنا</h1>
-    <div class="row" style="display: flex; gap: 20px; flex-wrap: wrap;">
-        <div class="contact-info" style="flex: 1; min-width: 300px;">
-            <h3>معلومات الاتصال</h3>
-            <p><i class="fas fa-map-marker-alt"></i> شارع النبأ العامة، المعادي، القاهرة، مصر</p>
-            <p><i class="fas fa-phone"></i> +20 1004006620</p>
-            <p><i class="fas fa-envelope"></i> info@al-azab.co</p>
-            <p><i class="fas fa-clock"></i> ساعات العمل: 9 صباحًا - 8 مساءً</p>
-        </div>
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2054.77338057068!2d31.27657031425044!3d29.987960326252388!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1458396f8a2923f3%3A0x7ab2af7892693ced!2sSmart%20Lights!5e0!3m2!1sar!2seg!4v1729982253704!5m2!1sar!2seg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-height: 400px; min-width: 300px; border: none;"></iframe>
-    </div>
-</section>
 
- <form action="">
+   <h1 class="heading"> contact us </h1>
+
+   <div class="row">
+
+      <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15076.89592087332!2d72.8319697277345!3d19.14167056419224!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63aceef0c69%3A0x2aa80cf2287dfa3b!2sJogeshwari%20West%2C%20Mumbai%2C%20Maharashtra%20400047!5e0!3m2!1sen!2sin!4v1641716772852!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+
+      <form action="">
          <h3>get in touch</h3>
          <input type="text" placeholder="name" class="box">
          <input type="email" placeholder="email" class="box">
          <input type="number" placeholder="phone" class="box">
          <textarea name="" placeholder="message" class="box" id="" cols="30" rows="10"></textarea>
          <input type="submit" value="send message" class="btn">
- </form>
-
-  </div>
-      
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script>
-   (function() {
-      emailjs.init("18ygGgryRoGve-Tpw"); 
-   })();
-
-   document.getElementById('contact-form').addEventListener('submit', function(event) {
-      event.preventDefault(); // منع التحديث الافتراضي للنموذج
-
-      emailjs.sendForm('service_Alazab.co', 'template_tvn06ki', this)
-         .then(function() {
-            alert('Message sent successfully!');
-         }, function(error) {
-            alert('Failed to send message, please try again.');
-            console.error('Error:', error);
-         });
-   });
-</script>
+      </form>
 
    </div>
 
@@ -601,8 +640,8 @@ height: 400px; min-width: 300px; border: none;"></iframe>
                <img src="images/blog-1.jpg" alt="">
             </div>
             <div class="content">
-               <h3>Constructions</h3>
-               <p>them new life, with quality and a modern touch</p>
+               <h3>blog title goes here</h3>
+               <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda, nobis!</p>
                <a href="#" class="btn">read more</a>
             </div>
          </div>
@@ -612,8 +651,8 @@ height: 400px; min-width: 300px; border: none;"></iframe>
                <img src="images/blog-2.jpg" alt="">
             </div>
             <div class="content">
-               <h3>building maintenance</h3>
-               <p>We provide comprehensive building maintenance solutions to ensure continued quality</p>
+               <h3>blog title goes here</h3>
+               <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda, nobis!</p>
                <a href="#" class="btn">read more</a>
             </div>
          </div>
@@ -677,11 +716,10 @@ height: 400px; min-width: 300px; border: none;"></iframe>
       <div class="swiper-wrapper">
          <div class="swiper-slide slide"><img src="images/client-logo-1.png" alt=""></div>
          <div class="swiper-slide slide"><img src="images/client-logo-2.png" alt=""></div>
-         <div class="swiper-slide slide"><img src="images/client-logo-7.png" alt=""></div>
-         <div class="swiper-slide slide"><img src="images/client-logo-8.png" alt=""></div>
-         <div class="swiper-slide slide"><img src="images/client-logo-9.png" alt=""></div>
-         <div class="swiper-slide slide"><img src="images/client-logo-10.png" alt=""></div>
-         <div class="swiper-slide slide"><img src="images/client-logo-11.png" alt=""></div>
+         <div class="swiper-slide slide"><img src="images/client-logo-3.png" alt=""></div>
+         <div class="swiper-slide slide"><img src="images/client-logo-4.png" alt=""></div>
+         <div class="swiper-slide slide"><img src="images/client-logo-5.png" alt=""></div>
+         <div class="swiper-slide slide"><img src="images/client-logo-6.png" alt=""></div>
       </div>
    </div>
 </section>
@@ -702,10 +740,7 @@ height: 400px; min-width: 300px; border: none;"></iframe>
       <a class="btn" href="#blogs">blogs</a>
    </div>
 
-  <div class="credit">
-    created by <span>ALAZAB CONSTRUCTION</span> | 
-    <a href="https://fato.me/s/alazzab/p199887" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #ff6600;">All rights reserved! Privacy Notice © 2023</a>
-</div>
+   <div class="credit"> created by <span>MD IMRAN HOSSEN</span> | all rights reserved! </div>
 
 </section>
 
