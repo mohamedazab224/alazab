@@ -801,30 +801,6 @@ section {
   border-color: var(--yellow);
 }
 
-/* تظليل خلفية قسم الاتصال */
-.contact {
-    position: relative;
-    padding: 50px 0;
-    background: #fff;
-    color: #333;
-    overflow: hidden;
-}
-
-.contact .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* تظليل أسود بنسبة شفافية 50% */
-    z-index: 0;
-}
-
-.contact .row {
-    position: relative;
-    z-index: 1; /* لضمان أن المحتوى فوق التظليل */
-}
-
 .contact .row form textarea {
   height: 15rem;
   resize: none;
@@ -976,15 +952,12 @@ section {
   }
 }
 
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff; /* لون الحروف أبيض */ /* تظليل أسود بنسبة شفافية 50% */
-    z-index: 0;
+@media (max-width: 450px) {
+  html {
+    font-size: 50%;
+  }
+  .about .row .content h3 {
+    font-size: 2.5rem;
+  }
 }
-
 /*# sourceMappingURL=style.css.map */
