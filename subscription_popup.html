@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نموذج الاشتراك</title>
+    <style>
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #333;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .popup.active {
+            display: block;
+        }
+        .close-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="popup" class="popup">
+        <a href="https://ibb.co/SVdG4J3"><img src="https://i.ibb.co/CVMD3WH/AZASDFGHJK.png" alt="AZASDFGHJK" border="0"></a>
+        <form id="subscribeForm">
+            <label for="name">الاسم:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="email">البريد الإلكتروني:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            <button type="submit">اشتراك</button>
+            <button type="button" class="close-btn" onclick="closePopup()">إغلاق</button>
+        </form>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("YOUR_USER_ID");
+        })();
+
+        function openPopup() {
+            document.getElementById('popup').classList.add('active');
+        }
+
+        function closePopup() {
+            document.getElementById('popup').classList.remove('active');
+        }
+
+        window.onload = function() {
+            setTimeout(openPopup, 3000);  // يظهر النموذج بعد 3 ثواني
+        };
+
+        document.getElementById('subscribeForm').onsubmit = function(event) {
+            event.preventDefault();
+            var templateParams = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value
+            };
+
+            emailjs.send('service_Alazab.co', 'template_tvn06ki', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    alert('تم الاشتراك بنجاح!');
+                    closePopup();
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('فشل الاشتراك. حاول مرة أخرى.');
+                });
+        };
+    </script>
+</body>
+</html>
