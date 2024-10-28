@@ -467,44 +467,71 @@
 
       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3455.7065802815996!2d31.27910032584619!3d29.987861474952034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1458388f10359fcb%3A0xaf3a5a81e2a0bcf1!2z2LnZhdin2LHYp9iqINin2YTZhtmK2KfYqNipINin2YTYudin2YXYqSDYp9mE2YXYudin2K_ZiiDYp9mE2KzYr9mK2K_YqQ!5e0!3m2!1sar!2seg!4v1730013717318!5m2!1sar!2seg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-      <form action="">
-         <h3>get in touch</h3>
-         <input type="text" name="name" placeholder="name" class="box">
-         <input type="email" name="email" placeholder="email" class="box">
-         <input type="number" placeholder="phone" class="box">
-         <textarea name="message" placeholder="message" class="box" cols="30" rows="10"></textarea>
-         <input type="submit" value="send message" class="btn">
-      </form>
+      <!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="styles.css"> <!-- تأكد من وجود ملف CSS إذا لزم الأمر -->
+</head>
+<body>
+    <!-- contact section starts -->
+    <section class="contact" id="contact">
+        <h1 class="heading">Contact Us</h1>
+        <div class="row">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3455.7065802815996!2d31.27910032584619!3d29.987861474952034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1458388f10359fcb%3A0xaf3a5a81e2a0bcf1!2z2LnZhdin2LHYp9iqINin2YTZhtmK2KfYqNipINin2YTYudin2YXYqSDYp9mE2YXYudin2K_ZiiDYp9mE2KzYr9mK2K_YqQ!5e0!3m2!1sar!2seg!4v1730013717318!5m2!1sar!2seg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <form id="contact-form">
+                <h3>Get in Touch</h3>
+                <input type="text" name="name" placeholder="Name" class="box" required>
+                <input type="email" name="email" placeholder="Email" class="box" required>
+                <input type="number" name="phone" placeholder="Phone" class="box">
+                <textarea name="message" placeholder="Message" class="box" cols="30" rows="10" required></textarea>
+                <input type="submit" value="Send Message" class="btn">
+            </form>
+        </div>
+    </section>
 
-   </div>
+    <!-- JavaScript for EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS with your user ID
+        (function() {
+            emailjs.init("18ygGgryRoGve-Tpw");
+        })();
 
-</section>
+        // Wait for the document to load before running JavaScript
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById("contact-form");
+            if (form) {
+                form.addEventListener("submit", function(event) {
+                    event.preventDefault(); // منع إعادة تحميل الصفحة
 
-// JavaScript Code
-(function() {
-  emailjs.init("18ygGgryRoGve-Tpw");
-})();
+                    // Get form values
+                    const formData = {
+                        name: form.name.value.trim(),
+                        email: form.email.value.trim(),
+                        phone: form.phone.value.trim(),
+                        message: form.message.value.trim()
+                    };
 
-const form = document.getElementById("contact-form");
-
-form.addEventListener("submit", function(event) {
-  event.preventDefault();
-
-  const formData = {
-    name: form.name.value,
-    email: form.email.value,
-    message: form.message.value
-  };
-
-  emailjs.send("service_Alazab.co", "template_tvn06ki", formData)
-    .then(function(response) {
-      console.log("SUCCESS!", response.status, response.text);
-      alert("Message sent successfully!");
-    }, function(error) {
-      console.log("FAILED...", error);
-      alert("Failed to send the message. Please try again later.");
-    });
-});
+                    // Send form data using EmailJS
+                    emailjs.send("service_Alazab.co", "template_tvn06ki", formData)
+                        .then(function(response) {
+                            console.log("SUCCESS!", response.status, response.text);
+                            alert("Message sent successfully!");
+                            form.reset(); // تفريغ النموذج بعد النجاح
+                        })
+                        .catch(function(error) {
+                            console.error("FAILED...", error);
+                            alert("Failed to send the message. Please check your internet connection and try again later.");
+                        });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
 
 <!-- contact section ends -->
 
