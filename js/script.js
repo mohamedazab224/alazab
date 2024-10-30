@@ -78,7 +78,6 @@ var swiper = new Swiper(".blogs-slider", {
       },
    },
 });
-
 var swiper = new Swiper(".logo-slider", {
    loop:true,
    grabCursor:true,
