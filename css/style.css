@@ -91,20 +91,19 @@ section {
   left: 0;
   right: 0;
   -webkit-box-shadow: var(--box-shadow);
-  box-shadow: var(--box-shadow);
+          box-shadow: var(--box-shadow);
   padding: 1.5rem 10%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   z-index: 1000;
-  background: var(--black) !important; /* تغيير الخلفية إلى اللون الأسود */
-  color: var(--white) !important; /* تغيير لون النص إلى الأبيض لتوضيح النص */
+  background: var(--white);
 }
 
 .header .logo span {
