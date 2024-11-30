@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'Semplicita';
+  src: url('https://fonts.assets-landingi.com/4cZCK5PgV1nIe0dC/SemplicitaPro_Medium.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}@font-face {
+  font-family: 'Semplicita';
+  src: url('https://fonts.assets-landingi.com/vKNeIPlLcTkNoxlj/SemplicitaPro_Regular.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}@font-face {
+  font-family: 'Semplicita';
+  src: url('https://fonts.assets-landingi.com/zaLa5rgQjupnksQF/SemplicitaPro_Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}@font-face {
+  font-family: 'Semplicita';
+  src: url('https://fonts.assets-landingi.com/3tKB8VdbFnPTL02a/SemplicitaPro_LightItalic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
