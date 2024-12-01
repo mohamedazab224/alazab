@@ -6,17 +6,13 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Alazab Construction</title>
 
-   <!-- إضافة الأيقونة القياسية (favicon.ico) -->
    <link rel="icon" href="https://i.ibb.co/0YFvRQG/AZASDFGHJK.png" type="image/png">
 
-   <!-- font awesome cdn link -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-   <!-- custom css file link -->
    <link rel="stylesheet" href="css/style.css">
    <style>
-      /* CSS for popup form */
       .popup {
          position: fixed;
          top: 0;
@@ -71,12 +67,6 @@
    </style>
 </head>
 <body>
-
-
-      </div>
-   </div>
-</div>
-
    <!-- Subscription Popup -->
    <div class="popup" id="subscription-popup">
       <div class="popup-content">
@@ -86,21 +76,24 @@
             <input type="email" name="user_email" placeholder="Your Email" required>
             <input type="submit" value="Subscribe" class="btn">
          </form>
-         <button class="close-btn" onclick="closePopup()">Close</button>
+         <button class="close-btn" onclick="closePopup()" aria-label="Close Popup">Close</button>
       </div>
    </div>
+   <div id="loading-spinner" style="display:none;">Loading...</div>
 
-   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.4.1/dist/email.min.js"></script>
-   <script src="js/emailjs_contact_form.js"></script>
+   <script defer src="https://cdn.jsdelivr.net/npm/emailjs-com@2.4.1/dist/email.min.js"></script>
+   <script defer src="js/emailjs_contact_form.js"></script>
    <script>
-      // Initialize EmailJS
-      (function() {
-         emailjs.init("18ygGgryRoGve-Tpw");
+      (async function() {
+         const response = await fetch('/api/get-emailjs-key');
+         const data = await response.json();
+         emailjs.init(data.key);
       })();
 
-      // Handle form submission
       document.getElementById('subscription-form').addEventListener('submit', function(event) {
          event.preventDefault();
+
+         document.getElementById('loading-spinner').style.display = 'block';
 
          emailjs.sendForm('service_Alazab.co', 'template_tvn06ki', this)
             .then(function() {
@@ -108,21 +101,21 @@
                closePopup();
             }, function(error) {
                alert('Failed to subscribe. Please try again later.');
+            })
+            .finally(function() {
+               document.getElementById('loading-spinner').style.display = 'none';
             });
       });
 
-      // Show popup after a delay
       window.onload = function() {
          setTimeout(function() {
             document.getElementById('subscription-popup').classList.add('active');
-         }, 3000); // Show popup after 3 seconds
+         }, 3000);
       }
 
-      // Close popup function
       function closePopup() {
          document.getElementById('subscription-popup').classList.remove('active');
       }
    </script>
-
 </body>
 </html>
