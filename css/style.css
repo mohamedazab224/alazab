@@ -552,6 +552,122 @@ section {
   line-height: 2;
 }
 
+/* تنسيق المنتج */
+.product-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    min-height: 600px; /* زيادة ارتفاع القسم */
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    max-width: 350px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+}
+
+.product-info {
+    max-width: 60%;
+}
+
+/* الأزرار */
+.cta-button, .video-button {
+    background-color: #000; /* اللون الأسود */
+    color: #fff;
+    padding: 15px 30px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+    font-size: 1rem;
+}
+
+.cta-button:hover, .video-button:hover {
+    background-color: #333; /* لون أسود فاتح عند التحويم */
+}
+
+/* تنسيق القائمة المنبثقة للفيديو */
+.video-popup {
+    display: none; /* إخفاء المنبثقة افتراضياً */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* لون خلفية شفاف غامق */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* للتأكد من أن المنبثقة فوق جميع العناصر الأخرى */
+}
+
+.video-popup-content {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.video-container {
+    width: 100%;
+    position: relative;
+    padding-bottom: 56.25%; /* نسبة العرض إلى الارتفاع 16:9 */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #000;
+}
+
+/* التنسيق المتجاوب للهواتف المحمولة */
+@media (max-width: 768px) {
+    .product-container {
+        flex-direction: column; /* جعل العناصر تحت بعضها بدلاً من أن تكون بجانب بعضها على الهواتف */
+        text-align: center;
+    }
+
+    .product-image {
+        max-width: 90%; /* تكبير الصورة لتناسب العرض تقريبًا */
+        margin: 0 auto 20px auto; /* توسيط الصورة وإضافة تباعد من الأسفل */
+    }
+
+    .product-info {
+        max-width: 100%;
+    }
+
+    .cta-button, .video-button {
+        width: 100%;
+        margin-bottom: 10px; /* جعل الأزرار أسفل بعضها بتباعد بسيط */
+    }
+}
+
+
 .projects {
   background: var(--black);
 }
