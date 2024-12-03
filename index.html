@@ -268,8 +268,147 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- services section ends -->
    
-<!-- projects section starts  -->
+<!-- Popup Video Dropdown section starts  -->
 
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Link Vadio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: right;
+            direction: rtl;
+            background-color: #f8f9fa;
+        }
+
+        .section {
+            width: 70%;
+            margin: 2rem auto;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+        }
+
+        .section img {
+            margin-left: 2rem;
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .video-dropdown {
+            margin-top: 2rem;
+            width: 100%;
+        }
+
+        .video-dropdown select {
+            padding: 0.5rem;
+            font-size: 1rem;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: left;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        iframe {
+            width: 100%;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="section">
+    <img src="https://via.placeholder.com/150" alt="Placeholder Image">
+    <div>
+        <h2>Ready-Made media wall featuring a fireplace and Sliding TV Mechanism</h2>
+        <p>Eco-Friendly Fireplaces for Every Interior.</p>
+
+        <button onclick="window.location.href='https://al-azab.co/offers.html'">Go..Now</button>
+
+        <div class="video-dropdown">
+            <label for="videos">Watch the new show:</label>
+            <select id="videos" onchange="openModal()">
+                <option value="">Select video...</option>
+                <option value="https://youtu.be/_Q2WPLCw-xk">Wall Decor and Fireplace</option>
+                <option value="https://www.youtube.com/embed/abc12345678">View my work</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div id="videoModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div id="videoContainer"></div>
+    </div>
+</div>
+
+<script>
+    function openModal() {
+        const videoUrl = document.getElementById('videos').value;
+        const videoContainer = document.getElementById('videoContainer');
+        const modal = document.getElementById('videoModal');
+        if (videoUrl) {
+            videoContainer.innerHTML = `<iframe src="${videoUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            modal.style.display = "block";
+        }
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('videoModal');
+        modal.style.display = "none";
+        document.getElementById('videoContainer').innerHTML = '';
+    }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById('videoModal');
+        if (event.target == modal) {
+            modal.style.display = "none";
+            document.getElementById('videoContainer').innerHTML = '';
+        }
+    }
+</script>
+
+<!-- Popup Video Dropdown section ends --> 
+   
+<!-- projects section starts  -->
+   
 <section class="projects" id="projects">
 
    <h1 class="heading"> our projects </h1>
