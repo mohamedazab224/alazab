@@ -562,13 +562,13 @@ section {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    min-height: 600px; /* زيادة ارتفاع القسم */
+    min-height: 550px; /* زيادة ارتفاع القسم */
 }
 
 .product-image {
     width: 100%;
     height: auto;
-    max-width: 350px;
+    max-width: 450px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-right: 20px;
