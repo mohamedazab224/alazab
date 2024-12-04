@@ -7,3 +7,4 @@ function openVideoPopup() {
 function closeVideoPopup() {
   document.getElementById("videoPopup").style.display = "none";
 }
+
