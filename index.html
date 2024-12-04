@@ -269,31 +269,136 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- services section ends -->
    
 <!-- product-container starts -->
-<div class="product-container">
-  <img src="https://images.assets-landingi.com/uc/51238747-c69b-4fc1-b20b-edd3b2f2c0c9/Media_Wall_Dekon_Gif.gif" alt="Product Image" class="product-image">
-  <div class="product-info">
-    <h2 class="product-title">Ready-Made media wall featuring a fireplace and Sliding TV Mechanism</h2>
-    <p class="product-description">
-      Eco-Friendly Fireplaces for Every Interior. Endless Design Possibilities with 66 Dekton finish options. NEX Media Wall allows you to effortlessly match your project’s style. Prefer something custom? Use your own materials to create a wall that feels naturally integrated into the space, meeting even the most specific design requirements. This flexibility empowers designers to explore and execute their most creative visions.
-    </p>
-
-    <!-- زر رابط المنتج -->
-    <a href="link-to-product-page.html" class="cta-button" target="_blank">View Product</a>
-
-    <!-- زر القائمة المنبثقة -->
-    <button class="video-button" onclick="openVideoPopup()">Watch Product Video</button>
-  </div>
-</div>
-
-<!-- القائمة المنبثقة للفيديو -->
-<div id="videoPopup" class="video-popup">
-  <div class="video-popup-content">
-    <span class="close-button" onclick="closeVideoPopup()">&times;</span>
-    <div class="video-container">
-      <iframe id="videoFrame" src="https://youtu.be/_Q2WPLCw-xk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قسم المنتجات المميزة</title>
+    <style>
+        body {
+            background-color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        .section-header {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .section-header h2 {
+            display: inline-block;
+            font-size: 24px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .product-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            width: 100%;
+        }
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+        }
+        .product-description {
+            margin: 20px 0;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .buttons .button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .buttons .yellow-button {
+            background-color: #FFD700;
+            color: #fff;
+        }
+        .buttons .black-button {
+            background-color: #000;
+            color: #fff;
+        }
+        .video-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .video-popup.active {
+            display: flex;
+        }
+        .video-popup iframe {
+            max-width: 100%; /* تكبير العرض */
+            max-height: 90%; /* تكبير الارتفاع */
+            width: 800px;    /* عرض مخصص */
+            height: 450px;   /* ارتفاع مخصص */
+        }
+        .video-popup .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="section-header">
+        <h2>Latest Products</h2>
     </div>
-  </div>
-</div>
+    <div class="product-section">
+        <div class="product-card">
+            <img src="https://images.assets-landingi.com/uc/51238747-c69b-4fc1-b20b-edd3b2f2c0c9/Media_Wall_Dekon_Gif.gif" alt="Media Wall">
+            <div class="product-description">
+                <p>
+                    Ready-Made Media Wall Featuring a Fireplace and Sliding TV Mechanism<br>
+                    Eco-Friendly Fireplaces for Every Interior. Endless Design Possibilities with 66 Dekton finish options. NEXt Media Wall allows you to effortlessly match your project’s style. Prefer something custom? Use your own materials to create a wall that feels naturally integrated into the space, meeting even the most specific design requirements. This flexibility empowers designers to explore and execute their most creative visions.
+                </p>
+                <p>
+                    تعتبر جدران الوسائط الجاهزة المزودة بمدفأة وآلية تلفاز منزلقة اختيارًا مثاليًا لأي نوع من الديكور الداخلي. مع 66 خيارًا مذهلًا من تشطيبات Dekton، تتيح لك جدران الوسائط NEXt Media Wall تنسيق نمط مشروعك بكل سهولة. لو عايز حاجة مخصصة؟ استخدم المواد بتاعتك لإنشاء جدار يبدو مدمجًا بشكل طبيعي في المساحة، ويلبي حتى أدق المتطلبات التصميمية. هذه المرونة تُمكِّن المصممين من استكشاف وتنفيذ أفكارهم الإبداعية بأقصى إمكانياتها.  سواء كنت بتخطط لتجديد غرفة المعيشة، غرفة النوم، أو حتى المكتب، هتلاقي إن جدران الوسائط بتوفر لك الحل الأمثل بكل سهولة واحترافية. التصميم العصري واللمسات النهائية المتعددة بتساعدك على تحقيق التناسق والتكامل بين كل عناصر الديكور في مساحتك. وبالإضافة إلى ذلك، المدفأة المدمجة بتضيف لمسة من الدفء والجاذبية لأي مكان، مما يجعلها الخيار الأمثل لفصل الشتاء البارد.
+                </p>
+            </div>
+            <div class="buttons">
+                <a href="https://al-azab.co/offers.html" class="button yellow-button">Product Link</a>
+                <button class="button black-button" onclick="toggleVideo()">Watch Video</button>
+            </div>
+        </div>
+    </div>
+    <div class="video-popup" id="videoPopup">
+        <button class="close-button" onclick="toggleVideo()">Close</button>
+        <iframe src="https://www.youtube.com/embed/_Q2WPLCw-xk" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <script>
+        function toggleVideo() {
+            const popup = document.getElementById('videoPopup');
+            popup.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>   
+
 <!-- product-container ends --> 
    
 <!-- projects section starts  -->
