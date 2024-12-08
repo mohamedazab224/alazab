@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Page - Mohamed Azab</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: ltr;
+            text-align: left;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .language-switch {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .language-switch button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .footer {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #e2e1e1;
+            font-size: 11px;
+            line-height: 1.5;
+            color: #000;
+        }
+        .footer a {
+            color: #808080;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div style="background-color: #000000; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+    <a href="https://al-azab.co" target="_blank" style="color: white; text-decoration: none;">
+        <img src="https://i.postimg.cc/sXVzB4MW/60-200PX.png" alt="Al-azab Logo English" /></a>
+    <a href="https://al-azab.co" target="_blank" style="color: white; text-decoration: none;">
+        <img src="https://i.postimg.cc/ZYHRLCZZ/logo60en200.png" alt="Al-azab Logo Arabic" /></a></div>
+
+    <div class="container">
+        <div class="language-switch">
+            <button onclick="switchLanguage('en')">English</button>
+            <button onclick="switchLanguage('ar')">العربية</button>
+        </div>
+
+        <a href='https://postimg.cc/8JTMcdcN' target='_blank'><img src='https://i.postimg.cc/8JTMcdcN/M-Azab.png' border='0' alt='M-Azab'/></a>
+        <div id="content">
+            <h1>Mohamed Azab</h1>
+            <h2>Founder, CEO and Managing Director of Al-Azab Construction Company</h2>
+            <p>
+                Mohamed Azab is an architect and pioneer in the field of real estate development who founded Al-Azab Construction Company, a company that has become a reference in providing integrated architectural and construction solutions. With his passion and creativity, Mohamed was able to build a company that is distinguished by quality and professionalism, and provides distinguished services in the field of construction, equipment, and architectural maintenance.
+            </p>
+            <h3>Academic and Professional Background</h3>
+            <p>
+                Mohamed Azab holds a first degree with honors in architecture from the Academy of Professional Life and is a member of the [Egyptian Society of Engineers]. Mohamed began his career working for major companies in the field of construction, where he gained extensive experience in designing and implementing various architectural projects.
+            </p>
+            <h3>Vision and Mission</h3>
+            <p>
+                Mohamed Azab's vision is to provide innovative and sustainable architectural solutions that meet the needs of clients and exceed their expectations. He believes that true success can only be achieved through a commitment to quality, transparency, and sustainability in every project. His mission is to transform ideas into tangible reality and create spaces that inspire and positively impact people's lives.
+            </p>
+            <h3>Achievements</h3>
+            <p>
+                Under his leadership, Al-Azab Construction has successfully executed many successful projects that have been widely acclaimed by clients and the community. This includes integrated commercial, industrial, and residential projects, characterized by high quality and innovation in design and implementation.
+            </p>
+            <h3>Core Values</h3>
+            <ul>
+                <li>Professionalism: Leading work teams efficiently to ensure projects are executed with the highest quality standards.</li>
+                <li>Quality: A constant commitment to providing the best construction and architectural solutions.</li>
+                <li>Transparency: Building strong relationships with clients through clear and transparent communication.</li>
+                <li>Sustainability: Implementing projects that respect the environment and contribute to sustainable development.</li>
+            </ul>
+            <h3>CEO Message</h3>
+            <p>
+                "At Al-Azab, we believe that each project has a unique story to tell. We are here to create that story together, through dedication to work and commitment to quality and innovation in everything we do. Our vision goes beyond just building; it is about creating spaces that enhance lives and inspire future generations."
+            </p>
+            <p>
+                "In life, if you provide value to others in a shorter period of time, you will be rewarded and rewarded well."
+            </p>
+            <h3>Contact Mohamed Azab</h3>
+            <p>Email: <a href="mailto:mohamed@al-azab.co">mohamed@al-azab.co</a></p>
+        </div>
+
+        <div class="footer">
+            <a href="https://fato.me/s/alazab.construction/p199887">
+                <strong>Al-azab Construction</strong> Company is a subsidiary of the registered trademark D-U-N-S No: 849203826, operates under the legal trade name {Azab for Implementation Management Works for Industrial and Service Projects and General Supplies}. 
+                This message was produced and distributed by <strong>Al-azab Company</strong> Head Office, Address: 8/500 Maadi Street, Cairo, Egypt Postal: 4234570 Email: support@al-azab.co Phone: 0227047955 Tax: 577219804 CR: 218670 | Alazab Construction, Inc. or its affiliates. All rights reserved. Read our Privacy Notice &copy; 2023.
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const content = {
+            en: document.getElementById("content").innerHTML,
+            ar: `
+                <h1>محمد عزب</h1>
+                <h2>المؤسس والرئيس التنفيذي والعضو المنتدب لشركة العزب للإنشاءات</h2>
+                <p>
+                    محمد عزب هو المهندس المعماري والرائد في مجال التطوير العقاري الذي قام بتأسيس العزب للإنشاءات، وهي الشركة التي أصبحت مرجعًا في تقديم حلول معمارية وإنشائية متكاملة. بشغفه وإبداعه، استطاع محمد أن يبني شركة تتميز بالجودة والاحترافية، وتقدم خدمات متميزة في مجال البناء والتجهيزات والصيانات المعمارية.
+                </p>
+                <h3>الخلفية الأكاديمية والمهنية</h3>
+                <p>
+                    محمد عزب حاصل على الدرجة الأولى بتزكية في الهندسة المعمارية من أكاديمية الحياة المهنية، وهو عضو في [جمعية المهندسين المصرية]. بدأ محمد مسيرته المهنية في العمل لدى شركات كبرى في مجال الإنشاءات، حيث اكتسب خبرة واسعة في تصميم وتنفيذ المشاريع المعمارية المتنوعة.
+                </p>
+                <h3>الرؤية والرسالة</h3>
+                <p>
+                    تتمثل رؤية محمد عزب في تقديم حلول معمارية مبتكرة ومستدامة تلبي احتياجات العملاء وتفوق توقعاتهم. يؤمن بأن النجاح الحقيقي لا يتحقق إلا من خلال الالتزام بالجودة والشفافية والاستدامة في كل مشروع. رسالته هي تحويل الأفكار إلى واقع ملموس، وخلق مساحات تلهم وتؤثر إيجابيًا في حياة الناس.
+                </p>
+                <h3>الإنجازات</h3>
+                <p>
+                    تحت قيادته، نجحت العزب للإنشاءات في تنفيذ العديد من المشاريع الناجحة التي حظيت بإشادة واسعة من العملاء والمجتمع. يشمل ذلك مشروعات تجارية وصناعية وسكنية متكاملة، تمتاز بالجودة العالية والابتكار في التصميم والتنفيذ.
+                </p>
+                <h3>القيم الأساسية</h3>
+                <ul>
+                    <li>الاحترافية: قيادة فرق العمل بكفاءة لضمان تنفيذ المشاريع بأعلى معايير الجودة.</li>
+                    <li>الجودة: التزام دائم بتقديم أفضل الحلول الإنشائية والمعمارية.</li>
+                    <li>الشفافية: بناء علاقات متينة مع العملاء من خلال التواصل الواضح والشفاف.</li>
+                    <li>الاستدامة: تنفيذ مشاريع تحترم البيئة وتساهم في التنمية المستدامة.</li>
+                </ul>
+                <h3>كلمة الرئيس التنفيذي</h3>
+                <p>
+                    "في العزب، نؤمن بأن لكل مشروع قصة فريدة ترويها تفاصيله. نحن هنا لنصنع تلك القصة معًا، من خلال التفاني في العمل والالتزام بالجودة والابتكار في كل ما نقوم به. رؤيتنا تتجاوز مجرد البناء، إنها تتعلق بصنع مساحات تعزز الحياة وتلهم الأجيال القادمة."
+                </p>
+                <p>
+                    "في الحياة، إذا قدمت قيمة للآخرين في فترة زمنية أقصر، فسوف تتكافأ وتكافأ جيدًا."
+                </p>
+                <h3>التواصل مع محمد عزب</h3>
+                <p>البريد الإلكتروني: <a href="mailto:mohamed@al-azab.co">mohamed@al-azab.co</a></p>
+            `
+        };
+
+        function switchLanguage(lang) {
+            const contentDiv = document.getElementById("content");
+            contentDiv.innerHTML = content[lang];
+            document.body.style.direction = lang === 'ar' ? 'rtl' : 'ltr';
+            document.body.style.textAlign = lang === 'ar' ? 'right' : 'left';
+        }
+    </script>
+</body>
+</html>
