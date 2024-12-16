@@ -606,6 +606,18 @@ html {
   box-shadow: 0 0.1rem 0.8rem rgba(0, 0, 0, 0.4);
 }
 
+.custom-form {
+  margin: 20px auto; /* إضافة مسافة حول العنصر */
+  text-align: center; /* توسيط النموذج */
+  width: 80%; /* التحكم في عرض النموذج */
+  max-width: 600px; /* تحديد الحد الأقصى للعرض */
+  background-color: #f9f9f9; /* لون خلفية خفيف */
+  border: 1px solid #ddd; /* إضافة حدود للنموذج */
+  padding: 15px; /* مسافة داخلية */
+  border-radius: 8px; /* حواف مستديرة */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف */
+}
+
 .contact {
   width: 100%;
   height: 100vh;
