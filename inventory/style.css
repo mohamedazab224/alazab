@@ -608,26 +608,18 @@ html {
 
 .custom-form {
   margin: 20px auto; /* توسيط النموذج مع مسافة حوله */
-  width: 90%; /* عرض النموذج 90% من عرض الشاشة */
-  max-width: 1000px; /* الحد الأقصى لعرض النموذج */
-  padding: 10px; /* مسافة داخلية بسيطة */
-  background-color: #fff; /* خلفية بيضاء */
-  border: 1px solid #ddd; /* حدود خفيفة */
-  border-radius: 8px; /* حواف دائرية */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ظل خفيف */
-}
-
-.custom-form iframe {
-  width: 100%; /* جعل iframe الخاص بالنموذج يتمدد على كامل العرض */
-  height: 100%; /* ارتفاع النموذج بالكامل */
-  min-height: 600px; /* ارتفاع افتراضي */
+  text-align: center; /* توسيط المحتوى أفقيًا */
+  width: 90%; /* عرض النموذج بنسبة 90% من عرض الشاشة */
+  max-width: 1050px; /* حد أقصى للعرض */
+  background-color: #262626; /* خلفيه */
   border: none; /* إزالة الحدود */
 }
 
-@media (max-width: 768px) {
-  .custom-form iframe {
-    min-height: 800px; /* زيادة الارتفاع قليلاً للهواتف */
-  }
+.custom-form iframe {
+  width: 100%; /* جعل عرض النموذج يمتد بنسبة 100% */
+  height: auto; /* الارتفاع يتم ضبطه تلقائيًا */
+  min-height: 1000px; /* ضمان ظهور كافٍ للارتفاع */
+  border: none; /* إزالة أي حدود */
 }
 
 .contact {
