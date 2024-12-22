@@ -8,13 +8,25 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
+    # 1. قم باستنساخ الكود من المستودع
     - uses: actions/checkout@v4
+
+    # 2. إعداد التخزين المؤقت
+    - name: Cache Gems
+      uses: actions/cache@v3
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+
+    # 3. بناء الموقع باستخدام Docker
     - name: Build the site in the jekyll/builder container
       run: |
         docker run \
         -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-        jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
+        jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && bundle install && jekyll build --future"
+
