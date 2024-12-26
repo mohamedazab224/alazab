@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Files Directory - Alazab Construction</title>
+   <link rel="icon" href="../favicon.png" type="image/png">
+   <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
+
+      :root {
+         --yellow: #f5bf23;
+         --black: #111;
+         --white: #fff;
+         --light-color: #666;
+         --light-bg: #eee;
+         --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+         --border: .1rem solid rgba(0, 0, 0, .3);
+      }
+
+      * {
+         font-family: 'Poppins', sans-serif;
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+         text-decoration: none;
+      }
+
+      body {
+         background: var(--light-bg);
+         color: var(--black);
+         padding: 0;
+         margin: 0;
+      }
+
+      header {
+         position: sticky;
+         top: 0;
+         left: 0;
+         right: 0;
+         background: var(--white);
+         box-shadow: var(--box-shadow);
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         padding: 1.5rem 10%;
+         z-index: 1000;
+      }
+
+      header .logo img {
+         height: 60px;
+      }
+
+      header .navbar a {
+         font-size: 1.6rem;
+         color: var(--black);
+         margin: 0 1rem;
+         transition: color 0.3s;
+      }
+
+      header .navbar a:hover {
+         color: var(--yellow);
+      }
+
+      .files {
+         padding: 5rem 10%;
+      }
+
+      .files .box-container {
+         display: grid;
+         grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+         gap: 2rem;
+      }
+
+      .files .box {
+         background: var(--white);
+         padding: 2rem;
+         text-align: center;
+         box-shadow: var(--box-shadow);
+         transition: transform 0.3s ease;
+      }
+
+      .files .box:hover {
+         transform: translateY(-10px);
+      }
+
+      .files .box img {
+         height: 70px;
+         margin-bottom: 1rem;
+      }
+
+      .files .box h3 {
+         font-size: 1.8rem;
+         margin-bottom: 1rem;
+         color: var(--black);
+      }
+
+      .files .box p {
+         font-size: 1.4rem;
+         margin-bottom: 1rem;
+         color: var(--light-color);
+      }
+
+      .btn {
+         padding: 1rem 2rem;
+         background: var(--yellow);
+         color: var(--black);
+         border-radius: 5px;
+         transition: background 0.3s;
+      }
+
+      .btn:hover {
+         background: var(--black);
+         color: var(--white);
+      }
+
+      footer {
+         background: var(--black);
+         color: var(--white);
+         text-align: center;
+         padding: 2rem;
+      }
+
+      footer .credit {
+         margin-top: 1rem;
+         font-size: 1.4rem;
+      }
+   </style>
+</head>
+<body>
+
+<!-- Header section -->
+<header>
+   <a href="../index.html" class="logo">
+      <img src="../images/logo.png" alt="Alazab Construction">
+   </a>
+   <nav class="navbar">
+      <a href="../index.html">Home</a>
+      <a href="index.html" class="active">Files</a>
+      <a href="../#contact">Contact</a>
+   </nav>
+</header>
+
+<!-- Files section -->
+<section class="files" id="files">
+   <h1 class="heading"> Company Files </h1>
+   <div class="box-container">
+      <div class="box">
+         <img src="../images/file-icon.png" alt="File Icon">
+         <h3>Company Profile</h3>
+         <p>Download the latest company profile to learn more about our services.</p>
+         <a href="company-profile.pdf" class="btn" download>Download</a>
+      </div>
+
+      <div class="box">
+         <img src="../images/file-icon.png" alt="File Icon">
+         <h3>Service Catalog</h3>
+         <p>Explore the range of services we offer to support your projects.</p>
+         <a href="service-catalog.pdf" class="btn" download>Download</a>
+      </div>
+
+      <div class="box">
+         <img src="../images/file-icon.png" alt="File Icon">
+         <h3>Project Guidelines</h3>
+         <p>Access our detailed project guidelines for your reference.</p>
+         <a href="project-guidelines.pdf" class="btn" download>Download</a>
+      </div>
+
+      <div class="box">
+         <img src="../images/file-icon.png" alt="File Icon">
+         <h3>Financial Report</h3>
+         <p>Review the latest financial report for company insights.</p>
+         <a href="financial-report.pdf" class="btn" download>Download</a>
+      </div>
+
+      <div class="box">
+         <img src="../images/file-icon.png" alt="File Icon">
+         <h3>Employee Handbook</h3>
+         <p>Access the employee handbook for policies and guidelines.</p>
+         <a href="employee-handbook.pdf" class="btn" download>Download</a>
+      </div>
+
+      <div class="box">
+         <img src="../images/file-icon.png" alt="File Icon">
+         <h3>Safety Procedures</h3>
+         <p>Download the safety procedures to ensure safe operations.</p>
+         <a href="safety-procedures.pdf" class="btn" download>Download</a>
+      </div>
+   </div>
+</section>
+
+<!-- Footer section -->
+<footer>
+   <div class="credit">
+      Created by <span>Alazab Construction</span> | All rights reserved!
+   </div>
+</footer>
+
+</body>
+</html>
