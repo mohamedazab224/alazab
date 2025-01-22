@@ -438,66 +438,46 @@ section {
   right: 7rem;
 }
 
-.featured-Services {
-    font-family: 'Roboto', Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
-    text-align: center;
+.featured .Services {
+  background: var(--light-bg);
 }
 
-h1 {
-    font-size: 24px;
-    margin: 20px 0;
-    color: #333;
+.services .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 2rem;
 }
 
-p {
-    color: #555;
+.services .box-container .box {
+  text-align: center;
+  padding: 3rem;
+  background: var(--white);
+  box-shadow: var(--box-shadow);
+  border: var(--border);
+  transition: transform 0.3s ease;
 }
 
-.services-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
+.services .box-container .box:hover {
+  transform: translateY(-1rem);
 }
 
-.service-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    width: 250px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.services .box-container .box img {
+  height: 7rem;
+  margin-bottom: .5rem;
+  transition: transform 0.2s linear;
 }
 
-.service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.services .box-container .box h3 {
+  font-size: 1.7rem;
+  color: var(--black);
+  text-transform: capitalize;
+  padding: 1rem 0;
 }
 
-.service-card i {
-    font-size: 30px;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.service-card h3 {
-    font-size: 18px;
-    margin: 10px 0;
-    color: #333;
-}
-
-.service-card p {
-    font-size: 14px;
-    color: #777;
-    margin-bottom: 15px;
-    height: 60px; /* Ensures consistent text height */
-    line-height: 1.5; /* Improves readability */
-    overflow: hidden;
+.services .box-container .box p {
+  font-size: 1.4rem;
+  color: var(--light-color);
+  line-height: 2;
 }
 
 .learn-more-btn {
@@ -523,22 +503,22 @@ p {
 
     .section-description {
         font-size: 16px;
-    }
 }
+}  
 
 @media (max-width: 480px) {
     .service-title {
         font-size: 18px;
-    }
+}
 
     .service-description {
         font-size: 14px;
-    }
+}
 
     .service-button {
         padding: 8px 10px;
         font-size: 12px;
-    }
+        text-align: center;
 }
 
 .about .row {
