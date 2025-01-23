@@ -184,40 +184,207 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- home section ends -->
    
 <!-- featured services starts  -->
-<section class="featured services" id="featured-services">
-    <h1>Our Featured Services By Alazab</h1>
-    <p>Discover our Service lines Specifically Designed to meet your needs. We are Committed to Keeping your Facility in Top Condition.</p>
-    <div class="services-container">
-        <!-- Luxury Finishing -->
-        <div class="service-card">
-            <i><a href="https://al-azab.co" target="_blank"><img src="https://i.postimg.cc/3kQH1YfW/house-1.gif" alt="house-1"/></a></i>
-            <h3>Luxury Finishing</h3>
-            <p>High-end finishing solutions that turn your spaces into elegant masterpieces.</p>
-            <a href="https://alazab.online/services_1" class="learn-more-btn">Learn More</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Rotating Cards</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Lato', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+      background: #d1d1d1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container__card {
+      max-width: 1200px;
+      margin: auto;
+      perspective: 1000px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .card__father {
+      margin: 20px;
+      perspective: 1000px;
+    }
+
+    .card__father:hover .card {
+      transform: rotateY(180deg);
+    }
+
+    .card {
+      width: 450px;
+      height: 600px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: all 1s;
+    }
+
+    .card__front {
+      background-size: cover;
+      background-position: center;
+    }
+
+    .card__front,
+    .card__back {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      backface-visibility: hidden;
+      transform-style: preserve-3d;
+      border-radius: 20px;
+    }
+
+    .card__back {
+      transform: rotateY(180deg);
+      background: white;
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card__back h1 {
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+      color: #333;
+    }
+
+    .card__back p {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .card__back input {
+      padding: 10px 30px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      color: white;
+      background: #f5bf23;
+      border-radius: 10px;
+      transition: all 0.4s;
+    }
+
+    .card__back input:hover {
+      background: #ff8c00;
+    }
+
+    .bg {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: rgba(204, 178, 62, 0.15);
+      border-radius: 20px;
+    }
+
+    .body__card_front {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      transform: translateZ(60px);
+    }
+  </style>
+</head>
+<body>
+  <div class="container__card">
+    <!-- Card 1 -->
+    <div class="card__father">
+      <div class="card">
+        <div class="card__front" style="background-image: url('https://i.postimg.cc/0yL2z5gK/1.jpg');">
+          <div class="bg"></div>
+          <div class="body__card_front">
+            <h1>Luxury Finishing</h1>
+          </div>
         </div>
-        <!-- Brand Identity -->
-        <div class="service-card">
-            <i><a href="https://al-azab.co" target="_blank"><img src="https://i.postimg.cc/cgKjZ3gT/house.gif" alt="house"/></a></i>
-            <h3>Brand Identity</h3>
-            <p>We create spaces that reflect your brand image and make a lasting impression.</p>
-            <a href="https://alazab.online/services_2" class="learn-more-btn">Learn More</a>
+        <div class="card__back">
+          <h1>Luxury Finishing</h1>
+          <p>High-end finishing solutions that turn your spaces into elegant masterpieces.</p>
+          <input type="button" value="Learn More">
         </div>
-        <!-- Maintenance & Renovations -->
-        <div class="service-card">
-            <i><a href="https://al-azab.co" target="_blank"><img src="https://i.postimg.cc/Js5Zfmw6/maintenance-1.gif" alt="maintenance-1"/></a>️</i>
-            <h3>Maintenance/Renovations</h3>
-            <p>Comprehensive maintenance services to enhance and modernize your spaces.</p>
-            <a href="https://alazab.online/services_3" class="learn-more-btn">Learn More</a>
-        </div>
-        <!-- General Supplies -->
-        <div class="service-card">
-            <i><a href="https://al-azab.co" target="_blank"><img src="https://i.postimg.cc/qNT2DqF6/delivery-truck.gif" alt="delivery-truck"/></a></i>
-            <h3>General Supplies</h3>
-            <p>We offer full supply solutions for all your project needs, from start to finish.</p>
-            <a href="https://alazab.online/services_4" class="learn-more-btn">Learn More</a>
-        </div>
+      </div>
     </div>
-</section>
+
+    <!-- Card 2 -->
+    <div class="card__father">
+      <div class="card">
+        <div class="card__front" style="background-image: url('https://i.postimg.cc/25hjhpmc/2.jpg');">
+          <div class="bg"></div>
+          <div class="body__card_front">
+            <h1>Brand Identity</h1>
+          </div>
+        </div>
+        <div class="card__back">
+          <h1>Brand Identity</h1>
+          <p>We create spaces that reflect your brand image and make a lasting impression.</p>
+          <input type="button" value="Learn More">
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card__father">
+      <div class="card">
+        <div class="card__front" style="background-image: url('https://i.postimg.cc/hjnD0CtS/3.jpg');">
+          <div class="bg"></div>
+          <div class="body__card_front">
+            <h1>Maintenance/Renovations</h1>
+          </div>
+        </div>
+        <div class="card__back">
+          <h1>Maintenance/Renovations</h1>
+          <p>Comprehensive maintenance services to enhance and modernize your spaces.</p>
+          <input type="button" value="Learn More">
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="card__father">
+      <div class="card">
+        <div class="card__front" style="background-image: url('https://i.postimg.cc/GmBm38f1/4.jpg');">
+          <div class="bg"></div>
+          <div class="body__card_front">
+            <h1>General Supplies</h1>
+          </div>
+        </div>
+        <div class="card__back">
+          <h1>General Supplies</h1>
+          <p>We offer full supply solutions for all your project needs, from start to finish.</p>
+          <input type="button" value="Learn More">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
 <!-- featured services ends  -->  
 
 <!-- about section starts  -->
