@@ -438,31 +438,6 @@ section {
   right: 7rem;
 }
 
-.featured.services {
-    font-family: 'Roboto', Arial, sans-serif;
-    background-color: var(--white);
-    margin: 0;
-    padding: 0;
-    text-align: center;
-}
-
-.featured.services .h1 {
-    font-size: 26px;
-    margin: 22px 0;
-    color: #333;
-}
-
-.featured.services .p {
-    color: #555;
-}
-
-.featured.services .services-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
-}
 .about .row {
   display: -webkit-box;
   display: -ms-flexbox;
