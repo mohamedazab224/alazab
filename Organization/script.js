@@ -13,8 +13,8 @@
 Highcharts.chart('container', {
 
   chart: {
-    height: 600,
-    width: 800,
+    height: 1250,
+    width: 1000,
     inverted: true
   },
 
@@ -24,7 +24,7 @@ Highcharts.chart('container', {
 
   series: [{
     type: 'organization',
-    name: 'Highsoft',
+    name: 'Alazab Construction',
     keys: ['from', 'to'],
     data: [
       ['Shareholders', 'Board'],
@@ -67,12 +67,12 @@ Highcharts.chart('container', {
     }, {
       id: 'CEO',
       title: 'CEO',
-      name: 'Grethe Hjetland',
+      name: 'Mohamed Azab',
       image: 'https://wp-assets.highcharts.com/www-highcharts-com/blog/wp-content/uploads/2018/11/12132317/Grethe.jpg'
     }, {
       id: 'HR',
-      title: 'HR/CFO',
-      name: 'Anne Jorunn Fjærestad',
+      title: 'PM/COO',
+      name: 'Magdy Azab',
       color: '#007ad0',
       image: 'https://wp-assets.highcharts.com/www-highcharts-com/blog/wp-content/uploads/2018/11/12132314/AnneJorunn.jpg',
       column: 3,
