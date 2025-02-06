@@ -1,0 +1,30 @@
+#container {
+  min-width: 300px;
+  border: 1px solid silver;
+  overflow: scroll !important;
+  float: left;
+  width: 800px;
+  height: 500px;
+}
+
+.labels {
+  float: left;
+  width: 200px;
+  font-size: 14px;
+  position: relative;
+  height: 600px;
+}
+.labels .label {
+  position: absolute;
+}
+
+#container h4 {
+  text-transform: none;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+#container p {
+  font-size: 13px;
+  line-height: 16px;
+}
