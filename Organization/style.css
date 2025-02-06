@@ -1,30 +1,50 @@
-#container {
-  min-width: 300px;
-  border: 1px solid silver;
-  overflow: scroll !important;
-  float: left;
-  width: 800px;
-  height: 500px;
+/* style.css */
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: #fcfbf7;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
 }
 
-.labels {
-  float: left;
-  width: 200px;
-  font-size: 14px;
-  position: relative;
-  height: 600px;
-}
-.labels .label {
-  position: absolute;
+.org-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-#container h4 {
-  text-transform: none;
-  font-size: 14px;
-  font-weight: normal;
+.level {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
-#container p {
-  font-size: 13px;
-  line-height: 16px;
+.box {
+    background-color: #e7b631;
+    color: #141413;
+    border: 2px solid #8e9296;
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.box:hover {
+    transform: scale(1.1);
+    background-color: #636465;
+    color: #ececec;
+}
+
+.ceo {
+    background-color: #49402f;
+    color: #fcfbf7;
+    font-size: 24px;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+@media (max-width: 768px) {
+    .level {
+        flex-direction: column;
+    }
 }
