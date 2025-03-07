@@ -23,9 +23,11 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gems-
 
-    # 3. بناء الموقع باستخدام Docker
+    # 3. بناء الموقع باستخدام Docker مع تمرير المتغيرات البيئية
     - name: Build the site in the jekyll/builder container
       run: |
         docker run \
-        -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
+        -v ${{ github.workspace }}:/srv/jekyll \
+        -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
+        -e API_KEY=${{ secrets.API_KEY }} \
         jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && bundle install && jekyll build --future"
