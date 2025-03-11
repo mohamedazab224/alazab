@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+form {
+    max-width: 600px;
+    margin: auto;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+canvas {
+    border: 1px solid #000;
+    margin-top: 10px;
+}
+
+button {
+    margin-top: 10px;
+}
