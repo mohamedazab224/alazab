@@ -1,53 +1,131 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عرض التصميم</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-            background-color: #f4f4f4;
-        }
-        .embed-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            height: 0;
-            padding-top: 141.4286%;
-            margin: auto;
-            box-shadow: 0 2px 8px rgba(63, 69, 81, 0.16);
-            border-radius: 8px;
-            overflow: hidden;
-            will-change: transform;
-        }
-        .embed-container iframe {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            border: none;
-        }
-        a {
-            display: block;
-            margin-top: 20px;
-            font-size: 18px;
-            color: #0073e6;
-            text-decoration: none;
-        }
-    </style>
+    <title>Vendor List Form</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>عرض التصميم</h1>
-    <div class="embed-container">
-        <iframe loading="lazy"
-            src="https://www.canva.com/design/DAF0llZOrvo/p3S0ELzjO-PmfQdxd6CnKg/view?embed"
-            allowfullscreen>
-        </iframe>
-    </div>
-    <a href="https://www.canva.com/design/DAF0llZOrvo/p3S0ELzjO-PmfQdxd6CnKg/view?utm_content=DAF0llZOrvo&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener">مشاهدة التصميم على Canva</a>
-</body>
-</html>
+    <form id="vendorForm">
+        <h1>Vendor List Form</h1>
+        <label for="spaceName">Space Name:</label>
+        <input type="text" id="spaceName" name="spaceName" value="Eslam Elhosainy (Elhosainy Nuts)" readonly><br>
+        
+        <label for="spaceNumber">Space Number:</label>
+        <input type="text" id="spaceNumber" name="spaceNumber" value="AZ-PROJ-2025-0016" readonly><br>
+        
+        <label for="date">Date:</label>
+        <input type="text" id="date" name="date" value="15/02/2025 / 30/03/2025" readonly><br>
+        
+        <h2>External Facade Systems (A,B,C)</h2>
+        <label for="curtainWall">Curtain Wall:</label>
+        <div id="curtainWall">
+            <input type="checkbox" id="aluNile" name="curtainWall" value="AluNile">
+            <label for="aluNile">AluNile</label><br>
+            <input type="checkbox" id="alumil" name="curtainWall" value="Alumil">
+            <label for="alumil">Alumil</label><br>
+            <input type="checkbox" id="almutahaduh" name="curtainWall" value="almutahaduh">
+            <label for="almutahaduh">almutahaduh</label><br>
+            <input type="checkbox" id="approvedEquivalent" name="curtainWall" value="Approved Equivalent">
+            <label for="approvedEquivalent">Approved Equivalent</label><br>
+        </div>
+        
+        <label for="aluminumProfile">Aluminum Profile RAL Color:</label>
+        <div id="aluminumProfile">
+            <input type="checkbox" id="ral7016" name="aluminumProfile" value="RAL 7016">
+            <label for="ral7016">RAL 7016</label><br>
+            <input type="checkbox" id="solarLiteClear" name="aluminumProfile" value="Solar Lite Clear">
+            <label for="solarLiteClear">Solar Lite Clear</label><br>
+        </div>
+        
+        <h2>Cladding Systems</h2>
+        <div id="claddingSystems">
+            <input type="checkbox" id="makkah" name="claddingSystems" value="Makkah">
+            <label for="makkah">Makkah</label><br>
+            <input type="checkbox" id="captain" name="claddingSystems" value="Captain">
+            <label for="captain">Captain</label><br>
+            <input type="checkbox" id="sharaqaBond" name="claddingSystems" value="Sharaqa Bond">
+            <label for="sharaqaBond">Sharaqa Bond</label><br>
+            <input type="checkbox" id="approvedEquivalentCladding" name="claddingSystems" value="Approved Equivalent">
+            <label for="approvedEquivalentCladding">Approved Equivalent</label><br>
+        </div>
+        
+        <h2>Inner Partitions</h2>
+        <div id="innerPartitions">
+            <input type="checkbox" id="knauf" name="innerPartitions" value="Knauf Gypsum Board">
+            <label for="knauf">Knauf Gypsum Board</label><br>
+            <input type="checkbox" id="lightWeightConcreteBlocks" name="innerPartitions" value="Light Weight Concrete Blocks">
+            <label for="lightWeightConcreteBlocks">Light Weight Concrete Blocks</label><br>
+        </div>
+        
+        <h2>Fire Alarm System & Sprinklers</h2>
+        <label for="fireAlarmSystem">Fire Alarm System:</label>
+        <div id="fireAlarmSystem">
+            <input type="checkbox" id="honywell" name="fireAlarmSystem" value="Honywell">
+            <label for="honywell">Honywell</label><br>
+            <input type="checkbox" id="apollo" name="fireAlarmSystem" value="Apollo">
+            <label for="apollo">Apollo</label><br>
+            <input type="checkbox" id="simplex" name="fireAlarmSystem" value="Simplex">
+            <label for="simplex">Simplex</label><br>
+            <input type="checkbox" id="zeta" name="fireAlarmSystem" value="Zeta">
+            <label for="zeta">Zeta</label><br>
+            <input type="checkbox" id="hHSTFire" name="fireAlarmSystem" value="H HST Fire">
+            <label for="hHSTFire">H HST Fire</label><br>
+            <input type="checkbox" id="approvedEquivalentFireAlarm" name="fireAlarmSystem" value="Approved Equivalent">
+            <label for="approvedEquivalentFireAlarm">Approved Equivalent</label><br>
+        </div>
+        
+        <label for="fireAlarmCables">Fire Alarm Cables:</label>
+        <div id="fireAlarmCables">
+            <input type="checkbox" id="elSewedy" name="fireAlarmCables" value="El Sewedy 2*1.5 shielded">
+            <label for="elSewedy">El Sewedy 2*1.5 shielded</label><br>
+            <input type="checkbox" id="approvedEquivalentFireAlarmCables" name="fireAlarmCables" value="Approved Equivalent">
+            <label for="approvedEquivalentFireAlarmCables">Approved Equivalent</label><br>
+        </div>
+        
+        <label for="dataCabling">Data Cabling:</label>
+        <div id="dataCabling">
+            <input type="checkbox" id="premiumLine" name="dataCabling" value="Premium-Line">
+            <label for="premiumLine">Premium-Line</label><br>
+            <input type="checkbox" id="nexans" name="dataCabling" value="Nexans">
+            <label for="nexans">Nexans</label><br>
+            <input type="checkbox" id="schneider" name="dataCabling" value="Schneider">
+            <label for="schneider">Schneider</label><br>
+            <input type="checkbox" id="approvedEquivalentDataCabling" name="dataCabling" value="Approved Equivalent">
+            <label for="approvedEquivalentDataCabling">Approved Equivalent</label><br>
+        </div>
+        
+        <label for="flowSwitch">Flow Switch:</label>
+        <div id="flowSwitch">
+            <input type="checkbox" id="potterElectronics" name="flowSwitch" value="Potter Electronics">
+            <label for="potterElectronics">Potter Electronics</label><br>
+            <input type="checkbox" id="systemSensor" name="flowSwitch" value="System Sensor">
+            <label for="systemSensor">System Sensor</label><br>
+        </div>
+        
+        <label for="pipingAndFittings">Piping and Fittings:</label>
+        <div id="pipingAndFittings">
+            <input type="checkbox" id="interpipe" name="pipingAndFittings" value="Interpipe seamless Ukrainian">
+            <label for="interpipe">Interpipe seamless Ukrainian</label><br>
+            <input type="checkbox" id="approvedEquivalentPiping" name="pipingAndFittings" value="Approved Equivalent">
+            <label for="approvedEquivalentPiping">Approved Equivalent</label><br>
+        </div>
+        
+        <label for="sprinklers">Sprinklers:</label>
+        <div id="sprinklers">
+            <input type="checkbox" id="viking" name="sprinklers" value="Viking – Quick response">
+            <label for="viking">Viking – Quick response</label><br>
+            <input type="checkbox" id="reliable" name="sprinklers" value="Reliable– Quick response">
+            <label for="reliable">Reliable– Quick response</label><br>
+            <input type="checkbox" id="globe" name="sprinklers" value="Globe– Quick response">
+            <label for="globe">Globe– Quick response</label><br>
+            <input type="checkbox" id="approvedEquivalentSprinklers" name="sprinklers" value="Approved Equivalent">
+            <label for="approvedEquivalentSprinklers">Approved Equivalent</label><br>
+        </div>
+        
+        <label for="fireExtinguisher">Fire Extinguisher:</label>
+        <div id="fireExtinguisher">
+            <input type="checkbox" id="bavaria" name="fireExtinguisher" value="Bavaria">
+            <label for="bavaria">Bavaria</label><br>
+            <input type="checkbox" id="naffco
