@@ -1,0 +1,105 @@
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
+import { Trash, Edit, Save } from "lucide-react";
+
+export default function RedirectURIs() {
+  const [uris, setUris] = useState([]);
+  const [newUri, setNewUri] = useState("");
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editValue, setEditValue] = useState("");
+
+  useEffect(() => {
+    const savedURIs = JSON.parse(localStorage.getItem("redirectURIs")) || [];
+    setUris(savedURIs);
+  }, []);
+
+  const saveToLocalStorage = (updatedUris) => {
+    localStorage.setItem("redirectURIs", JSON.stringify(updatedUris));
+  };
+
+  const addUri = () => {
+    if (newUri.trim() !== "") {
+      const updatedUris = [...uris, newUri.trim()];
+      setUris(updatedUris);
+      saveToLocalStorage(updatedUris);
+      setNewUri("");
+    }
+  };
+
+  const deleteUri = (index) => {
+    const updatedUris = uris.filter((_, i) => i !== index);
+    setUris(updatedUris);
+    saveToLocalStorage(updatedUris);
+  };
+
+  const startEditing = (index) => {
+    setEditingIndex(index);
+    setEditValue(uris[index]);
+  };
+
+  const saveEdit = () => {
+    const updatedUris = [...uris];
+    updatedUris[editingIndex] = editValue.trim();
+    setUris(updatedUris);
+    saveToLocalStorage(updatedUris);
+    setEditingIndex(null);
+    setEditValue("");
+  };
+
+  return (
+    <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
+      <h1 className="text-xl font-bold mb-4">إدارة عناوين URI لإعادة التوجيه</h1>
+      <div className="flex gap-2 mb-4">
+        <Input
+          type="text"
+          placeholder="أضف عنوان URI جديد"
+          value={newUri}
+          onChange={(e) => setNewUri(e.target.value)}
+        />
+        <Button onClick={addUri}>إضافة</Button>
+      </div>
+      <Card>
+        <CardContent>
+          {uris.length === 0 ? (
+            <p className="text-gray-500">لم يتم إضافة أي عناوين URI حتى الآن.</p>
+          ) : (
+            <ul>
+              {uris.map((uri, index) => (
+                <li
+                  key={index}
+                  className="flex justify-between items-center p-2 border-b"
+                >
+                  {editingIndex === index ? (
+                    <Input
+                      type="text"
+                      value={editValue}
+                      onChange={(e) => setEditValue(e.target.value)}
+                    />
+                  ) : (
+                    <span>{uri}</span>
+                  )}
+                  <div className="flex gap-2">
+                    {editingIndex === index ? (
+                      <Button size="sm" onClick={saveEdit}>
+                        <Save size={16} />
+                      </Button>
+                    ) : (
+                      <Button size="sm" onClick={() => startEditing(index)}>
+                        <Edit size={16} />
+                      </Button>
+                    )}
+                    <Button size="sm" variant="destructive" onClick={() => deleteUri(index)}>
+                      <Trash size={16} />
+                    </Button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
