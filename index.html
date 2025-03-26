@@ -57,6 +57,28 @@
       })(window, document, "clarity", "script", "p512rzxtax");
    </script>
    <!-- End of Microsoft Clarity tracking code -->
+   <!-- starts facebook login code -->
+    <script>
+      window.fbAsyncInit = function() {
+          FB.init({
+          appId      : '615557577912061',
+	  cookie     : true,
+          xfbml      : true,
+          version    : 'v19.0'
+    });
+       FB.AppEvents.logPageView();   
+    };
+ 
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) return;
+           js = d.createElement(s); js.id = id;
+           js.src = "https://connect.facebook.net/en_US/sdk.js";
+           fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+</script>
+  <!-- End of facebook login code -->
+	
 </head>
 <body>
    <!-- Google Tag Manager (noscript) -->
