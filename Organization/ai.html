@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AzaBot • المساعد الذكي</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: #2b4a83;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .chat-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    iframe {
+      width: 100%;
+      max-width: 1000px;
+      height: 700px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background: white;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #777;
+      padding: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    🤖 AzaBot • المساعد الذكي لخدمات العزب
+  </header>
+
+  <div class="chat-container">
+    <iframe
+      id="JotFormIFrame-0194abdee59871f7b73e2eae35ed720e8ce0"
+      title="AzaBot • AI Agent"
+      allowtransparency="true"
+      allow="geolocation; microphone; camera; fullscreen"
+      src="https://agent.jotform.com/0194abdee59871f7b73e2eae35ed720e8ce0?embedMode=iframe&background=1&shadow=1"
+      scrolling="no"
+      onload="window.parent.scrollTo(0,0)"
+    ></iframe>
+  </div>
+
+  <footer>
+    جميع الحقوق محفوظة &copy; شركة العزب المعمارية 2025
+  </footer>
+
+  <script src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"></script>
+  <script>
+    window.jotformEmbedHandler(
+      "iframe[id='JotFormIFrame-0194abdee59871f7b73e2eae35ed720e8ce0']",
+      "https://www.jotform.com"
+    );
+  </script>
+
+</body>
+</html>
