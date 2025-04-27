@@ -1,33 +1,19 @@
-name: Jekyll site CI
+name: Deploy Website
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches:
+      - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
-    # 1. قم باستنساخ الكود من المستودع
-    - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    # 2. إعداد التخزين المؤقت
-    - name: Cache Gems
-      uses: actions/cache@v3
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
-
-    # 3. بناء الموقع باستخدام Docker مع تمرير المتغيرات البيئية
-    - name: Build the site in the jekyll/builder container
-      run: |
-        docker run \
-        -v ${{ github.workspace }}:/srv/jekyll \
-        -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-        -e API_KEY=${{ secrets.API_KEY }} \
-        jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && bundle install && jekyll build --future"
+      - name: Upload to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
