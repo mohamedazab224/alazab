@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نموذج طلب الصيانة</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap');
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: #f8fafc;
+    }
+
+    .step-indicator {
+      transition: all 0.3s ease;
+    }
+
+    .step-indicator.active {
+      background-color: #3b82f6;
+      color: white;
+    }
+
+    .step-indicator.completed {
+      background-color: #10b981;
+      color: white;
+    }
+
+    .form-section {
+      display: none;
+    }
+
+    .form-section.active {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .file-preview {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50">
+  <div class="min-h-screen pb-12">
+    <div class="max-w-3xl mx-auto">
+      <!-- الشعار والعنوان -->
+      <div class="text-center py-8">
+        <div class="flex justify-center items-center mb-3">
+          <div class="bg-blue-600 text-white p-3 rounded-full">
+            <i class="fas fa-tools text-2xl"></i>
+          </div>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-800">نظام طلبات الصيانة</h1>
+        <p class="text-gray-600 mt-2">أدخل بيانات طلب الصيانة الخاص بك بالخطوات</p>
+      </div>
+
+      <!-- مؤشر الخطوات -->
+      <div class="mb-8">
+        <div class="flex justify-between items-center">
+          <div class="w-full flex items-center">
+            <div class="step-indicator active rounded-full h-10 w-10 flex items-center justify-center font-bold bg-blue-500 text-white">1</div>
+            <div class="flex-1 h-1 mx-2 bg-gray-300 relative">
+              <div class="absolute top-0 left-0 h-full bg-blue-500 progress-bar" style="width: 0%"></div>
+            </div>
+          </div>
+          <div class="w-full flex items-center">
+            <div class="step-indicator rounded-full h-10 w-10 flex items-center justify-center font-bold bg-gray-300 text-gray-600">2</div>
+            <div class="flex-1 h-1 mx-2 bg-gray-300 relative">
+              <div class="absolute top-0 left-0 h-full bg-blue-500 progress-bar" style="width: 0%"></div>
+            </div>
+          </div>
+          <div class="w-full flex items-center">
+            <div class="step-indicator rounded-full h-10 w-10 flex items-center justify-center font-bold bg-gray-300 text-gray-600">3</div>
+            <div class="flex-1 h-1 mx-2 bg-gray-300 relative">
+              <div class="absolute top-0 left-0 h-full bg-blue-500 progress-bar" style="width: 0%"></div>
+            </div>
+          </div>
+          <div class="w-full flex items-center">
+            <div class="step-indicator rounded-full h-10 w-10 flex items-center justify-center font-bold bg-gray-300 text-gray-600">4</div>
+            <div class="flex-1 h-1 mx-2 bg-gray-300 relative">
+              <div class="absolute top-0 left-0 h-full bg-blue-500 progress-bar" style="width: 0%"></div>
+            </div>
+          </div>
+          <div class="step-indicator rounded-full h-10 w-10 flex items-center justify-center font-bold bg-gray-300 text-gray-600">5</div>
+        </div>
+        <div class="flex justify-between mt-2 text-sm text-gray-600">
+          <div class="text-center step-name" style="width: 20%">المعلومات الأساسية</div>
+          <div class="text-center step-name" style="width: 20%">تفاصيل الطلب</div>
+          <div class="text-center step-name" style="width: 20%">المرفقات</div>
+          <div class="text-center step-name" style="width: 20%">المراجعة</div>
+          <div class="text-center step-name" style="width: 20%">الإرسال</div>
+        </div>
+      </div>
+
+      <!-- النموذج -->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <form id="maintenanceForm">
+          <!-- القسم 1: المعلومات الأساسية -->
+          <div class="form-section active" id="step-1">
+            <h2 class="text-xl font-bold mb-6 text-gray-800 border-r-4 border-blue-500 pr-3">المعلومات الأساسية</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label class="block text-gray-700 mb-2" for="store_id">اختر الفرع <span class="text-red-500">*</span></label>
+                <select id="store_id" name="store_id" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                  <option value="" disabled selected>اختر الفرع المطلوب</option>
+                  <!-- سيتم تحميل الفروع هنا عبر JavaScript -->
+                </select>
+              </div>
+              
+              <div>
+                <label class="block text-gray-700 mb-2" for="service_type">نوع الخدمة <span class="text-red-500">*</span></label>
+                <select id="service_type" name="service_type" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                  <option value="" disabled selected>اختر نوع الخدمة</option>
+                  <!-- سيتم تحميل أنواع الخدمات هنا عبر JavaScript -->
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <label class="block text-gray-700 mb-2" for="title">عنوان طلب الصيانة <span class="text-red-500">*</span></label>
+              <input type="text" id="title" name="title" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="أدخل عنوان مختصر للطلب">
+            </div>
+            
+            <div class="flex justify-end">
+              <button type="button" class="next-btn bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium transition duration-300 flex items-center">
+                التالي <i class="fas fa-arrow-left mr-2"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- القسم 2: تفاصيل الطلب -->
+          <div class="form-section" id="step-2">
+            <h2 class="text-xl font-bold mb-6 text-gray-800 border-r-4 border-blue-500 pr-3">تفاصيل الطلب</h2>
+            
+            <div class="mb-6">
+              <label class="block text-gray-700 mb-2" for="description">وصف المشكلة <span class="text-red-500">*</span></label>
+              <textarea id="description" name="description" required rows="4" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="اشرح المشكلة بالتفصيل"></textarea>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label class="block text-gray-700 mb-2" for="priority">الأولوية <span class="text-red-500">*</span></label>
+                <select id="priority" name="priority" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                  <option value="" disabled selected>اختر أولوية الطلب</option>
+                  <option value="منخفضة">منخفضة</option>
+                  <option value="متوسطة">متوسطة</option>
+                  <option value="عالية">عالية</option>
+                  <option value="عاجلة">عاجلة</option>
+                </select>
+              </div>
+              
+              <div>
+                <label class="block text-gray-700 mb-2" for="scheduled_date">التاريخ المطلوب <span class="text-red-500">*</span></label>
+                <input type="datetime-local" id="scheduled_date" name="scheduled_date" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+              </div>
+            </div>
+            
+            <div class="mb-6">
+              <label class="block text-gray-700 mb-2" for="estimated_cost">التكلفة المتوقعة (اختياري)</label>
+              <input type="number" id="estimated_cost" name="estimated_cost" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="أدخل التكلفة المتوقعة">
+            </div>
+            
+            <div class="flex justify-between">
+              <button type="button" class="prev-btn bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 rounded-lg font-medium transition duration-300 flex items-center">
+                <i class="fas fa-arrow-right ml-2"></i> السابق
+              </button>
+              <button type="button" class="next-btn bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium transition duration-300 flex items-center">
+                التالي <i class="fas fa-arrow-left mr-2"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- القسم 3: المرفقات -->
+          <div class="form-section" id="step-3">
+            <h2 class="text-xl font-bold mb-6 text-gray-800 border-r-4 border-blue-500 pr-3">المرفقات</h2>
+            
+            <div class="mb-6">
+              <label class="block text-gray-700 mb-2">إضافة صور أو ملفات</label>
+              <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:border-blue-500 transition duration-300" id="dropArea">
+                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
+                <p class="mb-2 text-gray-600">اسحب الملفات هنا أو انقر للاختيار</p>
+                <p class="text-sm text-gray-500">يمكنك رفع ملفات بصيغة JPG, PNG, PDF (الحد الأقصى 5 ملفات)</p>
+                <input type="file" id="fileInput" multiple accept="image/*,.pdf" class="hidden">
+              </div>
+            </div>
+            
+            <div id="filePreviewContainer" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              <!-- سيتم عرض معاينة الملفات هنا -->
+            </div>
+            
+            <div class="flex justify-between">
+              <button type="button" class="prev-btn bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 rounded-lg font-medium transition duration-300 flex items-center">
+                <i class="fas fa-arrow-right ml-2"></i> السابق
+              </button>
+              <button type="button" class="next-btn bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium transition duration-300 flex items-center">
+                التالي <i class="fas fa-arrow-left mr-2"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- القسم 4: المراجعة -->
+          <div class="form-section" id="step-4">
+            <h2 class="text-xl font-bold mb-6 text-gray-800 border-r-4 border-blue-500 pr-3">مراجعة البيانات</h2>
+            
+            <div class="bg-gray-50 p-4 rounded-lg mb-6">
+              <h3 class="font-bold text-gray-700 mb-3">المعلومات الأساسية</h3>
+              <div class="grid grid-cols-2 gap-3 mb-4">
+                <div>
+                  <p class="text-sm text-gray-500">الفرع:</p>
+                  <p id="review-store" class="font-medium"></p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">نوع الخدمة:</p>
+                  <p id="review-service" class="font-medium"></p>
+                </div>
+                <div class="col-span-2">
+                  <p class="text-sm text-gray-500">العنوان:</p>
+                  <p id="review-title" class="font-medium"></p>
+                </div>
+              </div>
+              
+              <h3 class="font-bold text-gray-700 mb-3">تفاصيل الطلب</h3>
+              <div class="grid grid-cols-2 gap-3 mb-4">
+                <div class="col-span-2">
+                  <p class="text-sm text-gray-500">الوصف:</p>
+                  <p id="review-description" class="font-medium"></p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">الأولوية:</p>
+                  <p id="review-priority" class="font-medium"></p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">التاريخ المطلوب:</p>
+                  <p id="review-date" class="font-medium"></p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">التكلفة المتوقعة:</p>
+                  <p id="review-cost" class="font-medium"></p>
+                </div>
+              </div>
+              
+              <h3 class="font-bold text-gray-700 mb-3">المرفقات</h3>
+              <div id="review-files" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- سيتم عرض معاينة الملفات هنا -->
+              </div>
+            </div>
+            
+            <div class="flex justify-between">
+              <button type="button" class="prev-btn bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 rounded-lg font-medium transition duration-300 flex items-center">
+                <i class="fas fa-arrow-right ml-2"></i> السابق
+              </button>
+              <button type="button" class="next-btn bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium transition duration-300 flex items-center">
+                إرسال الطلب <i class="fas fa-paper-plane mr-2"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- القسم 5: تأكيد الإرسال -->
+          <div class="form-section" id="step-5">
+            <div class="text-center py-8">
+              <div id="success-message" class="hidden">
+                <div class="flex justify-center items-center mb-4">
+                  <div class="bg-green-500 text-white p-4 rounded-full">
+                    <i class="fas fa-check text-3xl"></i>
+                  </div>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">تم إرسال طلبك بنجاح!</h2>
+                <p class="text-gray-600 mb-6">سيتم مراجعة طلبك في أقرب وقت ممكن</p>
+                <p class="text-gray-700 font-bold mb-2">رقم الطلب: <span id="request-id" class="text-blue-600"></span></p>
+                <div class="mt-8">
+                  <button type="button" id="new-request-btn" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium transition duration-300">
+                    طلب جديد
+                  </button>
+                </div>
+              </div>
+              
+              <div id="loading-message">
+                <div class="flex justify-center items-center mb-4">
+                  <div class="w-16 h-16 border-t-4 border-b-4 border-blue-500 rounded-full animate-spin"></div>
+                </div>
+                <h2 class="text-xl font-bold text-gray-800 mb-2">جاري معالجة طلبك</h2>
+                <p class="text-gray-600">يرجى الانتظار قليلاً...</p>
+              </div>
+              
+              <div id="error-message" class="hidden">
+                <div class="flex justify-center items-center mb-4">
+                  <div class="bg-red-500 text-white p-4 rounded-full">
+                    <i class="fas fa-exclamation-triangle text-3xl"></i>
+                  </div>
+                </div>
+                <h2 class="text-xl font-bold text-gray-800 mb-2">حدث خطأ ما</h2>
+                <p class="text-gray-600 mb-6">لم نتمكن من إرسال طلبك. يرجى المحاولة مرة أخرى.</p>
+                <div class="mt-8">
+                  <button type="button" id="try-again-btn" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium transition duration-300">
+                    المحاولة مرة أخرى
+                  </button>
+                </div>
+              </div>
+              
+              <div class="mt-8">
+                <button type="button" id="send-email-btn" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-medium transition duration-300">
+                  إرسال تأكيد بالبريد الإلكتروني
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    // تهيئة Supabase
+    const SUPABASE_URL = 'https://hvnxhovwbvphynuxlqnj.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh2bnhob3Z3YnZwaHludXhscW5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM4Mjg2ODAsImV4cCI6MjA1OTQwNDY4MH0.i59NYbHj1aJixQMmXh61gPV5SpqoXwxjr85-5pUl-9U';
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // متغيرات عامة
+    let currentStep = 1;
+    const totalSteps = 5;
+    let uploadedFiles = [];
+    let userId = null; // سيتم تحديده عند تحقق المستخدم
+
+    // التحقق من تسجيل الدخول
+    async function checkAuth() {
+      const { data: { session }, error } = await supabase.auth.getSession();
+      
+      if (session) {
+        userId = session.user.id;
+        console.log("المستخدم مسجل الدخول:", userId);
+      } else {
+        // إذا كان المستخدم غير مسجل الدخول، استخدم معرف افتراضي للتجربة
+        userId = 'guest-user';
+        console.log("المستخدم غير مسجل الدخول، استخدام معرف افتراضي:", userId);
+      }
+    }
+
+    // عناصر DOM
+    const form = document.getElementById('maintenanceForm');
+    const stepIndicators = document.querySelectorAll('.step-indicator');
+    const formSections = document.querySelectorAll('.form-section');
+    const nextButtons = document.querySelectorAll('.next-btn');
+    const prevButtons = document.querySelectorAll('.prev-btn');
+    const progressBars = document.querySelectorAll('.progress-bar');
+    const dropArea = document.getElementById('dropArea');
+    const fileInput = document.getElementById('fileInput');
+    const filePreviewContainer = document.getElementById('filePreviewContainer');
+    const newRequestBtn = document.getElementById('new-request-btn');
+    const tryAgainBtn = document.getElementById('try-again-btn');
+    
+    // زر المحاولة مرة أخرى
+    tryAgainBtn.addEventListener('click', () => {
+      goToStep(4);
+      document.getElementById('error-message').classList.add('hidden');
+    });
+    
+    // زر طلب جديد
+    newRequestBtn.addEventListener('click', () => {
+      form.reset();
+      filePreviewContainer.innerHTML = '';
+      uploadedFiles = [];
+      goToStep(1);
+      document.getElementById('success-message').classList.add('hidden');
+      document.getElementById('loading-message').classList.remove('hidden');
+    });
+
+    // تحميل الفروع
+    async function loadStores() {
+      try {
+        const { data, error } = await supabase
+          .from('stores')
+          .select('id, name')
+          .eq('status', 'active');
+          
+        if (error) throw error;
+        
+        const storeSelect = document.getElementById('store_id');
+        // إضافة بيانات تجريبية إذا لم تكن هناك بيانات
+        if (!data || data.length === 0) {
+          const dummyStores = [
+            { id: 'f47ac10b-58cc-4372-a567-0e02b2c3d479', name: 'فرع الرياض الرئيسي' },
+            { id: 'f47ac10b-58cc-4372-a567-0e02b2c3d480', name: 'فرع جدة' },
+            { id: 'f47ac10b-58cc-4372-a567-0e02b2c3d481', name: 'فرع الدمام' },
+            { id: 'f47ac10b-58cc-4372-a567-0e02b2c3d482', name: 'فرع مكة' }
+          ];
+          
+          dummyStores.forEach(store => {
+            const option = document.createElement('option');
+            option.value = store.id;
+            option.textContent = store.name;
+            storeSelect.appendChild(option);
+          });
+        } else {
+          data.forEach(store => {
+            const option = document.createElement('option');
+            option.value = store.id;
+            option.textContent = store.name;
+            storeSelect.appendChild(option);
+          });
+        }
+      } catch (error) {
+        console.error('خطأ في تحميل الفروع:', error);
+        // إضافة بيانات تجريبية في حالة الخطأ
+        const storeSelect = document.getElementById('store_id');
+        const dummyStores = [
+          { id: 'f47ac10b-58cc-4372-a567-0e02b2c3d479', name: 'فرع الرياض الرئيسي' },
+          { id: 'f47ac10b-58cc-4372-a567-0e02b2c3d480', name: 'فرع جدة' },
+          { id: 'f47ac10b-58cc-4372-a567-0e02b2c3d481', name: 'فرع الدمام' },
+          { id: 'f47ac10b-58cc-4372-a567-0e02b2c3d482', name: 'فرع مكة' }
+        ];
+        
+        dummyStores.forEach(store => {
+          const option = document.createElement('option');
+          option.value = store.id;
+          option.textContent = store.name;
+          storeSelect.appendChild(option);
+        });
+      }
+    }
+
+    // تحميل أنواع الخدمات
+    async function loadServices() {
+      try {
+        const { data, error } = await supabase
+          .from('maintenance_services')
+          .select('id, name')
+          .eq('is_active', true);
+          
+        if (error) throw error;
+        
+        const serviceSelect = document.getElementById('service_type');
+        // إضافة بيانات تجريبية إذا لم تكن هناك بيانات
+        if (!data || data.length === 0) {
+          const dummyServices = [
+            { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d490', name: 'صيانة مكيفات' },
+            { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d491', name: 'سباكة' },
+            { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d492', name: 'كهرباء' },
+            { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d493', name: 'دهانات' },
+            { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d494', name: 'نجارة' },
+            { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d495', name: 'نظافة' }
+          ];
+          
+          dummyServices.forEach(service => {
+            const option = document.createElement('option');
+            option.value = service.name;
+            option.textContent = service.name;
+            serviceSelect.appendChild(option);
+          });
+        } else {
+          data.forEach(service => {
+            const option = document.createElement('option');
+            option.value = service.name;
+            option.textContent = service.name;
+            serviceSelect.appendChild(option);
+          });
+        }
+      } catch (error) {
+        console.error('خطأ في تحميل الخدمات:', error);
+        // إضافة بيانات تجريبية في حالة الخطأ
+        const serviceSelect = document.getElementById('service_type');
+        const dummyServices = [
+          { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d490', name: 'صيانة مكيفات' },
+          { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d491', name: 'سباكة' },
+          { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d492', name: 'كهرباء' },
+          { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d493', name: 'دهانات' },
+          { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d494', name: 'نجارة' },
+          { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d495', name: 'نظافة' }
+        ];
+
+        dummyServices.forEach(service => {
+          const option = document.createElement('option');
+          option.value = service.name;
+          option.textContent = service.name;
+          serviceSelect.appendChild(option);
+        });
+      }
+    }
+
+    // استدعاء الدوال عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', async () => {
+      await checkAuth();
+      await loadStores();
+      await loadServices();
+    });
+
+    (function () {
+      emailjs.init("18ygGgryRoGve-Tpw"); // استبدل بمفتاحك العام
+    })();
+
+    document.getElementById('send-email-btn').addEventListener('click', async () => {
+      const emailParams = {
+        user_name: document.getElementById('review-store').textContent, // اسم المستخدم
+        user_email: 'example@example.com', // استبدل بالبريد الإلكتروني الفعلي
+        request_id: document.getElementById('request-id').textContent, // رقم الطلب
+        service_type: document.getElementById('review-service').textContent, // نوع الخدمة
+        description: document.getElementById('review-description').textContent, // وصف المشكلة
+      };
+
+      try {
+        const response = await emailjs.send('service_Alazab.co', 'template_hbb46pi', emailParams);
+        alert('تم إرسال البريد الإلكتروني بنجاح!');
+        console.log('Email sent:', response);
+      } catch (error) {
+        console.error('خطأ في إرسال البريد الإلكتروني:', error);
+        alert('حدث خطأ أثناء إرسال البريد الإلكتروني.');
+      }
+    });
+  </script>
+</body>
+</html>
