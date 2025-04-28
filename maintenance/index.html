@@ -333,11 +333,15 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
   <script>
-    // 1. إخفاء مفاتيح API باستخدام متغيرات بيئية
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_KEY = process.env.SUPABASE_KEY;
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    
+ // تهيئة Supabase
+  const { createClient } = require('@supabase/supabase-js'); // createClient
 
+  const SUPABASE_URL = 'https://hvnxhovwbvphynuxlqnj.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh2bnhob3Z3YnZwaHludXhscW5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM4Mjg2ODAsImV4cCI6MjA1OTQwNDY4MH0.i59NYbHj1aJixQMmXh61gPV5SpqoXwxjr85-5pUl-9U';
+  
+  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); // Updated indentation
+  
 // 2. تحسين تحميل الفروع
 async function loadStores() {
     try {
