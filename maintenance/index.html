@@ -20,12 +20,12 @@
     }
 
     .step-indicator.active {
-      background-color: #3b82f6;
+      background-color: #000000;
       color: white;
     }
 
     .step-indicator.completed {
-      background-color: #10b981;
+      background-color: #000000;
       color: white;
     }
 
@@ -331,179 +331,106 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
   <script>
-    // تهيئة Supabase
-    const SUPABASE_URL = 'https://hvnxhovwbvphynuxlqnj.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh2bnhob3Z3YnZwaHludXhscW5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM4Mjg2ODAsImV4cCI6MjA1OTQwNDY4MH0.i59NYbHj1aJixQMmXh61gPV5SpqoXwxjr85-5pUl-9U';
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    // 1. إخفاء مفاتيح API باستخدام متغيرات بيئية
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_KEY;
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    // متغيرات عامة
-    let currentStep = 1;
-    const totalSteps = 5;
-    let uploadedFiles = [];
-    let userId = null; // سيتم تحديده عند تحقق المستخدم
-
-    // التحقق من تسجيل الدخول
-    async function checkAuth() {
-      const { data: { session }, error } = await supabase.auth.getSession();
-      
-      if (session) {
-        userId = session.user.id;
-        console.log("المستخدم مسجل الدخول:", userId);
-      } else {
-        // إذا كان المستخدم غير مسجل الدخول، استخدم معرف افتراضي للتجربة
-        userId = 'guest-user';
-        console.log("المستخدم غير مسجل الدخول، استخدام معرف افتراضي:", userId);
-      }
-    }
-
-    // عناصر DOM
-    const form = document.getElementById('maintenanceForm');
-    const stepIndicators = document.querySelectorAll('.step-indicator');
-    const formSections = document.querySelectorAll('.form-section');
-    const nextButtons = document.querySelectorAll('.next-btn');
-    const prevButtons = document.querySelectorAll('.prev-btn');
-    const progressBars = document.querySelectorAll('.progress-bar');
-    const dropArea = document.getElementById('dropArea');
-    const fileInput = document.getElementById('fileInput');
-    const filePreviewContainer = document.getElementById('filePreviewContainer');
-    const newRequestBtn = document.getElementById('new-request-btn');
-    const tryAgainBtn = document.getElementById('try-again-btn');
-    
-    // زر المحاولة مرة أخرى
-    tryAgainBtn.addEventListener('click', () => {
-      goToStep(4);
-      document.getElementById('error-message').classList.add('hidden');
-    });
-    
-    // زر طلب جديد
-    newRequestBtn.addEventListener('click', () => {
-      form.reset();
-      filePreviewContainer.innerHTML = '';
-      uploadedFiles = [];
-      goToStep(1);
-      document.getElementById('success-message').classList.add('hidden');
-      document.getElementById('loading-message').classList.remove('hidden');
-    });
-
-    // تحميل الفروع
-    async function loadStores() {
-      try {
+// 2. تحسين تحميل الفروع
+async function loadStores() {
+    try {
         const { data, error } = await supabase
-          .from('stores')
-          .select('id, name')
-          .eq('status', 'active');
-          
+            .from('stores')
+            .select('id, name')
+            .eq('status', 'active');
+
         if (error) throw error;
-        
+
         const storeSelect = document.getElementById('store_id');
-        // إضافة بيانات تجريبية إذا لم تكن هناك بيانات
         if (!data || data.length === 0) {
-          const dummyStores = [
-            { id: 'f47ac10b-58cc-4372-a567-0e02b2c3d479', name: 'فرع الرياض الرئيسي' },
-            { id: 'f47ac10b-58cc-4372-a567-0e02b2c3d480', name: 'فرع جدة' },
-            { id: 'f47ac10b-58cc-4372-a567-0e02b2c3d481', name: 'فرع الدمام' },
-            { id: 'f47ac10b-58cc-4372-a567-0e02b2c3d482', name: 'فرع مكة' }
-          ];
-          
-          dummyStores.forEach(store => {
-            const option = document.createElement('option');
-            option.value = store.id;
-            option.textContent = store.name;
-            storeSelect.appendChild(option);
-          });
+            storeSelect.innerHTML = '<option disabled>لا توجد فروع متاحة</option>';
         } else {
-          data.forEach(store => {
-            const option = document.createElement('option');
-            option.value = store.id;
-            option.textContent = store.name;
-            storeSelect.appendChild(option);
-          });
+            data.forEach(store => {
+                const option = document.createElement('option');
+                option.value = store.id;
+                option.textContent = store.name;
+                storeSelect.appendChild(option);
+            });
         }
-      } catch (error) {
+    } catch (error) {
         console.error('خطأ في تحميل الفروع:', error);
-        // إضافة بيانات تجريبية في حالة الخطأ
-        const storeSelect = document.getElementById('store_id');
-        const dummyStores = [
-          { id: 'f47ac10b-58cc-4372-a567-0e02b2c3d479', name: 'فرع الرياض الرئيسي' },
-          { id: 'f47ac10b-58cc-4372-a567-0e02b2c3d480', name: 'فرع جدة' },
-          { id: 'f47ac10b-58cc-4372-a567-0e02b2c3d481', name: 'فرع الدمام' },
-          { id: 'f47ac10b-58cc-4372-a567-0e02b2c3d482', name: 'فرع مكة' }
-        ];
-        
-        dummyStores.forEach(store => {
-          const option = document.createElement('option');
-          option.value = store.id;
-          option.textContent = store.name;
-          storeSelect.appendChild(option);
-        });
-      }
+        alert('حدث خطأ أثناء تحميل الفروع. يرجى المحاولة لاحقًا.');
     }
+}
 
-    // تحميل أنواع الخدمات
-    async function loadServices() {
-      try {
+// 3. تحسين تحميل أنواع الخدمات
+async function loadServices() {
+    try {
         const { data, error } = await supabase
-          .from('maintenance_services')
-          .select('id, name')
-          .eq('is_active', true);
-          
+            .from('maintenance_services')
+            .select('id, name')
+            .eq('is_active', true);
+
         if (error) throw error;
-        
+
         const serviceSelect = document.getElementById('service_type');
-        // إضافة بيانات تجريبية إذا لم تكن هناك بيانات
         if (!data || data.length === 0) {
-          const dummyServices = [
-            { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d490', name: 'صيانة مكيفات' },
-            { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d491', name: 'سباكة' },
-            { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d492', name: 'كهرباء' },
-            { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d493', name: 'دهانات' },
-            { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d494', name: 'نجارة' },
-            { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d495', name: 'نظافة' }
-          ];
-          
-          dummyServices.forEach(service => {
-            const option = document.createElement('option');
-            option.value = service.name;
-            option.textContent = service.name;
-            serviceSelect.appendChild(option);
-          });
+            serviceSelect.innerHTML = '<option disabled>لا توجد خدمات متاحة</option>';
         } else {
-          data.forEach(service => {
-            const option = document.createElement('option');
-            option.value = service.name;
-            option.textContent = service.name;
-            serviceSelect.appendChild(option);
-          });
+            data.forEach(service => {
+                const option = document.createElement('option');
+                option.value = service.id;
+                option.textContent = service.name;
+                serviceSelect.appendChild(option);
+            });
         }
-      } catch (error) {
+    } catch (error) {
         console.error('خطأ في تحميل الخدمات:', error);
-        // إضافة بيانات تجريبية في حالة الخطأ
-        const serviceSelect = document.getElementById('service_type');
-        const dummyServices = [
-          { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d490', name: 'صيانة مكيفات' },
-          { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d491', name: 'سباكة' },
-          { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d492', name: 'كهرباء' },
-          { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d493', name: 'دهانات' },
-          { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d494', name: 'نجارة' },
-          { id: 'e47ac10b-58cc-4372-a567-0e02b2c3d495', name: 'نظافة' }
-        ];
-
-        dummyServices.forEach(service => {
-          const option = document.createElement('option');
-          option.value = service.name;
-          option.textContent = service.name;
-          serviceSelect.appendChild(option);
-        });
-      }
+        alert('حدث خطأ أثناء تحميل الخدمات. يرجى المحاولة لاحقًا.');
     }
+}
 
-    // استدعاء الدوال عند تحميل الصفحة
-    document.addEventListener('DOMContentLoaded', async () => {
-      await checkAuth();
-      await loadStores();
-      await loadServices();
-    });
+// 4. تحسين إرسال طلب الصيانة
+async function submitMaintenanceRequest() {
+    const formData = new FormData(document.getElementById('maintenanceForm'));
+    const request = {
+        store_id: formData.get('store_id'),
+        title: formData.get('title'),
+        description: formData.get('description'),
+        priority: formData.get('priority'),
+        service_type: formData.get('service_type'),
+        scheduled_date: formData.get('scheduled_date'),
+        created_by: supabase.auth.user()?.id || 'guest-user'
+    };
+
+    try {
+        const { data, error } = await supabase
+            .from('maintenance_requests')
+            .insert([request]);
+
+        if (error) throw error;
+
+        alert('تم إرسال الطلب بنجاح! رقم الطلب الخاص بك هو: ' + data[0]?.id);
+        document.getElementById('maintenanceForm').reset();
+    } catch (error) {
+        console.error('خطأ في إرسال الطلب:', error);
+        alert('حدث خطأ أثناء إرسال الطلب. يرجى المحاولة لاحقًا.');
+    }
+}
+
+// 5. إضافة حدث إرسال للنموذج
+document.getElementById('maintenanceForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    await submitMaintenanceRequest();
+});
+
+// 6. تحسين تجربة المستخدم عند التحميل
+document.getElementById('loadingIndicator').classList.remove('hidden'); // عرض مؤشر التحميل
+await loadStores();
+await loadServices();
+document.getElementById('loadingIndicator').classList.add('hidden'); // إخفاء مؤشر التحميل
 
     (function () {
       emailjs.init("18ygGgryRoGve-Tpw"); // استبدل بمفتاحك العام
@@ -527,6 +454,33 @@
         alert('حدث خطأ أثناء إرسال البريد الإلكتروني.');
       }
     });
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const downloadPdfBtn = document.getElementById('downloadPdfBtn');
+
+    downloadPdfBtn.addEventListener('click', () => {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+
+        // إضافة عنوان
+        pdf.setFont('helvetica', 'normal');
+        pdf.setFontSize(16);
+        pdf.text('نموذج طلب الصيانة', 10, 10);
+
+        // جمع البيانات من النموذج
+        const formData = new FormData(document.getElementById('maintenanceForm'));
+        const formFields = Array.from(formData.entries());
+
+        let yPosition = 20; // الموضع الرأسي لبدء النصوص
+        formFields.forEach(([key, value]) => {
+            pdf.text(`${key}: ${value}`, 10, yPosition);
+            yPosition += 10;
+        });
+
+        // حفظ الملف باسم محدد
+        pdf.save('maintenance-request.pdf');
+    });
+});
   </script>
 </body>
 </html>
