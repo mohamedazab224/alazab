@@ -328,7 +328,8 @@
     // === تحسينات وتحسين رفع الملفات ===
     const SUPABASE_URL = 'https://hvnxhovwbvphynuxlqnj.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh2bnhob3Z3YnZwaHludXhscW5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM4Mjg2ODAsImV4cCI6MjA1OTQwNDY4MH0.i59NYbHj1aJixQMmXh61gPV5SpqoXwxjr85-5pUl-9U'; // المفتاح الكامل
-    const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     // معاينة الصور قبل الرفع
     const attachmentsInput = document.getElementById('attachments');
