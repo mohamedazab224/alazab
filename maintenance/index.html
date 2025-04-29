@@ -194,17 +194,9 @@
             <h2 class="text-xl font-bold mb-6 text-gray-800 border-r-4 border-blue-500 pr-3">المرفقات</h2>
             
             <div class="mb-6">
-              <label class="block text-gray-700 mb-2">إضافة صور أو ملفات</label>
-              <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:border-blue-500 transition duration-300" id="dropArea">
-                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
-                <p class="mb-2 text-gray-600">اسحب الملفات هنا أو انقر للاختيار</p>
-                <p class="text-sm text-gray-500">يمكنك رفع ملفات بصيغة JPG, PNG, PDF (الحد الأقصى 5 ملفات)</p>
-                <input type="file" id="fileInput" multiple accept="image/*,.pdf" class="hidden">
-              </div>
-            </div>
-            
-            <div id="filePreviewContainer" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-              <!-- سيتم عرض معاينة الملفات هنا -->
+              <label class="block text-gray-700 mb-2" for="attachments">رفع الصور أو الملفات (يمكن اختيار أكثر من ملف)</label>
+              <input type="file" id="attachments" name="attachments" multiple accept="image/*,.pdf,.doc,.docx,.xls,.xlsx" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+              <div id="attachments-preview" class="flex flex-wrap gap-4 mt-4"></div>
             </div>
             
             <div class="flex justify-between">
@@ -260,18 +252,7 @@
               
               <h3 class="font-bold text-gray-700 mb-3">المرفقات</h3>
               <div id="review-files" class="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <input type="file" id="fileInput" multiple accept="image/*,.pdf" /> 
-              <div class="form-section" id="step-3">
                 <!-- سيتم عرض معاينة الملفات هنا -->
-              <div class="mb-6">
-              <label class="block text-gray-700 mb-2">إضافة صور أو ملفات</label>
-              <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:border-blue-500 transition duration-300" id="dropArea">
-              <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
-              <p class="mb-2 text-gray-600">اسحب الملفات هنا أو انقر للاختيار</p>
-    <p class="text-sm text-gray-500">يمكنك رفع ملفات بصيغة JPG, PNG, PDF (الحد الأقصى 5 ملفات)</p>
-    <input type="file" id="fileInput" multiple accept="image/*,.pdf" class="hidden">
-  </div>
-</div>
               </div>
             </div>
             
@@ -344,171 +325,165 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
   <script>
-    
-  // 1. تهيئة Supabase
-  const SUPABASE_URL = 'https://hvnxhovwbvphynuxlqnj.supabase.co';
-  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh2bnhob3Z3YnZwaHludXhscW5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM4Mjg2ODAsImV4cCI6MjA1OTQwNDY4MH0.i59NYbHj1aJixQMmXh61gPV5SpqoXwxjr85-5pUl-9U';
-  const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    // === تحسينات وتحسين رفع الملفات ===
+    const SUPABASE_URL = window.SUPABASE_URL || '';
+    const client = window.client || null;
 
-  // 2. تحميل الفروع
-  async function loadStores() {
-    try {
-      const { data, error } = await client
-        .from('stores')
-        .select('id, name')
-        .eq('status', 'active');
+    // معاينة الصور قبل الرفع
+    const attachmentsInput = document.getElementById('attachments');
+    const attachmentsPreview = document.getElementById('attachments-preview');
+    if (attachmentsInput) {
+      attachmentsInput.addEventListener('change', function () {
+        attachmentsPreview.innerHTML = '';
+        Array.from(this.files).forEach(file => {
+          if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              const img = document.createElement('img');
+              img.src = e.target.result;
+              img.className = 'file-preview';
+              attachmentsPreview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+          } else {
+            const div = document.createElement('div');
+            div.textContent = file.name;
+            div.className = 'px-2 py-1 bg-gray-200 rounded';
+            attachmentsPreview.appendChild(div);
+          }
+        });
+      });
+    }
 
-      const storeSelect = document.getElementById('store_id');
-      if (error || !data) {
-        storeSelect.innerHTML = '<option disabled>لا توجد فروع متاحة</option>';
+    // توليد اسم فريد للملف
+    function generateUniqueFileName(file) {
+      const ext = file.name.split('.').pop();
+      const unique = Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+      return `${unique}.${ext}`;
+    }
+
+    // رفع ملف واحد مع اسم فريد
+    async function uploadFile(file) {
+      try {
+        const uniqueName = generateUniqueFileName(file);
+        const { data, error } = await client.storage
+          .from('uploads')
+          .upload(`maintenance-files/${uniqueName}`, file, {
+            cacheControl: '3600',
+            upsert: false,
+          });
+        if (error) throw error;
+        return `${SUPABASE_URL}/storage/v1/object/public/uploads/maintenance-files/${uniqueName}`;
+      } catch (error) {
+        console.error('خطأ أثناء رفع الملف:', error.message);
         throw error;
       }
-
-      storeSelect.innerHTML = '<option value="" disabled selected>اختر الفرع المطلوب</option>';
-      data.forEach(store => {
-        const option = document.createElement('option');
-        option.value = store.id;
-        option.textContent = store.name;
-        storeSelect.appendChild(option);
-      });
-    } catch (error) {
-      console.error('خطأ في تحميل الفروع:', error);
-      alert('حدث خطأ أثناء تحميل الفروع.');
     }
-  }
 
-  // 3. تحميل أنواع الخدمات
-  async function loadServices() {
-    try {
-      const { data, error } = await client
-        .from('maintenance_services')
-        .select('id, name')
-        .eq('is_active', true);
-
-      const serviceSelect = document.getElementById('service_type');
-      if (error || !data) {
-        serviceSelect.innerHTML = '<option disabled>لا توجد خدمات متاحة</option>';
-        throw error;
+    // رفع جميع الملفات وإرجاع الروابط
+    async function uploadAllFiles(files) {
+      const urls = [];
+      for (const file of files) {
+        // تحقق من نوع الملف
+        if (!file.type.match(/(image|pdf|msword|excel)/)) {
+          alert('نوع ملف غير مدعوم: ' + file.name);
+          continue;
+        }
+        try {
+          const url = await uploadFile(file);
+          urls.push(url);
+        } catch (e) {
+          alert('فشل رفع الملف: ' + file.name);
+        }
       }
+      return urls;
+    }
 
-      serviceSelect.innerHTML = '<option value="" disabled selected>اختر نوع الخدمة</option>';
-      data.forEach(service => {
-        const option = document.createElement('option');
-        option.value = service.id;
-        option.textContent = service.name;
-        serviceSelect.appendChild(option);
+    // إرسال الطلب مع روابط الملفات
+    async function submitMaintenanceRequest() {
+      const form = document.getElementById('maintenanceForm');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'جاري الإرسال...';
+
+      const formData = new FormData(form);
+      let attachmentsUrls = [];
+      if (attachmentsInput && attachmentsInput.files.length > 0) {
+        attachmentsUrls = await uploadAllFiles(attachmentsInput.files);
+      }
+      const request = {
+        store_id: formData.get('store_id'),
+        service_type: formData.get('service_type'),
+        title: formData.get('title'),
+        description: formData.get('description'),
+        priority: formData.get('priority'),
+        scheduled_date: formData.get('scheduled_date'),
+        estimated_cost: formData.get('estimated_cost') ? parseFloat(formData.get('estimated_cost')) : null,
+        created_by: client.auth?.user()?.id || 'guest-user',
+        attachments: attachmentsUrls.length > 0 ? attachmentsUrls : null
+      };
+      try {
+        const { data, error } = await client
+          .from('maintenance_requests')
+          .insert([request]);
+        if (error) throw error;
+        alert('✅ تم إرسال الطلب بنجاح! رقم الطلب الخاص بك هو: ' + data[0]?.id);
+        form.reset();
+        attachmentsPreview.innerHTML = '';
+      } catch (error) {
+        console.error('خطأ في إرسال الطلب:', error);
+        alert('❌ حدث خطأ أثناء إرسال الطلب. حاول مرة أخرى.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'إرسال الطلب';
+      }
+    }
+
+    // ربط زر الإرسال بالوظيفة الجديدة
+    const oldForm = document.getElementById('maintenanceForm');
+    oldForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      await submitMaintenanceRequest();
+    });
+  </script>
+  <script>
+    // === الأقسام الأخرى ===
+    document.querySelectorAll('.next-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const currentSection = document.querySelector('.form-section.active');
+        const nextSection = currentSection.nextElementSibling;
+        if (nextSection && nextSection.classList.contains('form-section')) {
+          currentSection.classList.remove('active');
+          nextSection.classList.add('active');
+          updateStepIndicator(1);
+        }
       });
-    } catch (error) {
-      console.error('خطأ في تحميل الخدمات:', error);
-      alert('حدث خطأ أثناء تحميل أنواع الخدمات.');
-    }
-  }
-    // وظيفة لتحميل الملفات إلى التخزين
-async function uploadFile(file) {
-  try {
-    const { data, error } = await client.storage
-      .from('uploads') // استبدل "uploads" باسم الـ bucket الخاص بك
-      .upload(`maintenance-files/${file.name}`, file, {
-        cacheControl: '3600',
-        upsert: false,
+    });
+
+    document.querySelectorAll('.prev-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const currentSection = document.querySelector('.form-section.active');
+        const prevSection = currentSection.previousElementSibling;
+        if (prevSection && prevSection.classList.contains('form-section')) {
+          currentSection.classList.remove('active');
+          prevSection.classList.add('active');
+          updateStepIndicator(-1);
+        }
       });
+    });
 
-    if (error) {
-      throw error;
+    let currentStep = 0;
+    function updateStepIndicator(direction) {
+      const indicators = document.querySelectorAll('.step-indicator');
+      indicators[currentStep].classList.remove('active');
+      indicators[currentStep].classList.add('completed');
+      
+      currentStep += direction;
+
+      if (currentStep >= 0 && currentStep < indicators.length) {
+        indicators[currentStep].classList.add('active');
+      }
     }
-
-    // إرجاع رابط الملف
-    const fileUrl = `${SUPABASE_URL}/storage/v1/object/public/uploads/maintenance-files/${file.name}`;
-    return fileUrl;
-  } catch (error) {
-    console.error('خطأ أثناء رفع الملف:', error.message);
-    alert('حدث خطأ أثناء رفع الملف.');
-    return null;
-  }
-}
-
-  // 4. إرسال طلب الصيانة
-  async function submitMaintenanceRequest() {
-    const formData = new FormData(document.getElementById('maintenanceForm'));
-    const request = {
-      store_id: formData.get('store_id'),
-      service_type: formData.get('service_type'),
-      title: formData.get('title'),
-      description: formData.get('description'),
-      priority: formData.get('priority'),
-      scheduled_date: formData.get('scheduled_date'),
-      estimated_cost: formData.get('estimated_cost') ? parseFloat(formData.get('estimated_cost')) : null,
-      created_by: client.auth?.user()?.id || 'guest-user'
-    };
-
-    try {
-      const { data, error } = await client
-        .from('maintenance_requests')
-        .insert([request]);
-
-      if (error) throw error;
-
-      alert('تم إرسال الطلب بنجاح! رقم الطلب الخاص بك هو: ' + data[0]?.id);
-      document.getElementById('maintenanceForm').reset();
-    } catch (error) {
-      console.error('خطأ في إرسال الطلب:', error);
-      alert('حدث خطأ أثناء إرسال الطلب. حاول مرة أخرى.');
-    }
-  }
-
-  // 5. تحميل البيانات عند بدء الصفحة
-  document.addEventListener('DOMContentLoaded', async () => {
-    try {
-      await loadStores();
-      await loadServices();
-    } catch (error) {
-      console.error('فشل تحميل البيانات عند بدء الصفحة:', error);
-    }
-  });
-
-  // 6. إرسال النموذج عند الضغط
-  document.getElementById('maintenanceForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    await submitMaintenanceRequest();
-  });
-</script>
-<script>
-document.querySelectorAll('.next-btn').forEach(button => {
-  button.addEventListener('click', () => {
-    const currentSection = document.querySelector('.form-section.active');
-    const nextSection = currentSection.nextElementSibling;
-    if (nextSection && nextSection.classList.contains('form-section')) {
-      currentSection.classList.remove('active');
-      nextSection.classList.add('active');
-      updateStepIndicator(1);
-    }
-  });
-});
-
-document.querySelectorAll('.prev-btn').forEach(button => {
-  button.addEventListener('click', () => {
-    const currentSection = document.querySelector('.form-section.active');
-    const prevSection = currentSection.previousElementSibling;
-    if (prevSection && prevSection.classList.contains('form-section')) {
-      currentSection.classList.remove('active');
-      prevSection.classList.add('active');
-      updateStepIndicator(-1);
-    }
-  });
-});
-
-let currentStep = 0;
-function updateStepIndicator(direction) {
-  const indicators = document.querySelectorAll('.step-indicator');
-  indicators[currentStep].classList.remove('active');
-  indicators[currentStep].classList.add('completed');
-  
-  currentStep += direction;
-
-  if (currentStep >= 0 && currentStep < indicators.length) {
-    indicators[currentStep].classList.add('active');
-  }
-}
-    </script>  
- </body>
+  </script>
+</body>
 </html>
