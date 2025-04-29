@@ -326,8 +326,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
   <script>
     // === تحسينات وتحسين رفع الملفات ===
-    const SUPABASE_URL = window.SUPABASE_URL || '';
-    const client = window.client || null;
+    const SUPABASE_URL = 'https://hvnxhovwbvphynuxlqnj.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh2bnhob3Z3YnZwaHludXhscW5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM4Mjg2ODAsImV4cCI6MjA1OTQwNDY4MH0.i59NYbHj1aJixQMmXh61gPV5SpqoXwxjr85-5pUl-9U'; // المفتاح الكامل
+    const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     // معاينة الصور قبل الرفع
     const attachmentsInput = document.getElementById('attachments');
@@ -364,21 +365,21 @@
 
     // رفع ملف واحد مع اسم فريد
     async function uploadFile(file) {
-      try {
-        const uniqueName = generateUniqueFileName(file);
-        const { data, error } = await client.storage
-          .from('uploads')
-          .upload(`maintenance-files/${uniqueName}`, file, {
-            cacheControl: '3600',
-            upsert: false,
-          });
-        if (error) throw error;
-        return `${SUPABASE_URL}/storage/v1/object/public/uploads/maintenance-files/${uniqueName}`;
-      } catch (error) {
-        console.error('خطأ أثناء رفع الملف:', error.message);
-        throw error;
-      }
-    }
+     try {
+    const uniqueName = generateUniqueFileName(file);
+    const { data, error } = await client.storage
+      .from('azabstoredots') // ✅ اسم الباكت الصحيح
+      .upload(`uploads/${uniqueName}`, file, {
+        cacheControl: '3600',
+        upsert: false,
+      });
+      if (error) throw error;
+    return `${SUPABASE_URL}/storage/v1/object/public/azabstoredots/uploads/${uniqueName}`;
+     } catch (error) {
+    console.error('خطأ أثناء رفع الملف:', error.message);
+    throw error;
+  }
+}
 
     // رفع جميع الملفات وإرجاع الروابط
     async function uploadAllFiles(files) {
