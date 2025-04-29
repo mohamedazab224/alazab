@@ -438,5 +438,43 @@
     await submitMaintenanceRequest();
   });
 </script>
-</body>
+<script>
+document.querySelectorAll('.next-btn').forEach(button => {
+  button.addEventListener('click', () => {
+    const currentSection = document.querySelector('.form-section.active');
+    const nextSection = currentSection.nextElementSibling;
+    if (nextSection && nextSection.classList.contains('form-section')) {
+      currentSection.classList.remove('active');
+      nextSection.classList.add('active');
+      updateStepIndicator(1);
+    }
+  });
+});
+
+document.querySelectorAll('.prev-btn').forEach(button => {
+  button.addEventListener('click', () => {
+    const currentSection = document.querySelector('.form-section.active');
+    const prevSection = currentSection.previousElementSibling;
+    if (prevSection && prevSection.classList.contains('form-section')) {
+      currentSection.classList.remove('active');
+      prevSection.classList.add('active');
+      updateStepIndicator(-1);
+    }
+  });
+});
+
+let currentStep = 0;
+function updateStepIndicator(direction) {
+  const indicators = document.querySelectorAll('.step-indicator');
+  indicators[currentStep].classList.remove('active');
+  indicators[currentStep].classList.add('completed');
+  
+  currentStep += direction;
+
+  if (currentStep >= 0 && currentStep < indicators.length) {
+    indicators[currentStep].classList.add('active');
+  }
+}
+    </script>  
+ </body>
 </html>
