@@ -555,25 +555,27 @@
         }
         
         // إعداد بيانات الطلب
-        const requestData = {
-          store_id: formData.get('store_id'),
-          service_type: formData.get('maintenance_services'),
-          title: formData.get('title'),
-          description: formData.get('description'),
-          priority: formData.get('priority'),
-          scheduled_date: formData.get('scheduled_date'),
-          estimated_cost: formData.get('estimated_cost') ? parseFloat(formData.get('estimated_cost')) : null,
-          requester_name: formData.get('requester_name'),
-          requester_email: formData.get('requester_email'),
-          requester_phone: formData.get('requester_phone'),
-          status: 'pending',
-          attachments: uploadedFiles.length > 0 ? JSON.stringify(uploadedFiles) : null,
-          console.log('Uploaded Files:', uploadedFiles);
-          created_at: new Date().toISOString()
-        };
+        console.log('Uploaded Files:', uploadedFiles); // ضع السطر هنا خارج الكائن
+
+       const requestData = {
+      store_id: formData.get('store_id'),
+      service_type: formData.get('maintenance_services'),
+      title: formData.get('title'),
+      description: formData.get('description'),
+      priority: formData.get('priority'),
+      scheduled_date: formData.get('scheduled_date'),
+      estimated_cost: formData.get('estimated_cost') ? parseFloat(formData.get('estimated_cost')) : null,
+      requester_name: formData.get('requester_name'),
+      requester_email: formData.get('requester_email'),
+      requester_phone: formData.get('requester_phone'),
+      status: 'pending',
+      attachments: uploadedFiles.length > 0 ? JSON.stringify(uploadedFiles) : null,
+      created_at: new Date().toISOString()
+      };
+
+       console.log('Request Data:', requestData); // تحقق من بيانات الكائن أيضًا
         
         // إرسال الطلب إلى قاعدة البيانات
-        console.log('Request Data:', requestData);
         const { data, error } = await supabase
           .from('maintenance_requests')
           .insert([requestData])
