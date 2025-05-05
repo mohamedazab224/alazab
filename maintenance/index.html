@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
 
@@ -569,16 +568,21 @@
           requester_phone: formData.get('requester_phone'),
           status: 'pending',
           attachments: uploadedFiles.length > 0 ? JSON.stringify(uploadedFiles) : null,
+          console.log('Uploaded Files:', uploadedFiles);
           created_at: new Date().toISOString()
         };
         
         // إرسال الطلب إلى قاعدة البيانات
+        console.log('Request Data:', requestData);
         const { data, error } = await supabase
           .from('maintenance_requests')
           .insert([requestData])
           .select();
         
-        if (error) throw error;
+        if (error) {
+    console.error('Supabase Error:', error);
+    throw new Error('Failed to insert maintenance request.');
+      }
         
         // حفظ رقم الطلب
         requestId = data[0].id;
@@ -586,7 +590,8 @@
         // إعداد بيانات البريد الإلكتروني
         const storeName = document.getElementById('store_id').options[document.getElementById('store_id').selectedIndex].text;
         const serviceName = document.getElementById('maintenance_services').options[document.getElementById('maintenance_services').selectedIndex].text;
-        
+
+        console.log('Email Params:', emailParams);
         const emailParams = {
           request_id: requestId,
           requester_name: requestData.requester_name,
