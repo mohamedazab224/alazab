@@ -562,14 +562,17 @@ const requestData = {
   service_type: formData.get('maintenance_services'),
   title: formData.get('title'),
   description: formData.get('description'),
-  priority: formData.get('priority'),
+  priority: formData.get('priority') === 'متوسطة' ? 'medium' :
+          formData.get('priority') === 'عالية' ? 'high' :
+          formData.get('priority') === 'منخفضة' ? 'low' :
+          formData.get('priority') === 'عاجلة' ? 'urgent' : formData.get('priority'),
   scheduled_date: formData.get('scheduled_date'),
   estimated_cost: formData.get('estimated_cost') ? parseFloat(formData.get('estimated_cost')) : null,
   requester_name: formData.get('requester_name'),
   requester_email: formData.get('requester_email'),
   requester_phone: formData.get('requester_phone'),
   status: 'pending',
-  attachments: uploadedFiles.length > 0 ? JSON.stringify(uploadedFiles) : null,
+  attachments: uploadedFiles.length > 0 ? uploadedFiles.map(file => file.url) : null,
   created_at: new Date().toISOString()
 };
 
