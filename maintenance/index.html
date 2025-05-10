@@ -596,23 +596,24 @@ const requestData = {
         const storeName = document.getElementById('store_id').options[document.getElementById('store_id').selectedIndex].text;
         const serviceName = document.getElementById('maintenance_services').options[document.getElementById('maintenance_services').selectedIndex].text;
 
-        console.log('Email Params:', emailParams);
-        const emailParams = {
-          request_id: requestId,
-          requester_name: requestData.requester_name,
-          requester_email: requestData.requester_email,
-          requester_phone: requestData.requester_phone,
-          store_name: storeName,
-          service_type: serviceName,
-          title: requestData.title,
-          description: requestData.description,
-          priority: requestData.priority,
-          scheduled_date: new Date(requestData.scheduled_date).toLocaleString('ar-EG'),
-          estimated_cost: requestData.estimated_cost || 'غير محدد',
-          to_email: requestData.requester_email,
-          to_name: requestData.requester_name
-        };
-        
+     const emailParams = {
+       request_id: requestId,
+       requester_name: requestData.requester_name,
+       requester_email: requestData.requester_email,
+       requester_phone: requestData.requester_phone,
+       store_name: storeName,
+       service_type: serviceName,
+       title: requestData.title,
+       description: requestData.description,
+       priority: requestData.priority,
+       scheduled_date: new Date(requestData.scheduled_date).toLocaleString('ar-EG'),
+       estimated_cost: requestData.estimated_cost || 'غير محدد',
+       to_email: requestData.requester_email,
+       to_name: requestData.requester_name
+       };
+
+        console.log('Email Params:', emailParams); // ← بعد التعريف وليس قبله
+
         // إرسال البريد الإلكتروني
         const emailSent = await sendEmail(emailParams);
         
