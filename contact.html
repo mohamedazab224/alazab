@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اتصل بنا - شركة العزب</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --accent-color: #f39c12;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            color: var(--text-color);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .language-switcher {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        
+        .language-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .language-btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        
+        .page-header {
+            text-align: center;
+            margin: 30px 0 50px;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .contact-info {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .contact-form {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .info-icon {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-left: 15px;
+            margin-top: 5px;
+        }
+        
+        .info-content h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .info-content p {
+            margin: 0;
+            color: var(--text-color);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Tajawal', sans-serif;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .map-container {
+            height: 400px;
+            margin-top: 50px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        .alert-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            display: none;
+            max-width: 80%;
+        }
+        
+        .alert-success {
+            background-color: #28a745;
+        }
+        
+        .alert-error {
+            background-color: #dc3545;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .map-container {
+                height: 300px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="language-switcher">
+            <button class="language-btn" id="switchLanguage">
+                <i class="fas fa-language"></i> English
+            </button>
+        </div>
+        
+        <div class="page-header">
+            <h1 class="page-title">اتصل بنا</h1>
+            <p>نحن هنا لمساعدتك! تواصل معنا لأي استفسارات أو تعليقات.</p>
+        </div>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>عنواننا</h3>
+                        <p>8 شارع 500، المعادي - القاهرة، مصر</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>هاتفنا</h3>
+                        <p>+20 100 400 6620</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>البريد الإلكتروني</h3>
+                        <p>info@al-azab.co</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>ساعات العمل</h3>
+                        <p>الأحد - الخميس: 8 صباحاً - 5 مساءً</p>
+                        <p>الجمعة والسبت: مغلق</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">الاسم الكامل</label>
+                        <input type="text" id="name" name="from_name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="email" id="email" name="from_email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">رقم الهاتف</label>
+                        <input type="tel" id="phone" name="phone_number" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">الموضوع</label>
+                        <select id="subject" name="subject" class="form-control" required>
+                            <option value="">اختر موضوع الرسالة</option>
+                            <option value="استفسار">استفسار عام</option>
+                            <option value="مشروع">طلب خدمة / مشروع</option>
+                            <option value="توظيف">طلبات التوظيف</option>
+                            <option value="شكوى">شكوى أو اقتراح</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">الرسالة</label>
+                        <textarea id="message" name="message" class="form-control" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span id="btnText">إرسال الرسالة</span>
+                        <i class="fas fa-paper-plane" id="btnIcon"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3456.789012345678!2d31.2456789!3d29.9876543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjnCsDU5JzE1LjYiTiAzMcKwMTQnNDQuNSJF!5e0!3m2!1sen!2seg!4v1234567890123!5m2!1sen!2seg" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        
+        <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+
+    <!-- رسائل التنبيه -->
+    <div id="successAlert" class="alert-message alert-success" style="display: none;">
+        تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.
+    </div>
+    
+    <div id="errorAlert" class="alert-message alert-error" style="display: none;">
+        حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى لاحقاً.
+    </div>
+
+    <!-- مكتبات JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+    <script>
+        // تهيئة EmailJS
+        (function() {
+            emailjs.init("18ygGgryRoGve-Tpw"); // استبدل هذا بـ User ID الخاص بك
+        })();
+        
+        // تبديل اللغة
+        document.getElementById('switchLanguage').addEventListener('click', function() {
+            const currentLang = document.documentElement.lang;
+            if(currentLang === 'ar') {
+                document.documentElement.lang = 'en';
+                document.documentElement.dir = 'ltr';
+                this.innerHTML = '<i class="fas fa-language"></i> العربية';
+                // هنا يمكنك إضافة تغيير النصوص للغة الإنجليزية
+            } else {
+                document.documentElement.lang = 'ar';
+                document.documentElement.dir = 'rtl';
+                this.innerHTML = '<i class="fas fa-language"></i> English';
+                // هنا يمكنك إعادة النصوص للغة العربية
+            }
+        });
+        
+        // عرض رسالة التنبيه
+        function showAlert(message, isSuccess) {
+            const alertDiv = isSuccess ? document.getElementById('successAlert') : document.getElementById('errorAlert');
+            alertDiv.textContent = message;
+            alertDiv.style.display = 'block';
+            alertDiv.style.opacity = '1';
+            
+            setTimeout(() => {
+                alertDiv.style.opacity = '0';
+                setTimeout(() => {
+                    alertDiv.style.display = 'none';
+                }, 500);
+            }, 5000);
+        }
+        
+        // معالجة إرسال النموذج
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnIcon = document.getElementById('btnIcon');
+            
+            // حفظ النص الأصلي للزر
+            const originalBtnText = btnText.textContent;
+            const originalBtnIcon = btnIcon.className;
+            
+            // تغيير حالة الزر أثناء الإرسال
+            btnText.textContent = 'جاري الإرسال...';
+            btnIcon.className = 'fas fa-spinner fa-spin';
+            submitBtn.disabled = true;
+            
+            // إرسال البريد عبر EmailJS
+            emailjs.sendForm('service_Alazab.co', 'template_tvn06ki', this)
+                .then(function(response) {
+                    showAlert('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.', true);
+                    document.getElementById('contactForm').reset();
+                }, function(error) {
+                    console.error('فشل الإرسال:', error);
+                    showAlert('حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى لاحقاً.', false);
+                })
+                .finally(function() {
+                    // استعادة حالة الزر الأصلية
+                    btnText.textContent = originalBtnText;
+                    btnIcon.className = originalBtnIcon;
+                    submitBtn.disabled = false;
+                });
+        });
+    </script>
+</body>
+</html>
