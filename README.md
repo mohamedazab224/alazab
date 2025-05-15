@@ -66,3 +66,40 @@ To integrate EmailJS:
    ```html
    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
+   alazab/                         <-- المجلد الرئيسي للمشروع
+├── index.html                  <-- الصفحة الرئيسية
+├── about.html                  <-- صفحة "من نحن"
+├── services.html               <-- صفحة الخدمات
+├── portfolio.html              <-- صفحة معرض الأعمال
+├── contact.html                <-- صفحة "اتصل بنا"
+├── pricing.html                <-- صفحة الأسعار
+├── faq.html                    <-- صفحة الأسئلة الشائعة
+│
+├── assets/                     <-- المجلد الخاص بالموارد (صور، خطوط، إلخ)
+│   ├── images/                 <-- الصور
+│   │   ├── logo.png            <-- شعار الموقع
+│   │   ├── hero.jpg            <-- صورة الصفحة الرئيسية
+│   │   └── ...                 <-- صور أخرى
+│   ├── fonts/                  <-- الخطوط
+│   │   └── ...                 <-- ملفات الخطوط
+│   └── icons/                  <-- الأيقونات
+│
+├── css/                        <-- ملفات التنسيق (CSS)
+│   ├── main.css                <-- ملف التنسيق الرئيسي
+│   ├── header.css              <-- تنسيق الرأس
+│   ├── footer.css              <-- تنسيق التذييل
+│   └── ...                     <-- ملفات CSS إضافية
+│
+├── js/                         <-- ملفات JavaScript
+│   ├── main.js                 <-- ملف JavaScript الرئيسي
+│   ├── header.js               <-- كود تحميل الرأس
+│   ├── footer.js               <-- كود تحميل التذييل
+│   └── ...                     <-- ملفات JS إضافية
+│
+├── partials/                   <-- ملفات الأجزاء المشتركة (رأس، تذييل، إلخ)
+│   ├── header.html             <-- ملف الرأس
+│   ├── footer.html             <-- ملف التذييل
+│   └── ...                     <-- أجزاء أخرى
+│
+└── README.md                   <-- ملف توثيق المشروع
+
