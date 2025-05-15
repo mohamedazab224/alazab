@@ -66,13 +66,13 @@ To integrate EmailJS:
    ```html
    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
+# Alazab Project 🚀
 
-# هيكل مشروع Alazab
+This project provides a well-organized structure for developing a complete website using HTML, CSS, and JavaScript.
 
-هذا الهيكل يعرض كيفية تنظيم الملفات داخل المشروع:
+## Project Structure 📁
 
-
-   alazab/                         <-- المجلد الرئيسي للمشروع
+alazab/                         <-- المجلد الرئيسي للمشروع
 ├── index.html                  <-- الصفحة الرئيسية
 ├── about.html                  <-- صفحة "من نحن"
 ├── services.html               <-- صفحة الخدمات
@@ -102,11 +102,12 @@ To integrate EmailJS:
 │   ├── footer.js               <-- كود تحميل التذييل
 │   └── ...                     <-- ملفات JS إضافية
 │
-├── partials/                   <-- ملفات الأجزاء المشتركة (رأس، تذييل، إلخ)
+├── components/                 <-- الأجزاء المشتركة (رأس، تذييل، إلخ)
 │   ├── header.html             <-- ملف الرأس
 │   ├── footer.html             <-- ملف التذييل
 │   └── ...                     <-- أجزاء أخرى
 │
 └── README.md                   <-- ملف توثيق المشروع
+
 
 
