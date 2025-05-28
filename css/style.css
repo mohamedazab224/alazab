@@ -888,6 +888,8 @@ ul {
 .footer-section {
   background: #151414;
   position: relative;
+  padding: 40px 0 0 0;
+  color: #fff;
 }
 .footer-cta {
   border-bottom: 1px solid #373636;
@@ -913,8 +915,9 @@ ul {
   font-size: 15px;
 }
 .footer-content {
-  position: relative;
-  z-index: 2;
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 20px;
 }
 .footer-pattern img {
   position: absolute;
@@ -949,12 +952,10 @@ ul {
   font-size: 16px;
   margin-right: 15px;
 }
+.footer-social-icon a,
 .footer-social-icon i {
-  height: 40px;
-  width: 40px;
-  text-align: center;
-  line-height: 38px;
-  border-radius: 50%;
+  background: #2E2E2E;
+  transition: background 0.3s, color 0.3s;
 }
 .facebook-bg{
   background: #f5bf23;
