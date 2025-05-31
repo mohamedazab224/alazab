@@ -577,7 +577,7 @@ const requestData = {
 };
 
        console.log('Request Data:', requestData); // تحقق من بيانات الكائن أيضًا
-        
+ 
         // إرسال الطلب إلى قاعدة البيانات
         const { data, error } = await supabase
           .from('maintenance_requests')
@@ -593,24 +593,26 @@ const requestData = {
         requestId = data[0].id;
         
         // إعداد بيانات البريد الإلكتروني
-        const storeName = document.getElementById('store_id').options[document.getElementById('store_id').selectedIndex].text;
-        const serviceName = document.getElementById('maintenance_services').options[document.getElementById('maintenance_services').selectedIndex].text;
+    const storeName = document.getElementById('store_id').options[document.getElementById('store_id').selectedIndex].text;
+    const serviceName = document.getElementById('maintenance_services').options[document.getElementById('maintenance_services').selectedIndex].text;
 
-     const emailParams = {
-       request_id: requestId,
-       requester_name: requestData.requester_name,
-       requester_email: requestData.requester_email,
-       requester_phone: requestData.requester_phone,
-       store_name: storeName,
-       service_type: serviceName,
-       title: requestData.title,
-       description: requestData.description,
-       priority: requestData.priority,
-       scheduled_date: new Date(requestData.scheduled_date).toLocaleString('ar-EG'),
-       estimated_cost: requestData.estimated_cost || 'غير محدد',
-       to_email: requestData.requester_email,
-       to_name: requestData.requester_name
-       };
+    const requestData = {
+     store_id: formData.get('store_id'), // تأكد أن الـ value للفرع هو UUID
+     title: formData.get('title'),
+     description: formData.get('description') || null,
+     status: 'pending',
+     priority: formData.get('priority') || null,
+     service_type: document.getElementById('maintenance_services').options[
+     document.getElementById('maintenance_services').selectedIndex
+        ].text, // إرسال نص اسم الخدمة وليس الـ ID
+     scheduled_date: formData.get('scheduled_date') || null,
+     estimated_cost: formData.get('estimated_cost') ? parseFloat(formData.get('estimated_cost')) : null,
+     requester_name: formData.get('requester_name') || null,
+     requester_email: formData.get('requester_email') || null,
+     requester_phone: formData.get('requester_phone') || null,
+     attachments: uploadedFiles.length > 0 ? uploadedFiles.map(file => file.url) : []
+        // لا ترسل created_at ولا id ولا أي أعمدة غير معرفة في الجدول
+    };
 
         console.log('Email Params:', emailParams); // ← بعد التعريف وليس قبله
 
