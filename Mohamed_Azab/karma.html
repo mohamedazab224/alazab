@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقرير أكاديمي احترافي</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .school-logo {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .student-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            font-size: 48px;
+            color: white;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .student-photo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3) 0%, transparent 50%);
+            border-radius: 50%;
+        }
+
+        .school-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .report-title {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .academic-year {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+
+        .student-info {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .student-name {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .student-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .detail-item {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .detail-label {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .summary-section {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .overall-grade {
+            font-size: 48px;
+            font-weight: bold;
+            color: #2a5298;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .grade-status {
+            font-size: 20px;
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+
+        .performance-indicator {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .subject-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 2px solid #f0f0f0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .subject-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .subject-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .subject-grade {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2a5298;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        .grade-breakdown {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .grade-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+
+        .grade-item:last-child {
+            border-bottom: none;
+        }
+
+        .grade-label {
+            color: #666;
+        }
+
+        .grade-value {
+            font-weight: bold;
+            color: #2a5298;
+        }
+
+        .additional-subjects {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .additional-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .additional-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .additional-name {
+            font-weight: bold;
+            color: #2a5298;
+            margin-bottom: 5px;
+        }
+
+        .additional-status {
+            color: #28a745;
+            font-size: 14px;
+        }
+
+        .footer-stats {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .promotion-banner {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            margin-top: 20px;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .watermark {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-size: 12px;
+            color: #999;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                margin: 0;
+                border-radius: 15px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            }
+            
+            .header, .student-info, .content {
+                padding: 20px 15px;
+            }
+            
+            .school-name {
+                font-size: 20px;
+            }
+            
+            .report-title {
+                font-size: 16px;
+            }
+            
+            .academic-year {
+                font-size: 14px;
+            }
+            
+            .student-name {
+                font-size: 22px;
+                line-height: 1.3;
+            }
+            
+            .student-details {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .subjects-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .subject-card {
+                padding: 20px 15px;
+            }
+            
+            .subject-name {
+                font-size: 16px;
+            }
+            
+            .subject-grade {
+                font-size: 20px;
+                padding: 6px 12px;
+            }
+            
+            .grade-breakdown {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            
+            .additional-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .footer-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                padding: 20px 15px;
+            }
+            
+            .stat-number {
+                font-size: 20px;
+            }
+            
+            .stat-label {
+                font-size: 12px;
+            }
+            
+            .overall-grade {
+                font-size: 36px;
+            }
+            
+            .grade-status {
+                font-size: 16px;
+            }
+            
+            .performance-indicator {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+            
+            .promotion-banner {
+                padding: 20px 15px;
+                font-size: 16px;
+            }
+            
+            .promotion-banner div {
+                font-size: 14px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .student-photo {
+                width: 100px;
+                height: 100px;
+                font-size: 40px;
+            }
+            
+            .student-name {
+                font-size: 18px;
+            }
+            
+            .additional-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .overall-grade {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="school-logo">🎓</div>
+            <div class="school-name">مدارس العلياء الخاصة</div>
+            <div class="report-title">تقرير نهاية العام الدراسي الشامل</div>
+            <div class="academic-year">العام الدراسي 2024-2025 - الفصل الدراسي الثاني</div>
+        </div>
+
+        <div class="student-info">
+            <div class="student-photo">
+                <img src="data:image/svg+xml,%3Csvg xmlns='https://i.postimg.cc/HxfLF1YB/koka.png' viewBox='0 0 120 120'%3E%3Ccircle cx='60' cy='60' r='60' fill='%23f093fb'/%3E%3Ccircle cx='60' cy='45' r='18' fill='white'/%3E%3Cpath d='M35 85 Q35 70 60 70 Q85 70 85 85 L85 120 L35 120 Z' fill='white'/%3E%3C/svg%3E" alt="صورة الطالبة" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div style="display: none; width: 100%; height: 100%; align-items: center; justify-content: center; font-size: 48px; color: white; font-weight: bold;">ك</div>
+            </div>
+            <div class="student-name">كارما محمد عبدالغني محمد محمد عزب</div>
+            <div class="student-details">
+                    <div class="detail-item">
+                        <div class="detail-label">نتيجة العام</div>
+                        <div class="detail-value">ناجح ومنقول</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">ترتيب الصف</div>
+                        <div class="detail-value">الأول</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">مجموع الدرجات</div>
+                        <div class="detail-value">586/600</div>
+                    </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="summary-section">
+                <div class="overall-grade">97.67%</div>
+                <div class="grade-status">متوسط الدرجات النهائية</div>
+                <div class="performance-indicator">أداء متميز طوال العام</div>
+            </div>
+
+            <div class="subjects-grid">
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <div class="subject-name">اللغة العربية</div>
+                        <div class="subject-grade">95/100</div>
+                    </div>
+                    <div class="grade-breakdown">
+                        <div class="grade-item">
+                            <span class="grade-label">الفصل الأول</span>
+                            <span class="grade-value">47/50</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">الفصل الثاني</span>
+                            <span class="grade-value">48/50</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">الأنشطة الصفية</span>
+                            <span class="grade-value">20/20</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">المشاركة والسلوك</span>
+                            <span class="grade-value">20/20</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">الواجبات المنزلية</span>
+                            <span class="grade-value">10/10</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">المشروعات</span>
+                            <span class="grade-value">-/5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <div class="subject-name">الرياضيات</div>
+                        <div class="subject-grade">95/100</div>
+                    </div>
+                    <div class="grade-breakdown">
+                        <div class="grade-item">
+                            <span class="grade-label">الفصل الأول</span>
+                            <span class="grade-value">47/50</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">الفصل الثاني</span>
+                            <span class="grade-value">48/50</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">الأنشطة الصفية</span>
+                            <span class="grade-value">20/20</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">المشاركة والسلوك</span>
+                            <span class="grade-value">20/20</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">الواجبات المنزلية</span>
+                            <span class="grade-value">10/10</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">المشروعات</span>
+                            <span class="grade-value">-/5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <div class="subject-name">اللغة الإنجليزية</div>
+                        <div class="subject-grade">96/100</div>
+                    </div>
+                    <div class="grade-breakdown">
+                        <div class="grade-item">
+                            <span class="grade-label">الفصل الأول</span>
+                            <span class="grade-value">48/50</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">الفصل الثاني</span>
+                            <span class="grade-value">48/50</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">الأنشطة الصفية</span>
+                            <span class="grade-value">18/20</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">المشاركة والسلوك</span>
+                            <span class="grade-value">19/20</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">الواجبات المنزلية</span>
+                            <span class="grade-value">9/10</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">المشروعات</span>
+                            <span class="grade-value">5/5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <div class="subject-name">متعدد التخصصات</div>
+                        <div class="subject-grade">100/100</div>
+                    </div>
+                    <div class="grade-breakdown">
+                        <div class="grade-item">
+                            <span class="grade-label">الأداء الصفي</span>
+                            <span class="grade-value">20/20</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">الأداء المنزلي</span>
+                            <span class="grade-value">20/20</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">النشاط الصفي</span>
+                            <span class="grade-value">20/20</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">التقييمات الأسبوعية</span>
+                            <span class="grade-value">20/20</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">المهام الشفهية</span>
+                            <span class="grade-value">10/10</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">المهام المهارية</span>
+                            <span class="grade-value">5/5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <div class="subject-name">التربية الدينية</div>
+                        <div class="subject-grade">100/100</div>
+                    </div>
+                    <div class="grade-breakdown">
+                        <div class="grade-item">
+                            <span class="grade-label">الأداء الصفي</span>
+                            <span class="grade-value">20/20</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">الأداء المنزلي</span>
+                            <span class="grade-value">20/20</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">النشاط الصفي</span>
+                            <span class="grade-value">20/20</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">التقييمات الأسبوعية</span>
+                            <span class="grade-value">20/20</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">المهام الشفهية</span>
+                            <span class="grade-value">10/10</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">المهام المهارية</span>
+                            <span class="grade-value">5/5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <div class="subject-name">التربية البدنية</div>
+                        <div class="subject-grade">100/100</div>
+                    </div>
+                    <div class="grade-breakdown">
+                        <div class="grade-item">
+                            <span class="grade-label">الأداء الصفي</span>
+                            <span class="grade-value">20/20</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">الأداء المنزلي</span>
+                            <span class="grade-value">20/20</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">النشاط الصفي</span>
+                            <span class="grade-value">20/20</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">التقييمات الأسبوعية</span>
+                            <span class="grade-value">20/20</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">المهام الشفهية</span>
+                            <span class="grade-value">10/10</span>
+                        </div>
+                        <div class="grade-item">
+                            <span class="grade-label">المهام المهارية</span>
+                            <span class="grade-value">5/5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="additional-subjects">
+                <div class="section-title">تقييم الأنشطة والسلوكيات العامة</div>
+                <div class="additional-grid">
+                    <div class="additional-item">
+                        <div class="additional-name">السلوك العام</div>
+                        <div class="additional-status">ممتاز</div>
+                    </div>
+                    <div class="additional-item">
+                        <div class="additional-name">التعاون مع الزملاء</div>
+                        <div class="additional-status">جيد جداً</div>
+                    </div>
+                    <div class="additional-item">
+                        <div class="additional-name">المواظبة والانتظام</div>
+                        <div class="additional-status">جيد</div>
+                    </div>
+                    <div class="additional-item">
+                        <div class="additional-name">المشاركة في الأنشطة</div>
+                        <div class="additional-status">ممتاز</div>
+                    </div>
+                    <div class="additional-item">
+                        <div class="additional-name">احترام القوانين</div>
+                        <div class="additional-status">ممتاز</div>
+                    </div>
+                    <div class="additional-item">
+                        <div class="additional-name">النظافة والترتيب</div>
+                        <div class="additional-status">جيد جداً</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-stats">
+                <div class="stat-item">
+                    <div class="stat-number">586</div>
+                    <div class="stat-label">مجموع العام</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">600</div>
+                    <div class="stat-label">الدرجة الكاملة</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">97.67%</div>
+                    <div class="stat-label">النسبة النهائية</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1</div>
+                    <div class="stat-label">ترتيب الصف</div>
+                </div>
+            </div>
+
+            <div class="promotion-banner">
+                🎉 نهنئ الطالبة بإتمام العام الدراسي بنجاح والانتقال للصف الثاني الابتدائي 🎉
+                <br>
+                <div style="margin-top: 10px; font-size: 16px; opacity: 0.9;">
+                    مع تمنياتنا لها بالتوفيق والنجاح في العام الدراسي القادم
+                </div>
+            </div>
+        </div>
+
+        <div class="watermark">
+            تقرير نهاية العام الدراسي ٢٠٢٤-٢٠٢٥ | تم الإنتهاء بتاريخ: ١١ يونيو ٢٠٢٥
+        </div>
+    </div>
+</body>
+</html>
