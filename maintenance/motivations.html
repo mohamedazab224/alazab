@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحفيز ذاتي</title>
+    <style>
+        body {
+            font-family: 'Tajawal', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .main {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 90%;
+            max-width: 600px;
+            transition: all 0.3s ease;
+        }
+        
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .head {
+            color: #2c3e50;
+            font-size: 32px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .head::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
+            border-radius: 2px;
+        }
+        
+        .label {
+            color: #4a5568;
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #2c3e50;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 180, 0, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(255, 180, 0, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .info-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #4a5568;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        /* تأثيرات النجمة */
+        .star {
+            position: absolute;
+            background-color: #FFD700;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main">
+        <div class="wrapper">
+            <h1 class="head">حفّز نفسك!</h1>
+            <h2 id="label" class="label">اضغط على الزر بالأسفل للحصول على تحفيز</h2>
+            <button id="btn" class="btn">حفّزني الآن</button>
+        </div>
+    </div>
+    <div class="info-btn"><b>تم التطوير بواسطة:</b> روناك كومار جوبتا</div>
+
+    <script>
+        var label = document.getElementById('label');
+        var btn = document.getElementById('btn');
+        
+        // العبارات التحفيزية بالعربية
+        var motivations = [
+            "فكرة واحدة إيجابية صباحاً يمكنها أن تغير يومك بالكامل.",
+            "الفرص لا تأتي وحدها، أنت من يصنعها.",
+            "أحب عائلتك، اعمل بجد، عش شغفك.",
+            "لم يفت الأوان بعد لتصبح ما تريد أن تكون.",
+            "عندما تغير أفكارك، تذكر أن تغير العالم من حولك أيضاً.",
+            "لا تتوقف عندما تتعب، توقف عندما تنتهي.",
+            "لا تتكلم كثيراً، دع أفعالك تتحدث عنك.",
+            "عندما يكون لديك حلم، يجب أن تمسك به ولا تتركه أبداً.",
+            "لا شيء مستحيل. الكلمة نفسها تقول 'أنا ممكن!'",
+            "لا يوجد شيء مستحيل لمن سيحاول.",
+            "الأخبار السيئة هي أن الوقت يطير. الأخبار الجيدة هي أنك أنت الطيار.",
+            "الحياة مليئة بالتقلبات. عليك أن تتمسك جيداً وتنطلق.",
+            "اجعل وجهك دوماً نحو الشمس، وسوف تسقط الظلال خلفك.",
+            "كن شجاعاً. تحدى الأفكار التقليدية. قف لما تؤمن به.",
+            "النجاح ليس نهائياً، والفشل ليس قاتلاً: الشجاعة في الاستمرار هي ما تُحسب.",
+            "أنت من يحدد حياتك. لا تدع الآخرين يكتبون سيناريو حياتك.",
+            "الإيمان بالله هو أقوى محفز في الحياة.",
+            "الصبر مفتاح الفرج.",
+            "من جد وجد ومن زرع حصد.",
+            "التفاؤل نصف النجاح.",
+            "النجاح هو مجموع الجهود الصغيرة المتكررة يومياً.",
+            "كلما زادت الصعوبات، زاد النجاح لذة.",
+            "لا تنتظر الظروف المثالية، ابدأ الآن حيث أنت.",
+            "أعظم مجد في الحياة ليس في عدم السقوط، بل في النهوض كلما سقطنا.",
+            "المستقبل ينتمي لأولئك الذين يؤمنون بجمال أحلامهم."
+        ];
+        
+        // أصوات تنبيه
+        var sounds = [
+            new Audio('https://assets.mixkit.co/sfx/preview/mixkit-positive-interface-beep-221.mp3'),
+            new Audio('https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3'),
+            new Audio('https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3')
+        ];
+        
+        btn.addEventListener('click', function() {
+            // اختيار عبارة تحفيزية عشوائية
+            var randomMotivation = Math.floor(Math.random() * motivations.length);
+            
+            // إضافة تأثير التلاشي
+            label.classList.remove('fade-in');
+            void label.offsetWidth; // إعادة تدفق الصفحة لإعادة التشغيل
+            label.classList.add('fade-in');
+            
+            // تغيير النص مع علامات الاقتباس
+            label.innerHTML = '"' + motivations[randomMotivation] + '"';
+            
+            // تشغيل صوت عشوائي
+            var randomSound = Math.floor(Math.random() * sounds.length);
+            sounds[randomSound].play();
+            
+            // إضافة تأثير النجوم
+            createStars(5);
+        });
+        
+        // تأثير النجوم
+        function createStars(count) {
+            for (let i = 0; i < count; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.opacity = '0';
+                document.body.appendChild(star);
+                
+                // أنيميشن للنجمة
+                setTimeout(() => {
+                    star.style.transition = 'all 0.5s ease-out';
+                    star.style.opacity = '0.8';
+                    star.style.width = '20px';
+                    star.style.height = '20px';
+                    star.style.boxShadow = '0 0 10px 2px #FFD700';
+                    
+                    setTimeout(() => {
+                        star.style.opacity = '0';
+                        star.style.width = '5px';
+                        star.style.height = '5px';
+                        
+                        setTimeout(() => {
+                            star.remove();
+                        }, 500);
+                    }, 500);
+                }, i * 100);
+            }
+        }
+        
+        // عرض عبارة تحفيزية عشوائية عند التحميل
+        window.onload = function() {
+            var randomMotivation = Math.floor(Math.random() * motivations.length);
+            label.innerHTML = '"' + motivations[randomMotivation] + '"';
+        };
+    </script>
+</body>
+</html>

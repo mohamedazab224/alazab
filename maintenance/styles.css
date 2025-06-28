@@ -1,0 +1,90 @@
+body {
+    font-family: 'Arial', sans-serif;
+    direction: rtl;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333333;
+  }
+  
+  label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #555555;
+  }
+  
+  input, textarea, button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+/* === Progress Bar Styles === */
+.progress-bar {
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: #2563eb; /* blue-500 */
+  border-radius: 0.25rem;
+}
+
+/* === Step Name Styles === */
+.step-name {
+  width: 20%;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #4b5563; /* gray-600 */
+  padding: 0.25rem 0;
+}
+
+/* === Motivational Message === */
+#motivational-message {
+  display: none;
+  font-size: 1.125rem;
+  color: #2563eb;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* === Reward Link === */
+#reward-link {
+  display: none;
+  color: #2563eb;
+  text-decoration: underline;
+  margin-top: 1rem;
+  transition: color 0.3s;
+}
+#reward-link:hover {
+  color: #1e40af;
+}

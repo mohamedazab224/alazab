@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حديقة الأذكار</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Amiri', serif;
+            background: linear-gradient(135deg, #e6f9f0 0%, #d1f2eb 100%);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #1a5276;
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 90%;
+            max-width: 600px;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(46, 134, 93, 0.2);
+        }
+        
+        .header {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: #1d8348;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .divider {
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #1d8348, #28b463);
+            margin: 0 auto;
+            border-radius: 3px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .dhikr-box {
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 30px;
+            border-radius: 15px;
+            background-color: rgba(210, 245, 227, 0.5);
+            position: relative;
+            transition: all 0.8s ease;
+            border: 1px dashed #28b463;
+        }
+        
+        .dhikr-text {
+            font-size: 26px;
+            line-height: 1.8;
+            position: relative;
+            padding: 0 20px;
+            color: #1a5276;
+        }
+        
+        .dhikr-text::before, .dhikr-text::after {
+            content: '"';
+            font-size: 50px;
+            color: #28b463;
+            position: absolute;
+            opacity: 0.3;
+        }
+        
+        .dhikr-text::before {
+            top: -25px;
+            left: -5px;
+        }
+        
+        .dhikr-text::after {
+            bottom: -40px;
+            right: -5px;
+        }
+        
+        .reference {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #1d8348;
+            font-style: italic;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #1d8348, #28b463);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(40, 180, 99, 0.3);
+            margin-top: 20px;
+            font-family: 'Amiri', serif;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(40, 180, 99, 0.4);
+            background: linear-gradient(135deg, #28b463, #1d8348);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .footer {
+            margin-top: 30px;
+            font-size: 16px;
+            color: #1d8348;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .islamic-pattern {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .pattern-1 {
+            top: -50px;
+            right: -50px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%231d8348" d="M50 0 L100 50 L50 100 L0 50 Z"/></svg>');
+        }
+        
+        .pattern-2 {
+            bottom: -50px;
+            left: -50px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle fill="%231d8348" cx="50" cy="50" r="50"/></svg>');
+        }
+        
+        .counter {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #1d8348;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .counter-number {
+            background-color: #1d8348;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="islamic-pattern pattern-1"></div>
+        <div class="islamic-pattern pattern-2"></div>
+        
+        <div class="header">
+            <h1>حديقة الأذكار</h1>
+            <div class="divider"></div>
+            <p>اضغط على الزر لتقطف وردة من أذكار الصالحين</p>
+        </div>
+        
+        <div class="dhikr-box">
+            <p id="dhikr" class="dhikr-text fade-in">سبحان الله وبحمده سبحان الله العظيم</p>
+            <p id="reference" class="reference">- حديث شريف</p>
+        </div>
+        
+        <div class="counter">
+            <span>عدد الأذكار اليوم:</span>
+            <span id="counter" class="counter-number">0</span>
+        </div>
+        
+        <button id="btn" class="btn">ذكر جديد 🌸</button>
+        
+        <div class="footer">
+            تطمئن به القلوب وتنشرح به الصدور
+        </div>
+    </div>
+
+    <script>
+        const dhikrElement = document.getElementById('dhikr');
+        const referenceElement = document.getElementById('reference');
+        const btn = document.getElementById('btn');
+        const counterElement = document.getElementById('counter');
+        
+        // مكتبة الأذكار والمواعظ الروحانية
+        const dhikrList = [
+            {
+                text: "اللهم إني أسألك علماً نافعاً، ورزقاً طيباً، وعملاً متقبلاً",
+                reference: "حديث شريف"
+            },
+            {
+                text: "من قال: سبحان الله وبحمده، غرست له نخلة في الجنة",
+                reference: "حديث صحيح"
+            },
+            {
+                text: "اللهم إني أعوذ بك من علم لا ينفع، ومن قلب لا يخشع، ومن نفس لا تشبع، ومن دعوة لا يستجاب لها",
+                reference: "حديث شريف"
+            },
+            {
+                text: "استغفروا ربكم إنه كان غفاراً، يرسل السماء عليكم مدراراً، ويمددكم بأموال وبنين ويجعل لكم جنات ويجعل لكم أنهاراً",
+                reference: "سورة نوح"
+            },
+            {
+                text: "إن الله لا ينظر إلى صوركم وأموالكم، ولكن ينظر إلى قلوبكم وأعمالكم",
+                reference: "حديث شريف"
+            },
+            {
+                text: "اللهم اغفر لي ذنبي، ووسع لي في داري، وبارك لي في رزقي",
+                reference: "حديث صحيح"
+            },
+            {
+                text: "من لزم الاستغفار جعل الله له من كل ضيق مخرجاً، ومن كل هم فرجاً، ورزقه من حيث لا يحتسب",
+                reference: "حديث شريف"
+            },
+            {
+                text: "اللهم إني أسألك الثبات في الأمر، والعزيمة على الرشد، وأسألك موجبات رحمتك، وعزائم مغفرتك",
+                reference: "دعاء نبوي"
+            },
+            {
+                text: "يا مقلب القلوب ثبت قلبي على دينك، يا مصرف القلوب صرف قلبي إلى طاعتك",
+                reference: "دعاء مأثور"
+            },
+            {
+                text: "اللهم إني أعوذ بك من زوال نعمتك، وتحول عافيتك، وفجاءة نقمتك، وجميع سخطك",
+                reference: "دعاء نبوي"
+            },
+            {
+                text: "من قال: لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير، عشر مرات، كان كمن أعتق أربعة أنفس من ولد إسماعيل",
+                reference: "حديث صحيح"
+            },
+            {
+                text: "اللهم إني أعوذ بك من الهم والحزن، والعجز والكسل، والجبن والبخل، وضلع الدين وغلبة الرجال",
+                reference: "حديث شريف"
+            },
+            {
+                text: "سبحان الله، والحمد لله، ولا إله إلا الله، والله أكبر، ولا حول ولا قوة إلا بالله العلي العظيم",
+                reference: "أذكار الصباح والمساء"
+            },
+            {
+                text: "اللهم إني أسألك فعل الخيرات، وترك المنكرات، وحب المساكين، وأن تغفر لي وترحمني",
+                reference: "دعاء نبوي"
+            },
+            {
+                text: "من قال حين يصبح وحين يمسي: حسبي الله لا إله إلا هو، عليه توكلت وهو رب العرش العظيم، سبع مرات، كفاه الله ما أهمه",
+                reference: "حديث صحيح"
+            },
+            {
+                text: "اللهم اهدني فيمن هديت، وعافني فيمن عافيت، وتولني فيمن توليت، وبارك لي فيما أعطيت",
+                reference: "دعاء القنوت"
+            },
+            {
+                text: "اللهم إني أعوذ بك من عذاب القبر، وأعوذ بك من فتنة المسيح الدجال، وأعوذ بك من فتنة المحيا والممات",
+                reference: "حديث شريف"
+            },
+            {
+                text: "من قرأ آية الكرسي دبر كل صلاة مكتوبة، لم يمنعه من دخول الجنة إلا أن يموت",
+                reference: "حديث صحيح"
+            },
+            {
+                text: "اللهم إني أسألك العفو والعافية في الدنيا والآخرة، اللهم إني أسألك العفو والعافية في ديني ودنياي وأهلي ومالي",
+                reference: "حديث نبوي"
+            },
+            {
+                text: "من قال: سبحان الله العظيم وبحمده، غرست له نخلة في الجنة",
+                reference: "حديث صحيح"
+            },
+            {
+                text: "اللهم مصرف القلوب صرف قلوبنا على طاعتك",
+                reference: "دعاء مأثور"
+            },
+            {
+                text: "من صلى علي حين يصبح عشراً، وحين يمسي عشراً، أدركته شفاعتي يوم القيامة",
+                reference: "حديث شريف"
+            },
+            {
+                text: "اللهم إني أعوذ بك من قلب لا يخشع، ومن دعاء لا يسمع، ومن نفس لا تشبع، ومن علم لا ينفع",
+                reference: "دعاء نبوي"
+            },
+            {
+                text: "من قال: لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير، مائة مرة في يوم، كانت له عدل عشر رقاب",
+                reference: "حديث صحيح"
+            },
+            {
+                text: "اللهم إني أعوذ بك من علم لا ينفع، ومن قلب لا يخشع، ومن نفس لا تشبع، ومن دعوة لا يستجاب لها",
+                reference: "حديث شريف"
+            }
+        ];
+        
+        // أصوات روحانية
+        const sounds = [
+            new Audio('https://assets.mixkit.co/sfx/preview/mixkit-positive-interface-beep-221.mp3'),
+            new Audio('https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3')
+        ];
+        
+        let counter = 0;
+        
+        // عرض ذكر عشوائي
+        function showRandomDhikr() {
+            const randomIndex = Math.floor(Math.random() * dhikrList.length);
+            const randomDhikr = dhikrList[randomIndex];
+            
+            // إضافة تأثير التلاشي
+            dhikrElement.classList.remove('fade-in');
+            referenceElement.classList.remove('fade-in');
+            
+            // إعادة تدفق الصفحة لإعادة تشغيل الأنيميشن
+            void dhikrElement.offsetWidth;
+            void referenceElement.offsetWidth;
+            
+            // تغيير النص
+            dhikrElement.textContent = randomDhikr.text;
+            referenceElement.textContent = `- ${randomDhikr.reference}`;
+            
+            // إضافة الأنيميشن
+            dhikrElement.classList.add('fade-in');
+            referenceElement.classList.add('fade-in');
+            
+            // تشغيل صوت عشوائي
+            const randomSound = Math.floor(Math.random() * sounds.length);
+            sounds[randomSound].play();
+            
+            // زيادة العداد
+            counter++;
+            counterElement.textContent = counter;
+            
+            // تغيير لون الخلفية كل 5 أذكار
+            if (counter % 5 === 0) {
+                document.querySelector('.dhikr-box').style.backgroundColor = getRandomLightColor();
+            }
+        }
+        
+        function getRandomLightColor() {
+            const colors = [
+                'rgba(210, 245, 227, 0.7)',
+                'rgba(230, 245, 210, 0.7)',
+                'rgba(210, 230, 245, 0.7)',
+                'rgba(245, 230, 210, 0.7)',
+                'rgba(230, 210, 245, 0.7)'
+            ];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+        
+        // حدث الضغط على الزر
+        btn.addEventListener('click', showRandomDhikr);
+        
+        // عرض ذكر عشوائي عند تحميل الصفحة
+        window.onload = showRandomDhikr;
+    </script>
+</body>
+</html>

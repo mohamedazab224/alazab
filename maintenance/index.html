@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نموذج طلب الصيانة</title>
+  <link rel="icon" href="https://raw.githubusercontent.com/alazab-group/assets/refs/heads/main/img/favicon.ico"
+    type="image/x-icon">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100..900&display=swap" rel="stylesheet">
+  <!-- روابط صفحات التحفيز -->
+  <link rel="preload" href="web/rewards.html" as="document">
+  <link rel="preload" href="web/motivations-days.html" as="document">
+  <style>
+    :root {
+      --gold: #f5bf23;
+      --black: #111111;
+      --white: #ffffff;
+      --gray: #f1f1f1;
+      --dark-gray: #b2b2b3;
+    }
+
+    body {
+      font-family: "Noto Sans Arabic", sans-serif;
+      background-color: var(--white);
+      color: var(--black);
+      font-size: 18px;
+    }
+
+    input,
+    select,
+    textarea {
+      background-color: #fff;
+      color: #000;
+      font-weight: bold;
+      border: 1px solid var(--gray);
+      padding: 0.5rem;
+      border-radius: 4px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 3px solid var(--gold);
+    }
+
+    .step-indicator {
+      transition: all 0.3s ease;
+      border: 1px solid var(--gray);
+      background-color: transparent;
+      color: var(--gray);
+    }
+
+    .step-indicator.active {
+      background-color: var(--gold);
+      color: var(--black);
+      font-weight: bold;
+    }
+
+    .step-indicator.completed {
+      background-color: var(--black);
+      color: var(--gold);
+    }
+
+    .form-section {
+      display: none;
+      background-color: #fff;
+    }
+
+    .form-section.active {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .file-preview {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 5px;
+      border: 2px solid var(--gold);
+    }
+
+    .contact-info {
+      background-color: var(--black);
+      color: var(--gold);
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      border: 1px solid var(--gold);
+    }
+
+    .thank-you-panel {
+      background-color: var(--gold);
+      color: var(--black);
+      border: 1px solid var(--black);
+      border-radius: 0.5rem;
+      padding: 2rem;
+      margin-top: 2rem;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .next-btn,
+    .prev-btn {
+      background-color: var(--gold);
+      color: var(--black);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .next-btn:hover,
+    .prev-btn:hover {
+      background-color: var(--white);
+      color: var(--black);
+    }
+
+    .progress-bar {
+      height: 6px;
+      background-color: var(--gold) !important;
+      border-radius: 3px;
+      /* أضف السطر التالي لعكس اتجاه النمو */
+      right: 0;
+      left: auto;
+      transform-origin: right;
+      direction: rtl;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 flex">
+  <!-- زر فتح القائمة (يظهر في الجوال) -->
+  <button id="sidebar-toggle" class="fixed top-4 right-4 z-40 md:hidden bg-gold text-black p-3 rounded-full shadow-lg focus:outline-none" title="فتح القائمة الجانبية">
+    <i class="fas fa-bars text-xl" aria-hidden="true"></i>
+    <span class="sr-only">فتح القائمة الجانبية</span>
+  </button>
+  <!-- طبقة تعتيم عند فتح القائمة في الجوال -->
+  <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-40 z-30 hidden md:hidden"></div>
+  <!-- القائمة الجانبية -->
+  <nav id="sidebar" class="w-64 md:w-56 min-h-screen bg-black text-gold flex flex-col fixed left-0 top-0 z-40 shadow-lg rtl:border-r-4 border-gold transform -translate-x-full md:translate-x-0 transition-transform duration-300 md:relative md:flex md:translate-x-0">
+    <!-- زر غلق القائمة (للجوال فقط) -->
+    <button id="sidebar-close" class="md:hidden absolute top-4 left-4 text-gold text-2xl focus:outline-none" title="إغلاق القائمة الجانبية">
+      <i class="fas fa-times" aria-hidden="true"></i>
+      <span class="sr-only">إغلاق القائمة الجانبية</span>
+    </button>
+    <div class="flex flex-col items-center py-8">
+      <img src="https://i.postimg.cc/k5GNwgXF/black-az-logo512.png" alt="Logo" class="w-16 h-16 mb-4 rounded-full border-2 border-gold">
+      <span class="font-bold text-xl mb-8 text-gold">ريــال إستيت كير</span>
+    </div>
+    <ul class="flex-1 flex flex-col gap-2 px-4">
+      <li><a href="#main-section" class="flex items-center gap-2 py-3 px-3 rounded-lg hover:bg-gold hover:text-black transition"><i class="fas fa-home"></i> الرئيسية</a></li>
+      <li><a href="#maintenance-form" class="flex items-center gap-2 py-3 px-3 rounded-lg hover:bg-gold hover:text-black transition"><i class="fas fa-tools"></i> طلب صيانة</a></li>
+      <li><a href="#requests-status" class="flex items-center gap-2 py-3 px-3 rounded-lg hover:bg-gold hover:text-black transition"><i class="fas fa-list"></i> حالة الطلبات</a></li>
+      <li><a href="#contact-section" class="flex items-center gap-2 py-3 px-3 rounded-lg hover:bg-gold hover:text-black transition"><i class="fas fa-envelope"></i> تواصل معنا</a></li>
+    </ul>
+    <div class="p-4 text-xs text-center text-gold">&copy; 2025 RealEstateCare</div>
+  </nav>
+  <!-- نهاية القائمة الجانبية -->
+
+  <div class="min-h-screen pb-12 flex-1 md:ml-56" id="main-section">
+    <!-- قسم الرئيسية -->
+    <section id="main-section" class="py-16">
+      <h1 class="text-3xl font-bold mb-6 text-gold text-center">مرحباً بك في منصة ريال إستيت كير</h1>
+      <p class="text-center text-lg text-gray-700 mb-8">إدارة الصيانة والتفتيش العقاري بسهولة واحترافية.</p>
+    </section>
+    <!-- قسم طلب الصيانة -->
+    <section id="maintenance-form" class="py-16">
+      <h2 class="text-2xl font-bold mb-6 text-gold text-center">طلب صيانة جديد</h2>
+      <!-- هنا سيتم عرض نموذج الطلب (موجود أصلاً أسفل هذا القسم) -->
+    </section>
+    <!-- قسم حالة الطلبات -->
+    <section id="requests-status" class="py-16">
+      <h2 class="text-2xl font-bold mb-6 text-gold text-center">حالة الطلبات</h2>
+      <p class="text-center text-gray-700 mb-8">تابع حالة جميع طلبات الصيانة الخاصة بك هنا.</p>
+      <!-- يمكنك لاحقاً ربط هذا القسم بلوحة الطلبات الحقيقية -->
+    </section>
+    <!-- قسم تواصل معنا -->
+    <section id="contact-section" class="py-16">
+      <h2 class="text-2xl font-bold mb-6 text-gold text-center">تواصل معنا</h2>
+      <p class="text-center text-gray-700 mb-8">للاستفسارات والدعم الفني: info@realestatecare.com</p>
+    </section>
+    <script>
+      // تفعيل السحب السلس عند الضغط على روابط القائمة
+      document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+          const targetId = this.getAttribute('href').slice(1);
+          const targetSection = document.getElementById(targetId);
+          if (targetSection) {
+            e.preventDefault();
+            window.scrollTo({
+              top: targetSection.offsetTop - 24,
+              behavior: 'smooth'
+            });
+            // أغلق القائمة في الجوال إذا كانت مفتوحة
+            if (window.innerWidth < 768) {
+              document.getElementById('sidebar').classList.add('-translate-x-full');
+              document.getElementById('sidebar-overlay').classList.add('hidden');
+              document.body.classList.remove('overflow-hidden');
+            }
+          }
+        });
+      });
+    </script>
+
+  <script>
+    // تحكم في القائمة الجانبية للجوال
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebarClose = document.getElementById('sidebar-close');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+    function openSidebar() {
+      sidebar.classList.remove('-translate-x-full');
+      sidebarOverlay.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    }
+    function closeSidebar() {
+      sidebar.classList.add('-translate-x-full');
+      sidebarOverlay.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }
+    sidebarToggle.addEventListener('click', openSidebar);
+    sidebarClose.addEventListener('click', closeSidebar);
+    sidebarOverlay.addEventListener('click', closeSidebar);
+    // القائمة تظهر دائماً في md وما فوق
+    function handleResize() {
+      if (window.innerWidth >= 768) {
+        sidebar.classList.remove('-translate-x-full');
+        sidebarOverlay.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      } else {
+        sidebar.classList.add('-translate-x-full');
+      }
+    }
+    window.addEventListener('resize', handleResize);
+    handleResize();
+  </script>
+
+  <div class="min-h-screen pb-12">
+    <div class="max-w-3xl mx-auto">
+      <!-- الشعار والعنوان -->
+      <div class="text-center py-8">
+        <div class="flex justify-center items-center mb-3">
+          <img src="https://i.postimg.cc/k5GNwgXF/black-az-logo512.png" alt="Alazab Group Logo"
+            class="w-20 h-20 rounded-full shadow-lg" />
+        </div>
+        <h1 class="text-3xl font-bold text-black">--- نموذج طلبات الصيانة ---</h1>
+        <p class="text-gray-300 mt-2">يرجى تسجيل تفاصيل الصيانات مع إضافة الصورة، هذا يساعد في إنجاز الطلبات.</p>
+      </div>
+
+      <!-- مؤشر الخطوات -->
+      <div class="mb-8">
+        <div class="w-full bg-gray-300 h-1 rounded relative mb-4">
+          <div id="main-progress-bar" class="absolute top-0 left-0 h-full bg-blue-500 progress-bar">
+          </div>
+        </div>
+        <div class="flex justify-between mt-2 text-sm text-gray-600">
+          <div class="text-center step-name">المعلومات الأساسية</div>
+          <div class="text-center step-name">تفاصيل الطلب</div>
+          <div class="text-center step-name">المرفقات</div>
+          <div class="text-center step-name">المراجعة</div>
+          <div class="text-center step-name">الإرسال</div>
+        </div>
+      </div>
+
+      <!-- النموذج -->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <form id="maintenanceForm">
+          <!-- القسم 1: المعلومات الأساسية -->
+          <div class="form-section active" id="step-1">
+            <h2 class="text-xl font-bold mb-6 text-gray-800 border-r-4 border-blue-500 pr-3">المعلومات الأساسية</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label class="block text-gray-700 mb-2" for="store_id">اختر الفرع <span
+                    class="text-red-500">*</span></label>
+                <select id="store_id" name="store_id" required
+                  class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                  <option value="" disabled selected>جاري تحميل الفروع...</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-gray-700 mb-2" for="maintenance_services">نوع الخدمة <span
+                    class="text-red-500">*</span></label>
+                <select id="maintenance_services" name="maintenance_services" required
+                  class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                  <option value="" disabled selected>جاري تحميل الخدمات...</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <label class="block text-gray-700 mb-2" for="title">عنوان طلب الصيانة <span
+                  class="text-red-500">*</span></label>
+              <input type="text" id="title" name="title" required
+                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="أدخل عنوان مختصر للطلب">
+            </div>
+
+            <div class="mb-6">
+              <label class="block text-gray-700 mb-2" for="requester_name">اسم مقدم الطلب <span
+                  class="text-red-500">*</span></label>
+              <input type="text" id="requester_name" name="requester_name" required
+                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="أدخل اسمك الكامل">
+            </div>
+
+            <div class="mb-6">
+              <label class="block text-gray-700 mb-2" for="requester_email">البريد الإلكتروني <span
+                  class="text-red-500">*</span></label>
+              <input type="email" id="requester_email" name="requester_email" required
+                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="أدخل بريدك الإلكتروني">
+            </div>
+
+            <div class="mb-6">
+              <label class="block text-gray-700 mb-2" for="requester_phone">رقم الهاتف <span
+                  class="text-red-500">*</span></label>
+              <input type="tel" id="requester_phone" name="requester_phone" required
+                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="أدخل رقم هاتفك">
+            </div>
+
+            <div class="flex justify-end">
+              <button type="button"
+                class="next-btn bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium transition duration-300 flex items-center">
+                التالي <i class="fas fa-arrow-left mr-2"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- القسم 2: تفاصيل الطلب -->
+          <div class="form-section" id="step-2">
+            <h2 class="text-xl font-bold mb-6 text-gray-800 border-r-4 border-blue-500 pr-3">تفاصيل الطلب</h2>
+
+            <div class="mb-6">
+              <label class="block text-gray-700 mb-2" for="description">وصف المشكلة <span
+                  class="text-red-500">*</span></label>
+              <textarea id="description" name="description" required rows="4"
+                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="اشرح المشكلة بالتفصيل"></textarea>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label class="block text-gray-700 mb-2" for="priority">الأولوية <span
+                    class="text-red-500">*</span></label>
+                <select id="priority" name="priority" required
+                  class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                  <option value="" disabled selected>اختر أولوية الطلب</option>
+                  <option value="low">منخفضة</option>
+                  <option value="medium">متوسطة</option>
+                  <option value="high">عالية</option>
+                  <option value="urgent">عاجلة</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-gray-700 mb-2" for="scheduled_date">التاريخ المطلوب <span
+                    class="text-red-500">*</span></label>
+                <input type="datetime-local" id="scheduled_date" name="scheduled_date" required
+                  class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <label class="block text-gray-700 mb-2" for="estimated_cost">افضل وقت لتنفذ الاعمال (اختياري)</label>
+              <input type="number" id="estimated_cost" name="estimated_cost"
+                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="أدخل الوقت المتوقعة">
+            </div>
+
+            <div class="flex justify-between">
+              <button type="button"
+                class="prev-btn bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 rounded-lg font-medium transition duration-300 flex items-center">
+                <i class="fas fa-arrow-right ml-2"></i> السابق
+              </button>
+              <button type="button"
+                class="next-btn bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium transition duration-300 flex items-center">
+                التالي <i class="fas fa-arrow-left mr-2"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- القسم 3: المرفقات -->
+          <div class="form-section" id="step-3">
+            <h2 class="text-xl font-bold mb-6 text-gray-800 border-r-4 border-blue-500 pr-3">المرفقات</h2>
+
+            <div class="mb-6">
+              <label class="block text-gray-700 mb-2" for="attachments">رفع الصور أو الملفات (يمكن اختيار أكثر من
+                ملف)</label>
+              <input type="file" id="attachments" name="attachments" multiple
+                accept="image/*,.pdf,.doc,.docx,.xls,.xlsx"
+                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+              <div id="attachments-preview" class="flex flex-wrap gap-4 mt-4"></div>
+            </div>
+
+            <div class="flex justify-between">
+              <button type="button"
+                class="prev-btn bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 rounded-lg font-medium transition duration-300 flex items-center">
+                <i class="fas fa-arrow-right ml-2"></i> السابق
+              </button>
+              <button type="button"
+                class="next-btn bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium transition duration-300 flex items-center">
+                التالي <i class="fas fa-arrow-left mr-2"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- القسم 4: المراجعة -->
+          <div class="form-section" id="step-4">
+            <h2 class="text-xl font-bold mb-6 text-gray-800 border-r-4 border-blue-500 pr-3">مراجعة البيانات</h2>
+
+            <div class="bg-gray-50 p-4 rounded-lg mb-6">
+              <h3 class="font-bold text-gray-700 mb-3">المعلومات الأساسية</h3>
+              <div class="grid grid-cols-2 gap-3 mb-4">
+                <div>
+                  <p class="text-sm text-gray-500">الفرع:</p>
+                  <p id="review-store" class="font-medium"></p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">نوع الخدمة:</p>
+                  <p id="review-service" class="font-medium"></p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">اسم مقدم الطلب:</p>
+                  <p id="review-requester-name" class="font-medium"></p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">البريد الإلكتروني:</p>
+                  <p id="review-requester-email" class="font-medium"></p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">رقم الهاتف:</p>
+                  <p id="review-requester-phone" class="font-medium"></p>
+                </div>
+                <div class="col-span-2">
+                  <p class="text-sm text-gray-500">العنوان:</p>
+                  <p id="review-title" class="font-medium"></p>
+                </div>
+              </div>
+
+              <h3 class="font-bold text-gray-700 mb-3">تفاصيل الطلب</h3>
+              <div class="grid grid-cols-2 gap-3 mb-4">
+                <div class="col-span-2">
+                  <p class="text-sm text-gray-500">الوصف:</p>
+                  <p id="review-description" class="font-medium"></p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">الأولوية:</p>
+                  <p id="review-priority" class="font-medium"></p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">التاريخ المطلوب:</p>
+                  <p id="review-date" class="font-medium"></p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">التكلفة المتوقعة:</p>
+                  <p id="review-cost" class="font-medium"></p>
+                </div>
+              </div>
+
+              <h3 class="font-bold text-gray-700 mb-3">المرفقات</h3>
+              <div id="review-files" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- سيتم عرض معاينة الملفات هنا -->
+              </div>
+            </div>
+
+            <div class="flex justify-between">
+              <button type="button"
+                class="prev-btn bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 rounded-lg font-medium transition duration-300 flex items-center">
+                <i class="fas fa-arrow-right ml-2"></i> السابق
+              </button>
+              <button type="button"
+                class="next-btn bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium transition duration-300 flex items-center">
+                إرسال الطلب <i class="fas fa-paper-plane mr-2"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- القسم 5: تأكيد الإرسال -->
+          <div class="form-section" id="step-5">
+            <div class="text-center py-8">
+              <div id="success-message" class="hidden">
+                <div class="flex justify-center items-center mb-4">
+                  <div class="bg-green-500 text-white p-4 rounded-full">
+                    <i class="fas fa-check text-3xl"></i>
+                  <p class="text-gray-600"><i class="fas fa-envelope mr-2"></i> support@al-azab.co</p>
+                </div>
+              </div>
+
+              <div id="loading-message">
+                <div class="flex justify-center items-center mb-4">
+                  <div class="w-16 h-16 border-t-4 border-b-4 border-blue-500 rounded-full animate-spin"></div>
+          div.className = 'flex flex-col items-center';
+          if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              const img = document.createElement('img');
+              img.src = e.target.result;
+              img.className = 'file-preview mb-2';
+              div.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+          } else {
+            const icon = document.createElement('i');
+            icon.className = 'fas fa-file-alt text-3xl text-gray-500 mb-2';
+            div.appendChild(icon);
+          }
+          const name = document.createElement('span');
+          name.textContent = file.name;
+          name.className = 'text-xs text-gray-700';
+          div.appendChild(name);
+          previewContainer.appendChild(div);
+        });
+      });
+    }
+
+    // تهيئة الأحداث
+    document.addEventListener('DOMContentLoaded', function () {
+      // تحميل البيانات الأولية
+      loadStores();
+      loadServiceTypes();
+
+      // أحداث الأزرار
+      var nextButtons = document.querySelectorAll('.next-btn');
+      if (nextButtons) {
+        nextButtons.forEach(btn => {
+          btn.addEventListener('click', goToNextStep);
+        });
+      }
+
+      var prevButtons = document.querySelectorAll('.prev-btn');
+      if (prevButtons) {
+        prevButtons.forEach(btn => {
+          btn.addEventListener('click', goToPrevStep);
+        });
+      }
+
+      var newRequestBtn = document.getElementById('new-request-btn');
+      if (newRequestBtn) {
+        newRequestBtn.addEventListener('click', resetForm);
+      }
+      var tryAgainBtn = document.getElementById('try-again-btn');
+      if (tryAgainBtn) {
+        tryAgainBtn.addEventListener('click', submitMaintenanceRequest);
+      }
+      var finalSubmitBtn = document.querySelector('#step-4 .next-btn');
+      if (finalSubmitBtn) {
+        finalSubmitBtn.addEventListener('click', submitMaintenanceRequest);
+      }
+
+      // تحديث مؤشر التقدم الأولي
+      updateProgressBar(currentStep);
+    });
+  </script>
+<!-- نافذة التحفيز بعد الإرسال -->
+<div id="reward-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black bg-opacity-50">
+    <iframe src="web/rewards.html" class="w-full max-w-2xl h-96 rounded-lg shadow-xl bg-white"></iframe>
+</div>
+<!-- نافذة الحكمة اليومية -->
+<div id="motivation-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black bg-opacity-50">
+    <iframe src="web/motivations-days.html" class="w-full max-w-2xl h-96 rounded-lg shadow-xl bg-white"></iframe>
+</div>
+<script>
+// تحسين أداء التحميل للمحتوى التحفيزي
+const rewardIframe = document.createElement('iframe');
+rewardIframe.src = 'web/rewards.html';
+rewardIframe.style.display = 'none';
+document.body.appendChild(rewardIframe);
+
+// عرض نافذة المكافأة بعد الإرسال الناجح
+function showReward() {
+    document.getElementById('reward-modal').classList.remove('hidden');
+    // تخصيص اسم المستخدم إذا أردت
+    try {
+      const userName = document.getElementById('requester_name').value || 'العزيز';
+      const rewardIframe = document.querySelector('#reward-modal iframe');
+      rewardIframe.contentWindow.postMessage({name: userName}, '*');
+    } catch(e){}
+    setTimeout(() => {
+        document.getElementById('reward-modal').classList.add('hidden');
+    }, 8000); // إغلاق بعد 8 ثواني
+}
+// عرض الحكمة اليومية عند الدخول
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.getElementById('motivation-modal').classList.remove('hidden');
+        setTimeout(() => {
+            document.getElementById('motivation-modal').classList.add('hidden');
+        }, 5000);
+    }, 2000);
+});
+</script>
+</body>
+
+</html>

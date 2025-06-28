@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حافز الإنجاز اليومي</title>
+    <style>
+        body {
+            font-family: 'Tajawal', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #2c3e50;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 90%;
+            max-width: 600px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .divider {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+        
+        .quote-box {
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+        
+        .quote {
+            font-size: 22px;
+            line-height: 1.6;
+            position: relative;
+            padding: 0 20px;
+        }
+        
+        .quote::before, .quote::after {
+            content: '"';
+            font-size: 40px;
+            color: #4ECDC4;
+            position: absolute;
+            opacity: 0.3;
+        }
+        
+        .quote::before {
+            top: -20px;
+            left: -10px;
+        }
+        
+        .quote::after {
+            bottom: -30px;
+            right: -10px;
+        }
+        
+        .btn {
+            background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #FF6B6B;
+            opacity: 0;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .author {
+            margin-top: 15px;
+            font-style: italic;
+            color: #4ECDC4;
+            font-weight: bold;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>حافز الإنجاز اليومي</h1>
+            <div class="divider"></div>
+            <p>اضغط على الزر لتحصل على جرعة تحفيزية جديدة</p>
+        </div>
+        
+        <div class="quote-box">
+            <p id="quote" class="quote fade-in">كل يوم فرصة جديدة لتحقيق إنجاز</p>
+            <p id="author" class="author">- نظام الحافز</p>
+        </div>
+        
+        <button id="btn" class="btn">حفّزني!</button>
+        
+        <div class="footer">
+            صمم لتحفيزك على تحقيق الأفضل
+        </div>
+    </div>
+
+    <script>
+        const quoteElement = document.getElementById('quote');
+        const authorElement = document.getElementById('author');
+        const btn = document.getElementById('btn');
+        
+        // مكتبة العبارات التحفيزية (غير دينية)
+        const motivations = [
+            {
+                quote: "النجاح ليس صدفة، إنه عمل شاق، مثابرة، تعلم، دراسة، تضحية والأهم من ذلك، حب ما تفعله.",
+                author: "بيليه"
+            },
+            {
+                quote: "لا تخف من التخلي عن الجيد لتحصل على الأفضل.",
+                author: "جون روكفلر"
+            },
+            {
+                quote: "الطريقة الوحيدة لعمل عمل عظيم هي أن تحب ما تقوم به.",
+                author: "ستيف جوبز"
+            },
+            {
+                quote: "لا تقلق من الفشل، قلق من الفرص التي ستضيع إن لم تجرب.",
+                author: "جاك ما"
+            },
+            {
+                quote: "المستقبل ينتمي لأولئك الذين يؤمنون بجمال أحلامهم.",
+                author: "إليانور روزفلت"
+            },
+            {
+                quote: "إذا كنت تعمل على شيء يثيرك حقاً، فلا داعي لأن يدفعك أحد، الرؤية هي التي تسحبك.",
+                author: "ستيف جوبز"
+            },
+            {
+                quote: "الإبداع هو الذكاء الذي يستمتع.",
+                author: "ألبرت أينشتاين"
+            },
+            {
+                quote: "الفرق بين العادي والاستثنائي هو ذلك الجهد الإضافي الصغير.",
+                author: "جيمي رون"
+            },
+            {
+                quote: "الطموح هو الطريق إلى النجاح، والمثابرة هي السيارة التي توصلك إليه.",
+                author: "بيل برادلي"
+            },
+            {
+                quote: "لا يمكنك ركوب الأمواج إلا إذا كنت مستعداً للغوص تحتهم.",
+                author: "جون كابس"
+            },
+            {
+                quote: "النجاح هو مجموع الجهود الصغيرة المتكررة يومياً.",
+                author: "روبرت كولير"
+            },
+            {
+                quote: "لا تنتظر الظروف المثالية، ابدأ الآن حيث أنت.",
+                author: "آرثر بين"
+            },
+            {
+                quote: "أعظم مجد في الحياة ليس في عدم السقوط، بل في النهوض كلما سقطنا.",
+                author: "نيلسون مانديلا"
+            },
+            {
+                quote: "أنت لا تحتاج إلى رؤية السلم كله، فقط اصر على الصعود الدرجة الأولى.",
+                author: "مارتن لوثر كينج"
+            },
+            {
+                quote: "النجاح ليس نهائياً، والفشل ليس قاتلاً: الشجاعة في الاستمرار هي ما تُحسب.",
+                author: "ونستون تشرشل"
+            },
+            {
+                quote: "الوقت الذي تشعر فيه بعدم الراحة هو الوقت الذي تبدأ فيه بالنمو حقاً.",
+                author: "ماكس دي بري"
+            },
+            {
+                quote: "إذا كنت لا تستطيع أن تفسر الأمر ببساطة، فأنت لا تفهمه جيداً بما يكفي.",
+                author: "ألبرت أينشتاين"
+            },
+            {
+                quote: "التميز ليس مهارة، إنه موقف.",
+                author: "رالف مارستون"
+            },
+            {
+                quote: "كل شيء صعب قبل أن يصبح سهلاً.",
+                author: "يوهان فولفغانغ فون غوته"
+            },
+            {
+                quote: "المعرفة قوة، ولكن الممارسة هي التي تحقق النتائج.",
+                author: "توني روبنز"
+            }
+        ];
+        
+        // أصوات تنبيه
+        const sounds = [
+            new Audio('https://assets.mixkit.co/sfx/preview/mixkit-positive-interface-beep-221.mp3'),
+            new Audio('https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3'),
+            new Audio('https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3')
+        ];
+        
+        // عرض اقتباس عشوائي
+        function showRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * motivations.length);
+            const randomMotivation = motivations[randomIndex];
+            
+            // إضافة تأثير التلاشي
+            quoteElement.classList.remove('fade-in');
+            authorElement.classList.remove('fade-in');
+            
+            // إعادة تدفق الصفحة لإعادة تشغيل الأنيميشن
+            void quoteElement.offsetWidth;
+            void authorElement.offsetWidth;
+            
+            // تغيير النص
+            quoteElement.textContent = randomMotivation.quote;
+            authorElement.textContent = `- ${randomMotivation.author}`;
+            
+            // إضافة الأنيميشن
+            quoteElement.classList.add('fade-in');
+            authorElement.classList.add('fade-in');
+            
+            // تشغيل صوت عشوائي
+            const randomSound = Math.floor(Math.random() * sounds.length);
+            sounds[randomSound].play();
+            
+            // إضافة تأثير الكونفيتي
+            createConfetti();
+        }
+        
+        // تأثير الكونفيتي
+        function createConfetti() {
+            const container = document.querySelector('.container');
+            
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = -10 + 'px';
+                confetti.style.backgroundColor = getRandomColor();
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                container.appendChild(confetti);
+                
+                // أنيميشن الكونفيتي
+                setTimeout(() => {
+                    confetti.style.transition = `all ${Math.random() * 2 + 1}s ease-out`;
+                    confetti.style.opacity = '0.8';
+                    confetti.style.transform = `translateY(${Math.random() * 300 + 200}px) rotate(${Math.random() * 360}deg)`;
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 3000);
+                }, i * 50);
+            }
+        }
+        
+        function getRandomColor() {
+            const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFBE0B', '#FB5607', '#8338EC'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+        
+        // حدث الضغط على الزر
+        btn.addEventListener('click', showRandomQuote);
+        
+        // عرض اقتباس عشوائي عند تحميل الصفحة
+        window.onload = showRandomQuote;
+    </script>
+</body>
+</html>
