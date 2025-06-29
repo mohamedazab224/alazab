@@ -13,11 +13,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100..900&display=swap" rel="stylesheet">
   <!-- Preload motivational content -->
-  <link rel="prefetch" href="motivations-days.html" as="document">
-  <link rel="prefetch" href="motivations.html" as="document">
-  <link rel="prefetch" href="rewards.html" as="document">
-  <link rel="prefetch" href="rozhaniat.html" as="document">
-  <link rel="prefetch" href="self-motivation.html" as="document">
+  <link rel="prefetch" href="./motivations-days.html" as="document">
+  <link rel="prefetch" href="./motivations.html" as="document">
+  <link rel="prefetch" href="./rewards.html" as="document">
+  <link rel="prefetch" href="./rozhaniat.html" as="document">
+  <link rel="prefetch" href="./self-motivation.html" as="document">
 <style>
     :root {
       --gold: #f5bf23;
@@ -510,13 +510,13 @@
     // Motivation System Functions
     function preloadMotivationContent() {
       const iframe = document.createElement('iframe');
-      iframe.src = 'web/rewards.html';
+      iframe.src = './rewards.html';
       iframe.style.display = 'none';
       document.body.appendChild(iframe);
       
       setTimeout(() => {
         const dailyMotivation = document.createElement('iframe');
-        dailyMotivation.src = 'web/motivations-days.html';
+        dailyMotivation.src = './motivations-days.html';
         dailyMotivation.style.display = 'none';
         document.body.appendChild(dailyMotivation);
       }, 3000);
@@ -526,7 +526,7 @@
       const iframe = document.getElementById('motivation-iframe');
       const overlay = document.getElementById('motivation-overlay');
       
-      iframe.src = type === 'reward' ? 'web/rewards.html' : 'web/motivations-days.html';
+      iframe.src = type === 'reward' ? './rewards.html' : './motivations-days.html';
       overlay.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
       
