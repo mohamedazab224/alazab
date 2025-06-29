@@ -2,8 +2,6 @@
 <html dir="rtl" lang="ar">
 
 <head>
-    <link rel="stylesheet" href="styles.css">
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>نموذج طلب الصيانة</title>
@@ -14,9 +12,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100..900&display=swap" rel="stylesheet">
-  <!-- روابط صفحات التحفيز -->
-  <link rel="preload" href="web/rewards.html" as="document">
-  <link rel="preload" href="web/motivations-days.html" as="document">
+  <!-- Preload motivational content -->
+  <link rel="prefetch" href="web/rewards.html" as="document">
+  <link rel="prefetch" href="web/motivations-days.html" as="document">
   <style>
     :root {
       --gold: #f5bf23;
@@ -142,126 +140,52 @@
       height: 6px;
       background-color: var(--gold) !important;
       border-radius: 3px;
-      /* أضف السطر التالي لعكس اتجاه النمو */
       right: 0;
       left: auto;
       transform-origin: right;
       direction: rtl;
     }
+
+    /* Motivation Modal Styles */
+    #motivation-overlay {
+      transition: opacity 0.3s ease;
+      z-index: 9999;
+    }
+    
+    #motivation-overlay iframe {
+      transition: transform 0.3s ease;
+    }
+    
+    #motivation-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    #motivation-overlay.hidden iframe {
+      transform: translateY(20px);
+    }
   </style>
 </head>
 
-<body class="bg-gray-50 flex">
-  <!-- زر فتح القائمة (يظهر في الجوال) -->
-  <button id="sidebar-toggle" class="fixed top-4 right-4 z-40 md:hidden bg-gold text-black p-3 rounded-full shadow-lg focus:outline-none" title="فتح القائمة الجانبية">
-    <i class="fas fa-bars text-xl" aria-hidden="true"></i>
-    <span class="sr-only">فتح القائمة الجانبية</span>
-  </button>
-  <!-- طبقة تعتيم عند فتح القائمة في الجوال -->
-  <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-40 z-30 hidden md:hidden"></div>
-  <!-- القائمة الجانبية -->
-  <nav id="sidebar" class="w-64 md:w-56 min-h-screen bg-black text-gold flex flex-col fixed left-0 top-0 z-40 shadow-lg rtl:border-r-4 border-gold transform -translate-x-full md:translate-x-0 transition-transform duration-300 md:relative md:flex md:translate-x-0">
-    <!-- زر غلق القائمة (للجوال فقط) -->
-    <button id="sidebar-close" class="md:hidden absolute top-4 left-4 text-gold text-2xl focus:outline-none" title="إغلاق القائمة الجانبية">
-      <i class="fas fa-times" aria-hidden="true"></i>
-      <span class="sr-only">إغلاق القائمة الجانبية</span>
-    </button>
-    <div class="flex flex-col items-center py-8">
-      <img src="https://i.postimg.cc/k5GNwgXF/black-az-logo512.png" alt="Logo" class="w-16 h-16 mb-4 rounded-full border-2 border-gold">
-      <span class="font-bold text-xl mb-8 text-gold">ريــال إستيت كير</span>
+<body class="bg-gray-50">
+  <!-- Motivation Modal -->
+  <div id="motivation-overlay" class="fixed inset-0 z-50 hidden bg-black bg-opacity-70">
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl p-4">
+      <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
+        <div class="flex justify-between items-center bg-blue-600 p-4">
+          <h3 class="text-white font-bold text-xl">مفاجأة خاصة لك!</h3>
+          <button type="button" onclick="hideMotivation()" class="text-white hover:text-gray-200" aria-label="إغلاق النافذة" title="إغلاق">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+        <iframe id="motivation-iframe" class="w-full h-96 border-0" loading="lazy" title="نافذة التحفيز"></iframe>
+      </div>
     </div>
-    <ul class="flex-1 flex flex-col gap-2 px-4">
-      <li><a href="#main-section" class="flex items-center gap-2 py-3 px-3 rounded-lg hover:bg-gold hover:text-black transition"><i class="fas fa-home"></i> الرئيسية</a></li>
-      <li><a href="#maintenance-form" class="flex items-center gap-2 py-3 px-3 rounded-lg hover:bg-gold hover:text-black transition"><i class="fas fa-tools"></i> طلب صيانة</a></li>
-      <li><a href="#requests-status" class="flex items-center gap-2 py-3 px-3 rounded-lg hover:bg-gold hover:text-black transition"><i class="fas fa-list"></i> حالة الطلبات</a></li>
-      <li><a href="#contact-section" class="flex items-center gap-2 py-3 px-3 rounded-lg hover:bg-gold hover:text-black transition"><i class="fas fa-envelope"></i> تواصل معنا</a></li>
-    </ul>
-    <div class="p-4 text-xs text-center text-gold">&copy; 2025 RealEstateCare</div>
-  </nav>
-  <!-- نهاية القائمة الجانبية -->
-
-  <div class="min-h-screen pb-12 flex-1 md:ml-56" id="main-section">
-    <!-- قسم الرئيسية -->
-    <section id="main-section" class="py-16">
-      <h1 class="text-3xl font-bold mb-6 text-gold text-center">مرحباً بك في منصة ريال إستيت كير</h1>
-      <p class="text-center text-lg text-gray-700 mb-8">إدارة الصيانة والتفتيش العقاري بسهولة واحترافية.</p>
-    </section>
-    <!-- قسم طلب الصيانة -->
-    <section id="maintenance-form" class="py-16">
-      <h2 class="text-2xl font-bold mb-6 text-gold text-center">طلب صيانة جديد</h2>
-      <!-- هنا سيتم عرض نموذج الطلب (موجود أصلاً أسفل هذا القسم) -->
-    </section>
-    <!-- قسم حالة الطلبات -->
-    <section id="requests-status" class="py-16">
-      <h2 class="text-2xl font-bold mb-6 text-gold text-center">حالة الطلبات</h2>
-      <p class="text-center text-gray-700 mb-8">تابع حالة جميع طلبات الصيانة الخاصة بك هنا.</p>
-      <!-- يمكنك لاحقاً ربط هذا القسم بلوحة الطلبات الحقيقية -->
-    </section>
-    <!-- قسم تواصل معنا -->
-    <section id="contact-section" class="py-16">
-      <h2 class="text-2xl font-bold mb-6 text-gold text-center">تواصل معنا</h2>
-      <p class="text-center text-gray-700 mb-8">للاستفسارات والدعم الفني: info@realestatecare.com</p>
-    </section>
-    <script>
-      // تفعيل السحب السلس عند الضغط على روابط القائمة
-      document.querySelectorAll('nav a[href^="#"]').forEach(link => {
-        link.addEventListener('click', function(e) {
-          const targetId = this.getAttribute('href').slice(1);
-          const targetSection = document.getElementById(targetId);
-          if (targetSection) {
-            e.preventDefault();
-            window.scrollTo({
-              top: targetSection.offsetTop - 24,
-              behavior: 'smooth'
-            });
-            // أغلق القائمة في الجوال إذا كانت مفتوحة
-            if (window.innerWidth < 768) {
-              document.getElementById('sidebar').classList.add('-translate-x-full');
-              document.getElementById('sidebar-overlay').classList.add('hidden');
-              document.body.classList.remove('overflow-hidden');
-            }
-          }
-        });
-      });
-    </script>
-
-  <script>
-    // تحكم في القائمة الجانبية للجوال
-    const sidebar = document.getElementById('sidebar');
-    const sidebarToggle = document.getElementById('sidebar-toggle');
-    const sidebarClose = document.getElementById('sidebar-close');
-    const sidebarOverlay = document.getElementById('sidebar-overlay');
-
-    function openSidebar() {
-      sidebar.classList.remove('-translate-x-full');
-      sidebarOverlay.classList.remove('hidden');
-      document.body.classList.add('overflow-hidden');
-    }
-    function closeSidebar() {
-      sidebar.classList.add('-translate-x-full');
-      sidebarOverlay.classList.add('hidden');
-      document.body.classList.remove('overflow-hidden');
-    }
-    sidebarToggle.addEventListener('click', openSidebar);
-    sidebarClose.addEventListener('click', closeSidebar);
-    sidebarOverlay.addEventListener('click', closeSidebar);
-    // القائمة تظهر دائماً في md وما فوق
-    function handleResize() {
-      if (window.innerWidth >= 768) {
-        sidebar.classList.remove('-translate-x-full');
-        sidebarOverlay.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
-      } else {
-        sidebar.classList.add('-translate-x-full');
-      }
-    }
-    window.addEventListener('resize', handleResize);
-    handleResize();
-  </script>
+  </div>
 
   <div class="min-h-screen pb-12">
     <div class="max-w-3xl mx-auto">
-      <!-- الشعار والعنوان -->
+      <!-- Header -->
       <div class="text-center py-8">
         <div class="flex justify-center items-center mb-3">
           <img src="https://i.postimg.cc/k5GNwgXF/black-az-logo512.png" alt="Alazab Group Logo"
@@ -271,25 +195,25 @@
         <p class="text-gray-300 mt-2">يرجى تسجيل تفاصيل الصيانات مع إضافة الصورة، هذا يساعد في إنجاز الطلبات.</p>
       </div>
 
-      <!-- مؤشر الخطوات -->
+      <!-- Progress Indicator -->
       <div class="mb-8">
         <div class="w-full bg-gray-300 h-1 rounded relative mb-4">
-          <div id="main-progress-bar" class="absolute top-0 left-0 h-full bg-blue-500 progress-bar">
+          <div id="main-progress-bar" class="absolute top-0 left-0 h-full bg-blue-500 progress-bar" style="width: 0%">
           </div>
         </div>
         <div class="flex justify-between mt-2 text-sm text-gray-600">
-          <div class="text-center step-name">المعلومات الأساسية</div>
-          <div class="text-center step-name">تفاصيل الطلب</div>
-          <div class="text-center step-name">المرفقات</div>
-          <div class="text-center step-name">المراجعة</div>
-          <div class="text-center step-name">الإرسال</div>
+          <div class="text-center step-name step-width">المعلومات الأساسية</div>
+          <div class="text-center step-name step-width">تفاصيل الطلب</div>
+          <div class="text-center step-name step-width">المرفقات</div>
+          <div class="text-center step-name step-width">المراجعة</div>
+          <div class="text-center step-name step-width">الإرسال</div>
         </div>
       </div>
 
-      <!-- النموذج -->
+      <!-- Form -->
       <div class="bg-white rounded-lg shadow-md p-6 mb-8">
         <form id="maintenanceForm">
-          <!-- القسم 1: المعلومات الأساسية -->
+          <!-- Section 1: Basic Information -->
           <div class="form-section active" id="step-1">
             <h2 class="text-xl font-bold mb-6 text-gray-800 border-r-4 border-blue-500 pr-3">المعلومات الأساسية</h2>
 
@@ -353,7 +277,7 @@
             </div>
           </div>
 
-          <!-- القسم 2: تفاصيل الطلب -->
+          <!-- Section 2: Request Details -->
           <div class="form-section" id="step-2">
             <h2 class="text-xl font-bold mb-6 text-gray-800 border-r-4 border-blue-500 pr-3">تفاصيل الطلب</h2>
 
@@ -406,7 +330,7 @@
             </div>
           </div>
 
-          <!-- القسم 3: المرفقات -->
+          <!-- Section 3: Attachments -->
           <div class="form-section" id="step-3">
             <h2 class="text-xl font-bold mb-6 text-gray-800 border-r-4 border-blue-500 pr-3">المرفقات</h2>
 
@@ -431,7 +355,7 @@
             </div>
           </div>
 
-          <!-- القسم 4: المراجعة -->
+          <!-- Section 4: Review -->
           <div class="form-section" id="step-4">
             <h2 class="text-xl font-bold mb-6 text-gray-800 border-r-4 border-blue-500 pr-3">مراجعة البيانات</h2>
 
@@ -502,13 +426,27 @@
             </div>
           </div>
 
-          <!-- القسم 5: تأكيد الإرسال -->
+          <!-- Section 5: Confirmation -->
           <div class="form-section" id="step-5">
             <div class="text-center py-8">
               <div id="success-message" class="hidden">
                 <div class="flex justify-center items-center mb-4">
                   <div class="bg-green-500 text-white p-4 rounded-full">
                     <i class="fas fa-check text-3xl"></i>
+                  </div>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">تم إرسال طلبك بنجاح!</h2>
+                <p class="text-gray-600 mb-6">سيتم مراجعة طلبك في أقرب وقت ممكن</p>
+                <div class="flex flex-col items-center">
+                  <span id="motivational-message" class="text-lg text-blue-700 font-semibold animate-bounce mb-2"
+                    style="display:none;">اكتشف المفاجأة الجاية!</span>
+                  <button type="button" onclick="showMotivation('reward'); return false;" 
+                    class="text-blue-600 underline mt-4 inline-block transition duration-300 hover:text-blue-800 hide">🎉 مفاجأتنا ليك هنا…</button>
+                </div>
+                <p class="text-gray-600 mb-4">سنقوم بالتواصل معك خلال 24 ساعة لتأكيد الطلب وتحديد الموعد النهائي</p>
+                <div class="contact-info">
+                  <h4 class="font-bold text-gray-700 mb-2">للتواصل السريع:</h4>
+                  <p class="text-gray-600"><i class="fas fa-phone-alt mr-2"></i> 01004006620</p>
                   <p class="text-gray-600"><i class="fas fa-envelope mr-2"></i> support@al-azab.co</p>
                 </div>
               </div>
@@ -516,6 +454,502 @@
               <div id="loading-message">
                 <div class="flex justify-center items-center mb-4">
                   <div class="w-16 h-16 border-t-4 border-b-4 border-blue-500 rounded-full animate-spin"></div>
+                </div>
+                <h2 class="text-xl font-bold text-gray-800 mb-2">جاري معالجة طلبك</h2>
+                <p class="text-gray-600">يرجى الانتظار قليلاً...</p>
+              </div>
+
+              <div id="error-message" class="hidden">
+                <div class="flex justify-center items-center mb-4">
+                  <div class="bg-red-500 text-white p-4 rounded-full">
+                    <i class="fas fa-exclamation-triangle text-3xl"></i>
+                  </div>
+                </div>
+                <h2 class="text-xl font-bold text-gray-800 mb-2">حدث خطأ ما</h2>
+                <p class="text-gray-600 mb-6">لم نتمكن من إرسال طلبك. يرجى المحاولة مرة أخرى.</p>
+                <div class="mt-8">
+                  <button type="button" id="try-again-btn"
+                    class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium transition duration-300">
+                    المحاولة مرة أخرى
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center py-4 bg-gray-100">
+    <p class="text-gray-600">شكراً لاستخدامك نموذج طلب الصيانة الخاص بنا. نتمنى لك يوماً سعيداً!</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    // Initialize Supabase
+    const SUPABASE_URL = 'https://hvnxhovwbvphynuxlqnj.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh2bnhob3Z3YnZwaHludXhscW5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM4Mjg2ODAsImV4cCI6MjA1OTQwNDY4MH0.i59NYbHj1aJixQMmXh61gPV5SpqoXwxjr85-5pUl-9U';
+
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Initialize EmailJS
+    emailjs.init('18ygGgryRoGve-Tpw');
+
+    // System variables
+    let currentStep = 0;
+    let requestId = null;
+    let uploadedFiles = [];
+    let motivationShown = false;
+
+    // Motivation System Functions
+    function preloadMotivationContent() {
+      const iframe = document.createElement('iframe');
+      iframe.src = 'web/rewards.html';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+      
+      setTimeout(() => {
+        const dailyMotivation = document.createElement('iframe');
+        dailyMotivation.src = 'web/motivations-days.html';
+        dailyMotivation.style.display = 'none';
+        document.body.appendChild(dailyMotivation);
+      }, 3000);
+    }
+
+    function showMotivation(type = 'reward') {
+      const iframe = document.getElementById('motivation-iframe');
+      const overlay = document.getElementById('motivation-overlay');
+      
+      iframe.src = type === 'reward' ? 'web/rewards.html' : 'web/motivations-days.html';
+      overlay.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      
+      setTimeout(() => {
+        try {
+          const userName = document.getElementById('requester_name').value || 'العزيز';
+          iframe.contentWindow.postMessage({
+            type: 'userData',
+            name: userName,
+            date: new Date().toLocaleDateString('ar-EG')
+          }, '*');
+        } catch(e) {
+          console.log('Could not send user data to iframe');
+        }
+      }, 500);
+      
+      setTimeout(hideMotivation, type === 'reward' ? 8000 : 5000);
+    }
+
+    function hideMotivation() {
+      document.getElementById('motivation-overlay').classList.add('hidden');
+      document.body.style.overflow = 'auto';
+      motivationShown = true;
+    }
+
+    // Load stores from database
+    async function loadStores() {
+      const storeSelect = document.getElementById('store_id');
+      try {
+        const { data, error } = await supabase
+          .from('stores')
+          .select('id, name')
+          .order('name', { ascending: true });
+
+        if (error) throw error;
+
+        storeSelect.innerHTML = '<option value="" disabled selected>اختر الفرع المطلوب</option>';
+        data.forEach(store => {
+          const option = document.createElement('option');
+          option.value = store.id;
+          option.textContent = store.name;
+          storeSelect.appendChild(option);
+        });
+      } catch (error) {
+        console.error('Error loading stores:', error);
+        storeSelect.innerHTML = '<option value="" disabled selected>حدث خطأ في تحميل الفروع</option>';
+      }
+    }
+
+    // Load service types from database
+    async function loadServiceTypes() {
+      const serviceSelect = document.getElementById('maintenance_services');
+      try {
+        const { data, error } = await supabase
+          .from('maintenance_services')
+          .select('id, name')
+          .order('name', { ascending: true });
+
+        if (error) throw error;
+
+        serviceSelect.innerHTML = '<option value="" disabled selected>اختر نوع الخدمة</option>';
+        data.forEach(service => {
+          const option = document.createElement('option');
+          option.value = service.id;
+          option.textContent = service.name;
+          serviceSelect.appendChild(option);
+        });
+      } catch (error) {
+        console.error('Error loading maintenance_services:', error);
+        serviceSelect.innerHTML = '<option value="" disabled selected>حدث خطأ في تحميل الخدمات</option>';
+      }
+    }
+
+    // Generate unique file name
+    function generateUniqueFileName(file) {
+      const ext = file.name.split('.').pop();
+      const unique = Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+      return `${unique}.${ext}`;
+    }
+
+    // Upload single file to Supabase Storage
+    async function uploadFile(file) {
+      try {
+        const uniqueName = generateUniqueFileName(file);
+        const { data, error } = await supabase.storage
+          .from('azabstoredots')
+          .upload(`uploads/${uniqueName}`, file, {
+            cacheControl: '3600',
+            upsert: false,
+          });
+
+        if (error) throw error;
+
+        return `${SUPABASE_URL}/storage/v1/object/public/azabstoredots/uploads/${uniqueName}`;
+      } catch (error) {
+        console.error('Error uploading file:', error);
+        throw error;
+      }
+    }
+
+    // Upload all files
+    async function uploadAllFiles(files) {
+      const urls = [];
+      const validTypes = [
+        'image/jpeg',
+        'image/png',
+        'image/gif',
+        'application/pdf',
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      ];
+
+      for (const file of files) {
+        if (!validTypes.includes(file.type)) {
+          alert(`نوع الملف غير مدعوم: ${file.name}. يرجى رفع صور أو ملفات PDF أو Word فقط.`);
+          continue;
+        }
+
+        if (file.size > 5 * 1024 * 1024) { // 5MB limit
+          alert(`الملف ${file.name} كبير جداً. الحد الأقصى 5MB.`);
+          continue;
+        }
+
+        try {
+          const url = await uploadFile(file);
+          urls.push({
+            name: file.name,
+            url: url,
+            type: file.type.startsWith('image/') ? 'image' : 'file'
+          });
+        } catch (error) {
+          console.error('Upload error:', error);
+          alert(`فشل رفع الملف ${file.name}. يرجى المحاولة مرة أخرى.`);
+        }
+      }
+
+      return urls;
+    }
+
+    // Send email via EmailJS
+    async function sendEmail(templateParams) {
+      try {
+        await emailjs.send(
+          'service_Alazab.co',
+          'template_hbb46pi',
+          templateParams
+        );
+        return true;
+      } catch (error) {
+        console.error('Failed to send email:', error);
+        return false;
+      }
+    }
+
+    // Submit maintenance request
+    async function submitMaintenanceRequest() {
+      const form = document.getElementById('maintenanceForm');
+      const formData = new FormData(form);
+
+      // Show loading screen
+      document.getElementById('loading-message').classList.remove('hidden');
+      document.getElementById('success-message').classList.add('hidden');
+      document.getElementById('error-message').classList.add('hidden');
+
+      try {
+        // Upload files first if any
+        const attachmentsInput = document.getElementById('attachments');
+        if (attachmentsInput.files.length > 0) {
+          uploadedFiles = await uploadAllFiles(attachmentsInput.files);
+        }
+
+        // Prepare request data
+        const dbRequestData = {
+          store_id: formData.get('store_id'),
+          service_type: formData.get('maintenance_services'),
+          title: formData.get('title'),
+          description: formData.get('description'),
+          priority: formData.get('priority') === 'متوسطة' ? 'medium' :
+            formData.get('priority') === 'عالية' ? 'high' :
+              formData.get('priority') === 'منخفضة' ? 'low' :
+                formData.get('priority') === 'عاجلة' ? 'urgent' : formData.get('priority'),
+          scheduled_date: formData.get('scheduled_date'),
+          estimated_cost: formData.get('estimated_cost') ? parseFloat(formData.get('estimated_cost')) : null,
+          requester_name: formData.get('requester_name'),
+          requester_email: formData.get('requester_email'),
+          requester_phone: formData.get('requester_phone'),
+          status: 'pending',
+          attachments: uploadedFiles.length > 0 ? uploadedFiles.map(file => file.url) : null,
+          created_at: new Date().toISOString()
+        };
+
+        // Submit request to database
+        const { data, error } = await supabase
+          .from('maintenance_requests')
+          .insert([dbRequestData])
+          .select();
+
+        if (error) {
+          console.error("Error submitting request:", error);
+          throw new Error('Failed to insert maintenance request.');
+        }
+
+        // Save request ID
+        requestId = data[0].id;
+
+        // Prepare email data
+        const storeName = document.getElementById('store_id').options[document.getElementById('store_id').selectedIndex].text;
+        const serviceName = document.getElementById('maintenance_services').options[document.getElementById('maintenance_services').selectedIndex].text;
+
+        const emailParams = {
+          store_name: storeName,
+          service_name: serviceName,
+          title: formData.get('title'),
+          description: formData.get('description') || '',
+          priority: formData.get('priority') || '',
+          scheduled_date: formData.get('scheduled_date') || '',
+          estimated_cost: formData.get('estimated_cost') || '',
+          requester_name: formData.get('requester_name') || '',
+          requester_email: formData.get('requester_email') || '',
+          requester_phone: formData.get('requester_phone') || '',
+          attachments: uploadedFiles.length > 0 ? uploadedFiles.map(file => file.url).join(', ') : '',
+          email: formData.get('requester_email') || '',
+          contactPerson: formData.get('requester_name') || '',
+          store: storeName,
+          phone: formData.get('requester_phone') || '',
+          from_name: 'Alazab Maintenance',
+          user_email: formData.get('requester_email') || '',
+          request_id: requestId
+        };
+
+        // Send email
+        const emailSent = await emailjs.send('service_Alazab.co', 'template_hbb46pi', emailParams)
+          .then((response) => {
+            console.log('✅ Email sent successfully:', response.status, response.text);
+            return true;
+          })
+          .catch((error) => {
+            console.error('❌ Failed to send email:', error.text || error);
+            alert('⚠️ خطأ أثناء إرسال البريد: ' + (error.text || error));
+            return false;
+          });
+
+        if (!emailSent) {
+          console.warn('⚠️ Email sending failed, but request was submitted.');
+        }
+
+        // Show success message
+        setTimeout(() => {
+          document.getElementById('loading-message').classList.add('hidden');
+          document.getElementById('success-message').classList.remove('hidden');
+          
+          // Show reward after 1.5 seconds
+          setTimeout(() => {
+            showMotivation('reward');
+          }, 1500);
+          
+          // Show motivational elements after delay
+          setTimeout(() => {
+            document.getElementById('motivational-message').style.display = 'inline-block';
+          }, 2000);
+        }, 500);
+
+      } catch (error) {
+        console.error('Error submitting request:', error);
+        document.getElementById('loading-message').classList.add('hidden');
+        document.getElementById('error-message').classList.remove('hidden');
+      }
+    }
+
+    // Update progress bar
+    function updateProgressBar(step) {
+      const progressBar = document.getElementById('main-progress-bar');
+      const percentages = [0, 25, 50, 75, 100];
+      progressBar.style.width = `${percentages[step]}%`;
+      progressBar.style.right = '0';
+      progressBar.style.left = 'auto';
+    }
+
+    // Validate current step
+    function validateCurrentStep() {
+      const currentSection = document.querySelector('.form-section.active');
+      const requiredFields = currentSection.querySelectorAll('[required]');
+
+      let isValid = true;
+      requiredFields.forEach(field => {
+        if (!field.value) {
+          field.classList.add('border-red-500');
+          isValid = false;
+        } else {
+          field.classList.remove('border-red-500');
+        }
+      });
+
+      return isValid;
+    }
+
+    // Update review section
+    function updateReviewSection() {
+      const form = document.getElementById('maintenanceForm');
+      const formData = new FormData(form);
+
+      // Basic information
+      document.getElementById('review-store').textContent =
+        document.getElementById('store_id').options[document.getElementById('store_id').selectedIndex].text;
+      document.getElementById('review-service').textContent =
+        document.getElementById('maintenance_services').options[document.getElementById('maintenance_services').selectedIndex].text;
+      document.getElementById('review-title').textContent = formData.get('title');
+      document.getElementById('review-requester-name').textContent = formData.get('requester_name');
+      document.getElementById('review-requester-email').textContent = formData.get('requester_email');
+      document.getElementById('review-requester-phone').textContent = formData.get('requester_phone');
+
+      // Request details
+      document.getElementById('review-description').textContent = formData.get('description');
+      document.getElementById('review-priority').textContent = formData.get('priority');
+
+      const scheduledDate = new Date(formData.get('scheduled_date'));
+      document.getElementById('review-date').textContent =
+        scheduledDate.toLocaleString('ar-EG', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+
+      document.getElementById('review-cost').textContent =
+        formData.get('estimated_cost') ? `${formData.get('estimated_cost')}` : 'غير محدد';
+
+      // Attachments
+      const reviewFilesContainer = document.getElementById('review-files');
+      reviewFilesContainer.innerHTML = '';
+
+      if (uploadedFiles.length > 0) {
+        uploadedFiles.forEach(file => {
+          const div = document.createElement('div');
+          div.className = 'flex flex-col items-center';
+
+          if (file.type === 'image') {
+            const img = document.createElement('img');
+            img.src = file.url;
+            img.className = 'file-preview mb-2';
+            div.appendChild(img);
+          } else {
+            const icon = document.createElement('i');
+            icon.className = 'fas fa-file text-4xl text-gray-500 mb-2';
+            div.appendChild(icon);
+          }
+
+          const name = document.createElement('span');
+          name.textContent = file.name.length > 15 ? file.name.substring(0, 15) + '...' : file.name;
+          name.className = 'text-sm text-gray-600 text-center';
+          div.appendChild(name);
+
+          reviewFilesContainer.appendChild(div);
+        });
+      } else {
+        reviewFilesContainer.innerHTML = '<p class="text-gray-500">لا توجد مرفقات</p>';
+      }
+    }
+
+    // Go to next step
+    function goToNextStep() {
+      if (!validateCurrentStep()) return;
+
+      const currentSection = document.querySelector('.form-section.active');
+      const nextSection = currentSection.nextElementSibling;
+
+      if (nextSection && nextSection.classList.contains('form-section')) {
+        currentSection.classList.remove('active');
+        nextSection.classList.add('active');
+        currentStep++;
+        updateProgressBar(currentStep);
+
+        // If next step is review, update it
+        if (nextSection.id === 'step-4') {
+          updateReviewSection();
+        }
+      }
+    }
+
+    // Go to previous step
+    function goToPrevStep() {
+      const currentSection = document.querySelector('.form-section.active');
+      const prevSection = currentSection.previousElementSibling;
+
+      if (prevSection && prevSection.classList.contains('form-section')) {
+        currentSection.classList.remove('active');
+        prevSection.classList.add('active');
+        currentStep--;
+        updateProgressBar(currentStep);
+      }
+    }
+
+    // Reset form
+    function resetForm() {
+      document.getElementById('maintenanceForm').reset();
+      document.getElementById('attachments-preview').innerHTML = '';
+      document.getElementById('review-files').innerHTML = '';
+      uploadedFiles = [];
+      requestId = null;
+
+      // Return to first step
+      document.querySelectorAll('.form-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById('step-1').classList.add('active');
+
+      // Reset step indicator
+      currentStep = 0;
+      updateProgressBar(currentStep);
+
+      // Hide success/error messages
+      document.getElementById('loading-message').classList.add('hidden');
+      document.getElementById('success-message').classList.add('hidden');
+      document.getElementById('error-message').classList.add('hidden');
+    }
+
+    // Attachments preview
+    var attachmentsInput = document.getElementById('attachments');
+    if (attachmentsInput) {
+      attachmentsInput.addEventListener('change', function () {
+        const previewContainer = document.getElementById('attachments-preview');
+        previewContainer.innerHTML = '';
+        Array.from(this.files).forEach(file => {
+          const div = document.createElement('div');
           div.className = 'flex flex-col items-center';
           if (file.type.startsWith('image/')) {
             const reader = new FileReader();
@@ -540,13 +974,14 @@
       });
     }
 
-    // تهيئة الأحداث
+    // Initialize events
     document.addEventListener('DOMContentLoaded', function () {
-      // تحميل البيانات الأولية
+      // Load initial data
       loadStores();
       loadServiceTypes();
+      preloadMotivationContent();
 
-      // أحداث الأزرار
+      // Button events
       var nextButtons = document.querySelectorAll('.next-btn');
       if (nextButtons) {
         nextButtons.forEach(btn => {
@@ -561,10 +996,6 @@
         });
       }
 
-      var newRequestBtn = document.getElementById('new-request-btn');
-      if (newRequestBtn) {
-        newRequestBtn.addEventListener('click', resetForm);
-      }
       var tryAgainBtn = document.getElementById('try-again-btn');
       if (tryAgainBtn) {
         tryAgainBtn.addEventListener('click', submitMaintenanceRequest);
@@ -574,48 +1005,17 @@
         finalSubmitBtn.addEventListener('click', submitMaintenanceRequest);
       }
 
-      // تحديث مؤشر التقدم الأولي
+      // Show daily motivation after 2 seconds (only first visit)
+      if(!sessionStorage.getItem('motivationShown')) {
+        setTimeout(() => {
+          showMotivation('daily');
+          sessionStorage.setItem('motivationShown', 'true');
+        }, 2000);
+      }
+
+      // Update initial progress bar
       updateProgressBar(currentStep);
     });
   </script>
-<!-- نافذة التحفيز بعد الإرسال -->
-<div id="reward-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black bg-opacity-50">
-    <iframe src="web/rewards.html" class="w-full max-w-2xl h-96 rounded-lg shadow-xl bg-white"></iframe>
-</div>
-<!-- نافذة الحكمة اليومية -->
-<div id="motivation-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black bg-opacity-50">
-    <iframe src="web/motivations-days.html" class="w-full max-w-2xl h-96 rounded-lg shadow-xl bg-white"></iframe>
-</div>
-<script>
-// تحسين أداء التحميل للمحتوى التحفيزي
-const rewardIframe = document.createElement('iframe');
-rewardIframe.src = 'web/rewards.html';
-rewardIframe.style.display = 'none';
-document.body.appendChild(rewardIframe);
-
-// عرض نافذة المكافأة بعد الإرسال الناجح
-function showReward() {
-    document.getElementById('reward-modal').classList.remove('hidden');
-    // تخصيص اسم المستخدم إذا أردت
-    try {
-      const userName = document.getElementById('requester_name').value || 'العزيز';
-      const rewardIframe = document.querySelector('#reward-modal iframe');
-      rewardIframe.contentWindow.postMessage({name: userName}, '*');
-    } catch(e){}
-    setTimeout(() => {
-        document.getElementById('reward-modal').classList.add('hidden');
-    }, 8000); // إغلاق بعد 8 ثواني
-}
-// عرض الحكمة اليومية عند الدخول
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        document.getElementById('motivation-modal').classList.remove('hidden');
-        setTimeout(() => {
-            document.getElementById('motivation-modal').classList.add('hidden');
-        }, 5000);
-    }, 2000);
-});
-</script>
 </body>
-
 </html>
