@@ -232,40 +232,33 @@
 </div>
 <!-- [if mso | IE]></td></tr></table><![endif]-->
 <script type="module">
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-
-const supabase = createClient('https://hvnxhovwbvphynuxlqnj.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh2bnhob3Z3YnZwaHludXhscW5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM4Mjg2ODAsImV4cCI6MjA1OTQwNDY4MH0.i59NYbHj1aJixQMmXh61gPV5SpqoXwxjr85-5pUl-9U')
-
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+const supabase = createClient('https://hvnxhovwbvphynuxlqnj.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh2bnhob3Z3YnZwaHludXhscW5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM4Mjg2ODAsImV4cCI6MjA1OTQwNDY4MH0.i59NYbHj1aJixQMmXh61gPV5SpqoXwxjr85-5pUl-9U');
 const params = new URLSearchParams(window.location.search);
 const requestId = params.get('id');
-
 async function loadRequest() {
     if (!requestId) {
-        document.body.innerHTML = "<p>❌ لا يوجد طلب محدد للعرض.</p>";
+        document.getElementById('content-container').innerHTML = `<img src="https://raw.githubusercontent.com/mohamedazab224/alazab/master/images/error-email-post.png" alt="Error" style="max-width:100%; border-radius:12px;">`;
         return;
     }
-
-    const { data, error } = await supabase
-        .from('maintenance_requests')
-        .select('*')
-        .eq('id', requestId)
-        .single();
-
+    const { data, error } = await supabase.from('maintenance_requests').select('*').eq('id', requestId).single();
     if (error || !data) {
-        document.body.innerHTML = "<p>❌ لم يتم العثور على البيانات.</p>";
+        document.getElementById('content-container').innerHTML = `<img src="../images/error-email-post.png" alt="Error" style="max-width:100%; border-radius:12px;">`;
         return;
     }
-
-    // تعبئة البيانات في البريد
-    document.getElementById('customer_name').textContent = data.customer_name || '';
-    document.getElementById('preferred_time').textContent = data.preferred_time || '';
-    document.getElementById('branch').textContent = data.branch || '';
-    document.getElementById('description').textContent = data.description || '';
-    document.getElementById('created_at').textContent = new Date(data.created_at).toLocaleDateString('ar-EG');
-}
-
-loadRequest();
-</script>
-</body>
+    document.getElementById('store_name').textContent = data.store_name || 'غير محدد';
+    document.getElementById('service_name').textContent = data.service_type || 'غير محدد';
+    document.getElementById('title').textContent = data.title || 'غير محدد';
+    document.getElementById('description').textContent = data.description || 'غير محدد';
+    document.getElementById('priority').textContent = data.priority || 'غير محدد';
+    document.getElementById('scheduled_date').textContent = data.scheduled_date ? new Date(data.scheduled_date).toLocaleDateString('ar-EG') : 'غير محدد';
+    document.getElementById('preferred_time').textContent = data.preferred_time || 'غير محدد';
+    document.getElementById('requester_name').textContent = data.requester_name || 'غير محدد';
+    document.getElementById('requester_email').textContent = data.requester_email || 'غير محدد';
+    document.getElementById('requester_phone').textContent = data.requester_phone || 'غير محدد';
+    document.getElementById('attachments').textContent = (data.attachments && data.attachments.length > 0) ? data.attachments.join(', ') : 'لا توجد مرفقات';
+    }
+     loadRequest();
+   </script>
+ </body>
 </html>
-  
