@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alazab Services</title>
+  <!-- ========= روابط CSS والخطوط ========= -->
   <link rel="icon" href="https://raw.githubusercontent.com/alazab-group/assets/refs/heads/main/img/favicon.ico"
     type="image/x-icon">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
@@ -12,18 +13,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@100..900&display=swap" rel="stylesheet">
-  <!-- Preload motivational content -->
+  <!-- ========= تحميل مسبق للمحتوى التحفيزي ========= -->
   <link rel="prefetch" href="./motivations-days.html" as="document">
   <link rel="prefetch" href="./motivations.html" as="document">
   <link rel="prefetch" href="./rewards.html" as="document">
   <link rel="prefetch" href="./rozhaniat.html" as="document">
   <link rel="prefetch" href="./self-motivation.html" as="document">
-<style>
+  <!-- ========= أنماط CSS المخصصة ========= -->
+  <style>
     :root {
       --gold: #f5bf23;
       --black: #111111;
       --white: #ffffff;
-      --gray: #f1f1f1;
+      --gray: #f2f2f2;
       --dark-gray: #b2b2b3;
     }
 
@@ -34,6 +36,7 @@
       font-size: 18px;
     }
 
+    /* ========= أنماط حقول الإدخال ========= */
     input,
     select,
     textarea {
@@ -53,6 +56,7 @@
       outline: 3px solid var(--gold);
     }
 
+    /* ========= خطوات التقدم ========= */
     .step-indicator {
       transition: all 0.3s ease;
       border: 1px solid var(--gray);
@@ -71,6 +75,7 @@
       color: var(--gold);
     }
 
+    /* ========= أقسام النموذج ========= */
     .form-section {
       display: none;
       background-color: #fff;
@@ -93,6 +98,7 @@
       }
     }
 
+    /* ========= 97 معاينة الملفات ========= */
     .file-preview {
       width: 150px;
       height: 150px;
@@ -101,6 +107,7 @@
       border: 2px solid var(--gold);
     }
 
+    /* ========= معلومات التواصل ========= */
     .contact-info {
       background-color: var(--black);
       color: var(--gold);
@@ -110,6 +117,7 @@
       border: 1px solid var(--gold);
     }
 
+    /* ========= لوحة الشكر ========= */
     .thank-you-panel {
       background-color: var(--gold);
       color: var(--black);
@@ -121,6 +129,7 @@
       font-weight: bold;
     }
 
+    /* ========= أزرار التالي والسابق ========= */
     .next-btn,
     .prev-btn {
       background-color: var(--gold);
@@ -139,6 +148,7 @@
       color: var(--black);
     }
 
+    /* ========= شريط التقدم ========= */
     .progress-bar {
       height: 6px;
       background-color: var(--gold) !important;
@@ -149,56 +159,105 @@
       direction: rtl;
     }
 
-    /* Motivation Modal Styles */
+    /* ========= نافذة التحفيز ========= */
     #motivation-overlay {
       transition: opacity 0.3s ease;
       z-index: 9999;
     }
-    
+
     #motivation-overlay iframe {
       transition: transform 0.3s ease;
     }
-    
+
     #motivation-overlay.hidden {
       opacity: 0;
       pointer-events: none;
     }
-    
+
     #motivation-overlay.hidden iframe {
       transform: translateY(20px);
+    }
+
+    /* ========= أنماط مضافة حديثًا ========= */
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .gold-text {
+      background: linear-gradient(to right, #FFD700, #FFA500);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: bold;
+    }
+
+    .reward-badge {
+      animation: float 3s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .pulse-effect {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* ========= تحسينات للعرض على الجوال ========= */
+    @media (max-width: 640px) {
+      .reward-card {
+        padding: 20px;
+        width: 95%;
+      }
+
+      .discount-code {
+        font-size: 18px;
+        padding: 10px;
+      }
+
+      .reward-message {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
 
 <body class="bg-gray-50">
-  <!-- Motivation Modal -->
-  <div id="motivation-overlay" class="fixed inset-0 z-50 hidden bg-black bg-opacity-70">
-    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl p-4">
-      <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
-        <div class="flex justify-between items-center bg-blue-600 p-4">
-          <h3 class="text-white font-bold text-xl">مفاجأة خاصة لك!</h3>
-          <button type="button" onclick="hideMotivation()" class="text-white hover:text-gray-200" aria-label="إغلاق النافذة" title="إغلاق">
-            <i class="fas fa-times text-xl"></i>
-          </button>
-        </div>
-        <iframe id="motivation-iframe" class="w-full h-96 border-0" loading="lazy" title="نافذة التحفيز"></iframe>
-      </div>
-    </div>
-  </div>
-
   <div class="min-h-screen pb-12">
     <div class="max-w-3xl mx-auto">
-      <!-- Header -->
+      <!-- ========= رأس الصفحة ========= -->
       <div class="text-center py-8">
         <div class="flex justify-center items-center mb-3">
           <img src="https://i.postimg.cc/k5GNwgXF/black-az-logo512.png" alt="Alazab Group Logo"
             class="w-20 h-20 rounded-full shadow-lg" />
         </div>
-        <h1 class="text-3xl font-bold text-black">---  تسجيل طلبات الصيانة  ---</h1>
+        <h1 class="text-3xl font-bold text-black">--- تسجيل طلبات الصيانة ---</h1>
         <p class="text-gray-300 mt-2">يرجى تسجيل تفاصيل الصيانات مع إضافة الصورة، هذا يساعد في إنجاز الطلبات.</p>
       </div>
 
-      <!-- Progress Indicator -->
+      <!-- ========= 233 مؤشر التقدم ========= -->
       <div class="mb-8">
         <div class="w-full bg-gray-300 h-1 rounded relative mb-4">
           <div id="main-progress-bar" class="absolute top-0 left-0 h-full bg-blue-500 progress-bar" style="width: 0%">
@@ -213,10 +272,10 @@
         </div>
       </div>
 
-      <!-- Form -->
+      <!-- ========= 248 النموذج الرئيسي ========= -->
       <div class="bg-white rounded-lg shadow-md p-6 mb-8">
         <form id="maintenanceForm">
-          <!-- Section 1: Basic Information -->
+          <!-- ========= 251 القسم 1: المعلومات الأساسية ========= -->
           <div class="form-section active" id="step-1">
             <h2 class="text-xl font-bold mb-6 text-gray-800 border-r-4 border-blue-500 pr-3">المعلومات الأساسية</h2>
 
@@ -280,7 +339,7 @@
             </div>
           </div>
 
-          <!-- Section 2: Request Details -->
+          <!-- ========= 315 القسم 2: تفاصيل الطلب ========= -->
           <div class="form-section" id="step-2">
             <h2 class="text-xl font-bold mb-6 text-gray-800 border-r-4 border-blue-500 pr-3">تفاصيل الطلب</h2>
 
@@ -314,11 +373,15 @@
               </div>
             </div>
 
-            <div class="mb-6">
-              <label class="block text-gray-700 mb-2" for="estimated_cost">افضل وقت لتنفذ الاعمال (اختياري)</label>
-              <input type="number" id="estimated_cost" name="estimated_cost"
-                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="أدخل الوقت المتوقعة">
+            <div class="mb-6 px-4">
+              <label class="block text-gray-700 mb-2" for="preferred_time">أفضل وقت لتنفيذ الأعمال (اختياري)</label>
+              <select id="preferred_time" name="preferred_time"
+                class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <option value="" disabled selected>اختر الوقت المناسب</option>
+                <option value="صباحا">صباحًا</option>
+                <option value="مساء">مساءً</option>
+                <option value="بعد الغلق">بعد الغلق</option>
+              </select>
             </div>
 
             <div class="flex justify-between">
@@ -333,7 +396,7 @@
             </div>
           </div>
 
-          <!-- Section 3: Attachments -->
+          <!-- ========= 372 القسم 3: المرفقات ========= -->
           <div class="form-section" id="step-3">
             <h2 class="text-xl font-bold mb-6 text-gray-800 border-r-4 border-blue-500 pr-3">المرفقات</h2>
 
@@ -358,7 +421,7 @@
             </div>
           </div>
 
-          <!-- Section 4: Review -->
+          <!-- ========= 397 القسم 4: المراجعة ========= -->
           <div class="form-section" id="step-4">
             <h2 class="text-xl font-bold mb-6 text-gray-800 border-r-4 border-blue-500 pr-3">مراجعة البيانات</h2>
 
@@ -406,8 +469,8 @@
                   <p id="review-date" class="font-medium"></p>
                 </div>
                 <div>
-                  <p class="text-sm text-gray-500">التكلفة المتوقعة:</p>
-                  <p id="review-cost" class="font-medium"></p>
+                  <p class="text-sm text-gray-500">أفضل وقت لتنفيذ الأعمال:</p>
+                  <p id="review-time" class="font-medium"></p>
                 </div>
               </div>
 
@@ -429,7 +492,7 @@
             </div>
           </div>
 
-          <!-- Section 5: Confirmation -->
+          <!-- ========= 468 القسم 5: التأكيد ========= -->
           <div class="form-section" id="step-5">
             <div class="text-center py-8">
               <div id="success-message" class="hidden">
@@ -443,8 +506,9 @@
                 <div class="flex flex-col items-center">
                   <span id="motivational-message" class="text-lg text-blue-700 font-semibold animate-bounce mb-2"
                     style="display:none;">Surprise Alazab!</span>
-                  <button type="button" onclick="showMotivation('reward'); return false;" 
-                    class="text-blue-600 underline mt-4 inline-block transition duration-300 hover:text-blue-800 hide">🎉 مفاجأتنا ليك هنا…</button>
+                  <button type="button" onclick="showMotivation('reward'); return false;"
+                    class="text-blue-600 underline mt-4 inline-block transition duration-300 hover:text-blue-800 hide">🎉
+                    مفاجأتنا ليك هنا…</button>
                 </div>
                 <p class="text-gray-600 mb-4">سنقوم بالتواصل معك خلال 24 ساعة لتأكيد الطلب وتحديد الموعد النهائي</p>
                 <div class="contact-info">
@@ -483,16 +547,40 @@
       </div>
     </div>
   </div>
+  <!-- ========= 522 تسجيل في تطبيق العزب - منبثقة ========= -->
+  <div id="register-overlay" class="fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center justify-center hidden">
+    <div class="bg-white rounded-xl p-6 max-w-sm w-full text-center shadow-2xl border border-yellow-400">
+      <h2 class="text-xl font-bold mb-4 text-yellow-500">✨ سجّل في تطبيق العزب ✨</h2>
+      <p class="mb-4 text-gray-700">للحصول على أفضل تجربة ومتابعة طلباتك بسهولة</p>
+      <a href="https://alazab.com/app" target="_blank"
+        class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded-full transition block mb-2">
+        تحميل التطبيق الآن
+      </a>
+      <button onclick="hideRegisterOverlay()" class="text-blue-600 underline mt-2">تخطي الآن</button>
+    </div>
+  </div>
 
-  <footer class="text-center py-4 bg-gray-100">
-    <p class="text-gray-600"> Alazab.team شكراً لاستخدامك نموذج طلب الصيانة الخاص بنا. نتمنى لك يوماً سعيداً!</p>
+  <!-- ========= 535 تذييل الصفحة ========= -->
+  <footer class="text-center py-4 bg-[#b2b2b3] text-sm md:text-base">
+    <p class="text-gray-700">
+      <strong>Al-Azab Construction Company</strong>, a subsidiary of the registered trademark
+      <strong>D-U-N-S No.: 849203826</strong>, operates under the legal trade name
+      <em>Al-Azab Company for Implementation Management Works for Industrial and Service Projects and General
+        Supplies</em>.
+      Prepared and distributed by the Head Office, 8/500 Maadi Street, Cairo, Egypt.
+      Tel: 0227047955 | Tax No: 577219804 | CR: 218670.
+      All rights reserved © 2025 Al-Azab Construction Company or its affiliates.
+      <a href="https://al-azab.co/policy.html" class="text-blue-600 hover:underline ml-1">Privacy Policy</a>.
+    </p>
   </footer>
 
+  <!-- ========= 548 روابط JavaScript ========= -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <!-- ========= الأكواد البرمجية المخصصة ========= -->
   <script>
-    // Initialize Supabase
+    // ========= 554 تهيئة Supabase =========
     const SUPABASE_URL = 'https://hvnxhovwbvphynuxlqnj.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh2bnhob3Z3YnZwaHludXhscW5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM4Mjg2ODAsImV4cCI6MjA1OTQwNDY4MH0.i59NYbHj1aJixQMmXh61gPV5SpqoXwxjr85-5pUl-9U';
 
@@ -501,19 +589,19 @@
     // Initialize EmailJS
     emailjs.init('18ygGgryRoGve-Tpw');
 
-    // System variables
+    // ========= 563 متغيرات النظام =========
     let currentStep = 0;
     let requestId = null;
     let uploadedFiles = [];
     let motivationShown = false;
 
-    // Motivation System Functions
+    // ========= 569 نظام التحفيز =========
     function preloadMotivationContent() {
       const iframe = document.createElement('iframe');
       iframe.src = './rewards.html';
       iframe.style.display = 'none';
       document.body.appendChild(iframe);
-      
+
       setTimeout(() => {
         const dailyMotivation = document.createElement('iframe');
         dailyMotivation.src = './motivations-days.html';
@@ -521,15 +609,15 @@
         document.body.appendChild(dailyMotivation);
       }, 3000);
     }
-
+    // ========= 583 عرض المحتوى التحفيزي =========
     function showMotivation(type = 'reward') {
       const iframe = document.getElementById('motivation-iframe');
       const overlay = document.getElementById('motivation-overlay');
-      
+
       iframe.src = type === 'reward' ? './rewards.html' : './motivations-days.html';
       overlay.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
-      
+
       setTimeout(() => {
         try {
           const userName = document.getElementById('requester_name').value || 'العزيز';
@@ -538,12 +626,12 @@
             name: userName,
             date: new Date().toLocaleDateString('ar-EG')
           }, '*');
-        } catch(e) {
+        } catch (e) {
           console.log('Could not send user data to iframe');
         }
       }, 500);
-      
-      setTimeout(hideMotivation, type === 'reward' ? 8000 : 5000);
+
+      setTimeout(hideMotivation, type === 'reward' ? 10000 : 7000);
     }
 
     function hideMotivation() {
@@ -552,7 +640,7 @@
       motivationShown = true;
     }
 
-    // Load stores from database
+    // ========= 614 تحميل الفروع من قاعدة البيانات =========
     async function loadStores() {
       const storeSelect = document.getElementById('store_id');
       try {
@@ -576,7 +664,7 @@
       }
     }
 
-    // Load service types from database
+    // ========= 638 تحميل أنواع الخدمات =========
     async function loadServiceTypes() {
       const serviceSelect = document.getElementById('maintenance_services');
       try {
@@ -600,14 +688,14 @@
       }
     }
 
-    // Generate unique file name
+    // ========= 662 إدارة الملفات المرفوعة =========
     function generateUniqueFileName(file) {
       const ext = file.name.split('.').pop();
       const unique = Date.now() + '-' + Math.random().toString(36).substr(2, 9);
       return `${unique}.${ext}`;
     }
 
-    // Upload single file to Supabase Storage
+    // ... كود رفع ملف واحد ...
     async function uploadFile(file) {
       try {
         const uniqueName = generateUniqueFileName(file);
@@ -627,7 +715,7 @@
       }
     }
 
-    // Upload all files
+    // ... كود رفع جميع الملفات ...
     async function uploadAllFiles(files) {
       const urls = [];
       const validTypes = [
@@ -666,7 +754,7 @@
       return urls;
     }
 
-    // Send email via EmailJS
+    // ========= 728 إرسال البريد الإلكتروني =========
     async function sendEmail(templateParams) {
       try {
         await emailjs.send(
@@ -681,12 +769,12 @@
       }
     }
 
-    // Submit maintenance request
+    // ========= 743 إرسال طلب الصيانة =========
     async function submitMaintenanceRequest() {
       const form = document.getElementById('maintenanceForm');
       const formData = new FormData(form);
 
-      // Show loading screen
+      // ... كود إرسال الطلب ...
       document.getElementById('loading-message').classList.remove('hidden');
       document.getElementById('success-message').classList.add('hidden');
       document.getElementById('error-message').classList.add('hidden');
@@ -709,7 +797,7 @@
               formData.get('priority') === 'منخفضة' ? 'low' :
                 formData.get('priority') === 'عاجلة' ? 'urgent' : formData.get('priority'),
           scheduled_date: formData.get('scheduled_date'),
-          estimated_cost: formData.get('estimated_cost') ? parseFloat(formData.get('estimated_cost')) : null,
+          preferred_time: formData.get('preferred_time'),
           requester_name: formData.get('requester_name'),
           requester_email: formData.get('requester_email'),
           requester_phone: formData.get('requester_phone'),
@@ -743,7 +831,7 @@
           description: formData.get('description') || '',
           priority: formData.get('priority') || '',
           scheduled_date: formData.get('scheduled_date') || '',
-          estimated_cost: formData.get('estimated_cost') || '',
+          preferred_time: formData.get('preferred_time') || null,
           requester_name: formData.get('requester_name') || '',
           requester_email: formData.get('requester_email') || '',
           requester_phone: formData.get('requester_phone') || '',
@@ -777,12 +865,12 @@
         setTimeout(() => {
           document.getElementById('loading-message').classList.add('hidden');
           document.getElementById('success-message').classList.remove('hidden');
-          
+
           // Show reward after 1.5 seconds
           setTimeout(() => {
             showMotivation('reward');
           }, 1500);
-          
+
           // Show motivational elements after delay
           setTimeout(() => {
             document.getElementById('motivational-message').style.display = 'inline-block';
@@ -796,7 +884,7 @@
       }
     }
 
-    // Update progress bar
+    // ========= 858 إدارة خطوات النموذج =========
     function updateProgressBar(step) {
       const progressBar = document.getElementById('main-progress-bar');
       const percentages = [0, 25, 50, 75, 100];
@@ -853,8 +941,8 @@
           minute: '2-digit'
         });
 
-      document.getElementById('review-cost').textContent =
-        formData.get('estimated_cost') ? `${formData.get('estimated_cost')}` : 'غير محدد';
+      document.getElementById('review-time').textContent =
+        formData.get('preferred_time') ? formData.get('preferred_time') : 'غير محدد';
 
       // Attachments
       const reviewFilesContainer = document.getElementById('review-files');
@@ -945,7 +1033,7 @@
       document.getElementById('error-message').classList.add('hidden');
     }
 
-    // Attachments preview
+    // ========= 1007 معاينة المرفقات =========
     var attachmentsInput = document.getElementById('attachments');
     if (attachmentsInput) {
       attachmentsInput.addEventListener('change', function () {
@@ -977,14 +1065,14 @@
       });
     }
 
-    // Initialize events
+    // ========= 1039 تهيئة الأحداث =========
     document.addEventListener('DOMContentLoaded', function () {
-      // Load initial data
+      // تحميل البيانات الأولية
       loadStores();
       loadServiceTypes();
       preloadMotivationContent();
 
-      // Button events
+      // أحداث الأزرار
       var nextButtons = document.querySelectorAll('.next-btn');
       if (nextButtons) {
         nextButtons.forEach(btn => {
@@ -1008,17 +1096,34 @@
         finalSubmitBtn.addEventListener('click', submitMaintenanceRequest);
       }
 
-      // Show daily motivation after 2 seconds (only first visit)
-      if(!sessionStorage.getItem('motivationShown')) {
-        setTimeout(() => {
-          showMotivation('daily');
-          sessionStorage.setItem('motivationShown', 'true');
-        }, 10000);
-      }
-
-      // Update initial progress bar
+      // تحديث شريط التقدم الأولي
       updateProgressBar(currentStep);
     });
   </script>
+  <script>
+    // 1075إظهار المنبثقة
+    function showRegisterOverlay() {
+      const overlay = document.getElementById('register-overlay');
+      overlay.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // 1082إخفاء المنبثقة يدويًا
+    function hideRegisterOverlay() {
+      document.getElementById('register-overlay').classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    // تشغيل المنبثقة تلقائيًا بعد 5 ثواني لأول زيارة فقط
+    document.addEventListener('DOMContentLoaded', function () {
+      if (!sessionStorage.getItem('registerShown')) {
+        setTimeout(() => {
+          showRegisterOverlay();
+          sessionStorage.setItem('registerShown', 'true');
+        }, 5000);
+      }
+    });
+  </script>
 </body>
+
 </html>
