@@ -1,637 +1,180 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مرحبا عزيزي!</title>
+    <title>مفاجأة من العزب جروب</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <style>
         body {
             font-family: 'Tajawal', sans-serif;
             margin: 0;
             padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            color: #333;
+            height: 100vh;
             overflow: hidden;
         }
-        
-        .blur-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+        .container {
+            max-width: 100%;
             height: 100%;
-            -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-            background-color: rgba(0, 0, 0, 0.4);
-            z-index: 1000;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: all 0.5s ease;
-        }
-        
-        .reward-box {
-            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
-            border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            width: 380px;
-            padding: 30px;
+            padding: 20px;
+            box-sizing: border-box;
             text-align: center;
-            animation: fadeInUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .reward-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            border: 2px solid #FFA500;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.3);
         }
-        
+        .reward-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, rgba(255,215,0,0) 70%);
+            animation: shine 3s infinite;
+        }
+        h1 {
+            color: #FFA500;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        .reward-message {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .customer-name {
+            color: #FFA500;
+            font-weight: bold;
+        }
+        .reward-icon {
+            font-size: 60px;
+            margin: 20px 0;
+            color: #FFA500;
+            animation: bounce 2s infinite;
+        }
+        .discount-code {
+            background: #333;
+            color: #FFD700;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 20px 0;
+            display: inline-block;
+            border: 2px dashed #FFD700;
+        }
+        .note {
+            font-size: 14px;
+            color: #777;
+            margin-top: 20px;
+        }
+        @keyframes shine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
         .confetti {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .character-container {
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 20px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        h2 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 24px;
-            font-weight: 700;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .message {
-            color: #4a5568;
-            font-size: 17px;
-            margin: 20px 0;
-            line-height: 1.6;
-            position: relative;
-            z-index: 2;
-            min-height: 60px;
-        }
-        
-        .gift-btn {
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-            color: #2c3e50;
-            border: none;
-            padding: 14px 30px;
-            border-radius: 50px;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin: 15px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin: 0 auto;
-            box-shadow: 0 4px 15px rgba(255, 180, 0, 0.3);
-            position: relative;
-            z-index: 2;
-            overflow: hidden;
-        }
-        
-        .gift-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(255, 180, 0, 0.4);
-        }
-        
-        .gift-btn:active {
-            transform: translateY(1px);
-        }
-        
-        .gift-btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .gift-btn:hover::after {
-            opacity: 1;
-        }
-        
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #7f8c8d;
-            transition: all 0.3s;
-            z-index: 3;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-        
-        .close-btn:hover {
-            color: #e74c3c;
-            background-color: rgba(231, 76, 60, 0.1);
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
-        @keyframes fadeInUp {
-            from { 
-                opacity: 0; 
-                transform: translateY(30px) scale(0.95);
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0) scale(1);
-            }
-        }
-        
-        .gift-content {
-            margin-top: 25px;
-            animation: fadeIn 0.6s ease-out;
-            position: relative;
-            z-index: 2;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .gift-option {
-            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(245,245,245,0.9) 100%);
-            border-radius: 15px;
-            padding: 18px;
-            margin: 12px 0;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            text-align: right;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .gift-option:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(250,250,250,1) 100%);
-        }
-        
-        .gift-option .icon {
-            font-size: 24px;
-            flex-shrink: 0;
-        }
-        
-        .gift-option .text {
-            flex-grow: 1;
-        }
-        
-        .gift-option .title {
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 5px;
-        }
-        
-        .gift-option .desc {
-            font-size: 14px;
-            color: #7f8c8d;
-        }
-        
-        .timer {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #7f8c8d;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-        
-        .progress-container {
-            width: 100%;
-            height: 6px;
-            background-color: #ecf0f1;
-            border-radius: 3px;
-            margin-top: 5px;
-            overflow: hidden;
-        }
-        
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #FFD700 0%, #FFA500 100%);
-            width: 100%;
-            border-radius: 3px;
-            transition: width 0.1s linear;
-        }
-        
-        /* تأثيرات خاصة */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .floating {
-            animation: float 4s ease-in-out infinite;
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        /* تأثيرات دخول الهدايا */
-        .gift-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.4s ease;
-        }
-        
-        .gift-item.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* تأثيرات النجمة */
-        .star {
-            position: absolute;
+            width: 10px;
+            height: 10px;
             background-color: #FFD700;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
             opacity: 0;
         }
     </style>
-<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<div id="rewardPopup" class="blur-background hidden">
-    <div class="reward-box">
-        <div class="confetti" id="confetti"></div>
-        
-        <button class="close-btn" onclick="closePopup()">×</button>
-        
-        <div class="character-container floating">
-            <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_vyL7Jr.json" background="transparent" speed="1" class="reward-inline-style width: 150px; height: 150px;" loop autoplay></lottie-player>
-        </div>
-        
-        <h2 class="pulse">🎉 رائع! لقد أكملت طلبك بنجاح</h2>
-        
-        <p class="message" id="motivationalMessage"></p>
-        
-        <button class="gift-btn" onclick="showGift()">
-            اكتشف حظك الآن 🎁
-            <span class="reward-inline-style font-size: 20px;">✨</span>
-        </button>
-        
-        <div id="giftContent" class="gift-content hidden">
-            <div class="gift-item" onclick="downloadWallpaper()">
-                <div class="gift-option">
-                    <div class="icon">🎨</div>
-                    <div class="text">
-                        <div class="title">خلفية شاشة ملهمة</div>
-                        <div class="desc">احفظها لهاتفك لتذكرك بالإنجاز</div>
-                    </div>
-                </div>
+    <div class="container">
+        <div class="reward-card">
+            <div class="reward-icon">🎁</div>
+            <h1>مفاجأة خاصة لك <span id="name-placeholder"></span>!</h1>
+            <div class="reward-message">
+                شكراً لثقتك بفريق <strong>العزاب جروب</strong> لصيانة ممتلكاتك.<br>
+                نقدم لك هدية تقديراً لاختيارك خدماتنا:
             </div>
-            
-            <div class="gift-item" onclick="showMotivationalTip()">
-                <div class="gift-option">
-                    <div class="icon">💡</div>
-                    <div class="text">
-                        <div class="title">نصيحة ذهبية ليومك</div>
-                        <div class="desc">اضغط لمعرفة كيفية تحسين طاقتك</div>
-                    </div>
-                </div>
+            <div>
+                <div>خصم خاص على طلبك القادم</div>
+                <div class="discount-code" id="discount-code">AZAB10</div>
             </div>
-            
-            <a rel="noopener" href="https://open.spotify.com/playlist/37i9dQZF1DX4sWSpwq3LiO" target="_blank" class="reward-inline-style text-decoration: none;">
-                <div class="gift-item">
-                    <div class="gift-option">
-                        <div class="icon">🎶</div>
-                        <div class="text">
-                            <div class="title">موسيقى تركيز هادئة</div>
-                            <div class="desc">قائمة تشغيل لزيادة إنتاجيتك</div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            
-            <div class="gift-item" onclick="showJoke()">
-                <div class="gift-option">
-                    <div class="icon">😂</div>
-                    <div class="text">
-                        <div class="title">نكتة مضحكة</div>
-                        <div class="desc">اضحك قليلاً لتغيير مزاجك</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="gift-item" onclick="showQuote()">
-                <div class="gift-option">
-                    <div class="icon">📜</div>
-                    <div class="text">
-                        <div class="title">اقتباس ملهم</div>
-                        <div class="desc">حكمة ستغير طريقة تفكيرك</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="timer">
-            <span id="timeLeft">30</span> ثانية حتى الإغلاق التلقائي
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
+            <div class="note">
+                يمكنك استخدام هذا الكود في طلبك القادم خلال الـ 30 يومًا القادمة
             </div>
         </div>
     </div>
-</div>
 
-<audio id="dingSound" src="https://./emotional-piano-sad-background-music-for-videos-5688.mp3" preload="auto"></audio>
-<audio id="confettiSound" src="https://./better-day-186374.mp3" preload="auto"></audio>
-<audio id="laughSound" src="https://./byte-story-id2-11824.mp3" preload="auto"></audio>
-
-<script>
-    // العبارات التحفيزية المطورة
-    const motivationalMessages = [
-        "✨ أنت أكثر من مجرد موظف، أنت إنسان رائع يستحق التقدير!",
-        "🌱 كل إنجاز صغير هو خطوة نحو النجاح الكبير. استمر!",
-        "💫 الحياة ليست فقط العمل، خذ نفسًا عميقًا واستمتع بهذه اللحظة.",
-        "🌞 اليوم سيكون يومًا رائعًا لأنك بدأته بإنجاز جديد!",
-        "🦋 الصبر والإتقان يصنعون المعجزات الصغيرة كل يوم. أنت مذهل!",
-        "🌻 استراحة صغيرة الآن ستجعل بقية يومك أكثر إنتاجية وسعادة.",
-        "🌈 أنت تبني مستقبلك بكل مهمة تكملها. فخورون بك!",
-        "🎯 الدقة والالتزام صفتان رائعتان لديك. احتفل بإنجازك اليوم!",
-        "🚀 كل خطوة صغيرة تقودك إلى أهدافك الكبيرة. أنت على الطريق الصحيح!",
-        "🧠 تذكر أن عقلك قادر على أكثر مما تتخيل. استمر في التحدي!"
-    ];
-    
-    // النكات الخفيفة
-    const jokes = [
-        "لماذا لا يلعب الكمبيوتر الرياضة؟ لأنه خائف من الفيروسات!",
-        "ما هو الحيوان الذي يحب الصيانة؟ الفأر.. لأنه دايماً مع الكمبيوتر!",
-        "سمعت أن المبرمج عندما ولد قال: 'Hello World!'",
-        "لماذا يحب المهندسون الشاي؟ لأنه بدون 'تي' لا يعمل!",
-        "ما الفرق بين المهندس والساحر؟ الساحر يقول 'هكذا' والمهندس يقول 'هكذا نظرياً'!"
-    ];
-    
-    // الاقتباسات الملهمة
-    const quotes = [
-        "«النجاح هو مجموع الجهود الصغيرة المتكررة يومياً» - روبرت كولير",
-        "«لا تنتظر الظروف المثالية، ابدأ الآن حيث أنت» - آرثر بين",
-        "«أعظم مجد في الحياة ليس في عدم السقوط، بل في النهوض كلما سقطنا» - نيلسون مانديلا",
-        "«المستقبل ينتمي لأولئك الذين يؤمنون بجمال أحلامهم» - إليانور روزفلت",
-        "«الطريقة الوحيدة لعمل عمل عظيم هي أن تحب ما تقوم به» - ستيف جوبز"
-    ];
-    
-    // نصائح لتحسين اليوم
-    const tips = [
-        "خذ 3 أنفاس عميقة الآن، ستشعر بتحسن فوري في طاقتك.",
-        "اشرب كوب ماء، جفاف الجسم يؤثر على التركيز والمزاج.",
-        "قف وتمدد لمدة دقيقة، الحركة البسيطة تنشط الدورة الدموية.",
-        "اكتب 3 أشياء أنت ممتن لها اليوم، الامتنان يغير التركيز الذهني.",
-        "ابتسم لمدة 10 ثوانٍ، سيرسل عقلك إشارات سعادة فورية.",
-        "أغمض عينيك لمدة 30 ثانية، استراحة بصرية سريعة.",
-        "اتصل بشخص تحبه وقل له كلمة طيبة، السعادة معدية.",
-        "نظم مكتبك لمدة دقيقتين، البيئة المرتبة تزيد الإنتاجية."
-    ];
-    
-    // عرض البوب اب عند تحميل الصفحة
-    window.onload = function() {
-        setTimeout(() => {
-            showPopup();
-            startTimer();
-        }, 800);
-    };
-    
-    function showPopup() {
-        const popup = document.getElementById('rewardPopup');
-        const sound = document.getElementById('dingSound');
-        
-        // اختيار عبارة تحفيزية عشوائية
-        const messageElement = document.getElementById('motivationalMessage');
-        const randomMessage = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
-        messageElement.textContent = randomMessage;
-        
-        // عرض البوب اب وتشغيل الصوت
-        popup.classList.remove('hidden');
-        sound.play();
-        createConfetti();
-    }
-    
-    function closePopup() {
-        document.getElementById('rewardPopup').classList.add('hidden');
-        document.getElementById('giftContent').classList.add('hidden');
-        resetTimer();
-    }
-    
-    function showGift() {
-        const giftContent = document.getElementById('giftContent');
-        const confettiSound = document.getElementById('confettiSound');
-        
-        giftContent.classList.remove('hidden');
-        confettiSound.play();
-        createConfetti();
-        
-        // عرض الهدايا بتتابع
-        const giftItems = document.querySelectorAll('.gift-item');
-        giftItems.forEach((item, index) => {
-            setTimeout(() => {
-                item.classList.add('show');
-            }, index * 150);
-        });
-    }
-    
-    function downloadWallpaper() {
-        // رابط تحميل الخلفية
-        const link = document.createElement('a');
-        link.href = 'https://https://alazab-wellspring-goodness.nuxt.dev/';
-        link.download = 'https://i.postimg.cc/XYNfq41L/slogan.gif';
-        link.click();
-        
-        // تأثير إضافي
-        createStars(5);
-    }
-    
-    function showMotivationalTip() {
-        const randomTip = tips[Math.floor(Math.random() * tips.length)];
-        showCustomAlert('نصيحة لتحسين يومك 🌟', randomTip);
-    }
-    
-    function showJoke() {
-        const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
-        const laughSound = document.getElementById('laughSound');
-        laughSound.play();
-        showCustomAlert('اضحك معنا 😄', randomJoke);
-    }
-    
-    function showQuote() {
-        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-        showCustomAlert('اقتباس ملهم 📖', randomQuote);
-    }
-    
-    function showCustomAlert(title, message) {
-        const alertBox = document.createElement('div');
-        alertBox.style.position = 'fixed';
-        alertBox.style.top = '50%';
-        alertBox.style.left = '50%';
-        alertBox.style.transform = 'translate(-50%, -50%)';
-        alertBox.style.backgroundColor = 'white';
-        alertBox.style.padding = '25px';
-        alertBox.style.borderRadius = '15px';
-        alertBox.style.boxShadow = '0 10px 25px rgba(0,0,0,0.2)';
-        alertBox.style.zIndex = '1001';
-        alertBox.style.maxWidth = '80%';
-        alertBox.style.textAlign = 'center';
-        alertBox.style.animation = 'fadeInUp 0.5s ease-out';
-        
-        alertBox.innerHTML = `
-            <h3 class="reward-inline-style margin-top: 0; color: #2c3e50;">${title}</h3>
-            <p class="reward-inline-style font-size: 16px; color: #4a5568; line-height: 1.6;">${message}</p>
-            <button onclick="this.parentNode.remove()" class="reward-inline-style 
-                background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-                border: none;
-                padding: 10px 20px;
-                border-radius: 50px;
-                font-weight: bold;
-                cursor: pointer;
-                margin-top: 15px;
-            ">حسنًا</button>
-        `;
-        
-        document.body.appendChild(alertBox);
-    }
-    
-    function createConfetti() {
-        const confettiContainer = document.getElementById('confetti');
-        confettiContainer.innerHTML = '';
-        
-        for (let i = 0; i < 50; i++) {
-            const confetti = document.createElement('div');
-            confetti.style.position = 'absolute';
-            confetti.style.width = Math.random() * 10 + 5 + 'px';
-            confetti.style.height = Math.random() * 10 + 5 + 'px';
-            confetti.style.backgroundColor = getRandomColor();
-            confetti.style.borderRadius = '50%';
-            confetti.style.top = '-10px';
-            confetti.style.left = Math.random() * 100 + '%';
-            confetti.style.opacity = Math.random();
-            confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
-            
-            const animationDuration = Math.random() * 3 + 2 + 's';
-            confetti.style.animation = `fall ${animationDuration} linear forwards`;
-            
-            confettiContainer.appendChild(confetti);
-            
-            // إزالة الكونفيتي بعد انتهاء الحركة
-            setTimeout(() => {
-                confetti.remove();
-            }, 5000);
+    <script>
+        // Generate random discount code
+        function generateDiscountCode() {
+            const prefixes = ['AZAB', 'ALAZAB', 'AZ'];
+            const suffix = Math.floor(100 + Math.random() * 900);
+            return prefixes[Math.floor(Math.random() * prefixes.length)] + suffix;
         }
-        
-        // إضافة أنيميشن للكونفيتي
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes fall {
-                to {
-                    top: 100%;
-                    transform: rotate(360deg);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-    
-    function getRandomColor() {
-        const colors = ['#FFD700', '#FFA500', '#FF6347', '#4CAF50', '#3498db', '#9b59b6', '#e74c3c'];
-        return colors[Math.floor(Math.random() * colors.length)];
-    }
-    
-    function createStars(count) {
-        for (let i = 0; i < count; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.opacity = '0';
-            document.querySelector('.reward-box').appendChild(star);
+
+        // Create confetti effect
+        function createConfetti() {
+            const colors = ['#FFD700', '#FFA500', '#FF6347', '#4682B4', '#32CD32'];
+            const container = document.querySelector('.container');
             
-            // أنيميشن للنجمة
-            setTimeout(() => {
-                star.style.transition = 'all 0.5s ease-out';
-                star.style.opacity = '0.8';
-                star.style.width = '20px';
-                star.style.height = '20px';
-                star.style.boxShadow = '0 0 10px 2px ' + getRandomColor();
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = -10 + 'px';
+                confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                
+                container.appendChild(confetti);
+                
+                const animationDuration = Math.random() * 3 + 2;
+                
+                confetti.animate([
+                    { top: -10 + 'px', opacity: 0 },
+                    { top: Math.random() * 100 + 'vh', opacity: 1 },
+                    { top: Math.random() * 100 + 100 + 'vh', opacity: 0 }
+                ], {
+                    duration: animationDuration * 1000,
+                    delay: Math.random() * 2000,
+                    easing: 'cubic-bezier(0.1, 0.8, 0.3, 1)'
+                });
                 
                 setTimeout(() => {
-                    star.style.opacity = '0';
-                    star.style.width = '5px';
-                    star.style.height = '5px';
-                    
-                    setTimeout(() => {
-                        star.remove();
-                    }, 500);
-                }, 500);
-            }, i * 100);
-        }
-    }
-    
-    // Timer functions
-    let timer;
-    const totalTime = 30; // 30 sn
-    let timeLeft = totalTime;
-    
-    function startTimer() {
-        timer = setInterval(() => {
-            timeLeft--;
-            updateTimerDisplay();
-            
-            if (timeLeft <= 0) {
-                closePopup();
+                    confetti.remove();
+                }, animationDuration * 1000);
             }
-        }, 1000);
-    }
-    
-    function resetTimer() {
-        clearInterval(timer);
-        timeLeft = totalTime;
-        updateTimerDisplay();
-    }
-    
-    function updateTimerDisplay() {
-        document.getElementById('timeLeft').textContent = timeLeft;
-        const progressPercent = (timeLeft / totalTime) * 100;
-        document.getElementById('progressBar').style.width = progressPercent + '%';
-    }
-</script>
+        }
 
+        // Listen for message from parent
+        window.addEventListener('message', function(event) {
+            if (event.data.type === 'userData') {
+                document.getElementById('name-placeholder').textContent = event.data.name;
+                document.getElementById('discount-code').textContent = generateDiscountCode();
+                createConfetti();
+            }
+        });
+
+        // Initial animation
+        setTimeout(() => {
+            createConfetti();
+        }, 500);
+    </script>
 </body>
 </html>
