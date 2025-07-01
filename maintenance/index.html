@@ -249,8 +249,8 @@
       <!-- ========= رأس الصفحة ========= -->
       <div class="text-center py-8">
         <div class="flex justify-center items-center mb-3">
-          <img src="https://i.postimg.cc/k5GNwgXF/black-az-logo512.png" alt="Alazab Group Logo"
-            class="w-20 h-20 rounded-full shadow-lg" />
+          <img src="/images/alazab-icon.gif" alt="Alazab Group Logo"
+            class="w-28 h-28 rounded-full shadow-lg" />
         </div>
         <h1 class="text-3xl font-bold text-black">--- تسجيل طلبات الصيانة ---</h1>
         <p class="text-gray-300 mt-2">يرجى تسجيل تفاصيل الصيانات مع إضافة الصورة، هذا يساعد في إنجاز الطلبات.</p>
@@ -491,10 +491,11 @@
             </div>
           </div>
 
-          <!-- ========= 468 القسم 5: التأكيد ========= -->
+          <!-- ========= القسم 5: التأكيد ========= -->
           <div class="form-section" id="step-5">
             <div class="text-center py-8">
               <div id="success-message" class="hidden">
+                <p id="order-id" class="text-green-700 font-bold text-lg mt-4"></p>
                 <div class="flex justify-center items-center mb-4">
                   <div class="bg-green-500 text-white p-4 rounded-full">
                     <i class="fas fa-check text-3xl"></i>
@@ -580,7 +581,7 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <!-- ========= الأكواد البرمجية المخصصة ========= -->
   <script>
-    // ========= 554 تهيئة Supabase =========
+    // ========= تهيئة Supabase =========
     const SUPABASE_URL = 'https://hvnxhovwbvphynuxlqnj.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh2bnhob3Z3YnZwaHludXhscW5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM4Mjg2ODAsImV4cCI6MjA1OTQwNDY4MH0.i59NYbHj1aJixQMmXh61gPV5SpqoXwxjr85-5pUl-9U';
 
@@ -589,7 +590,7 @@
     // Initialize EmailJS
     emailjs.init('18ygGgryRoGve-Tpw');
 
-    // ========= 563 متغيرات النظام =========
+    // =========  متغيرات النظام =========
     let currentStep = 0;
     let requestId = null;
     let uploadedFiles = [];
@@ -640,7 +641,7 @@
       motivationShown = true;
     }
 
-    // ========= 614 تحميل الفروع من قاعدة البيانات =========
+    // ========= تحميل الفروع من قاعدة البيانات =========
     async function loadStores() {
       const storeSelect = document.getElementById('store_id');
       try {
@@ -688,7 +689,7 @@
       }
     }
 
-    // ========= 662 إدارة الملفات المرفوعة =========
+    // ========= إدارة الملفات المرفوعة =========
     function generateUniqueFileName(file) {
       const ext = file.name.split('.').pop();
       const unique = Date.now() + '-' + Math.random().toString(36).substr(2, 9);
@@ -754,22 +755,42 @@
       return urls;
     }
 
-    // ========= 728 إرسال البريد الإلكتروني =========
+    // ========= إرسال البريد الإلكتروني =========
     async function sendEmail(templateParams) {
       try {
-        await emailjs.send(
+        // تغيير الزر لحالة الانتظار
+        const submitButton = document.querySelector('.next-btn');
+        submitButton.disabled = true;
+        submitButton.innerHTML = '🚀 جاري إرسال الطلب...';
+
+        const response = await emailjs.send(
           'service_Alazab.co',
           'template_hbb46pi',
           templateParams
         );
-        return true;
+
+        console.log('تم إرسال البريد بنجاح:', response);
+
+        // إظهار رسالة النجاح
+        document.getElementById('loading-message').classList.add('hidden');
+        document.getElementById('success-message').classList.remove('hidden');
+
       } catch (error) {
-        console.error('Failed to send email:', error);
-        return false;
+        console.error('فشل إرسال البريد:', error);
+
+        // إظهار رسالة الخطأ
+        document.getElementById('loading-message').classList.add('hidden');
+        document.getElementById('error-message').classList.remove('hidden');
+      } finally {
+        // إعادة الزر لحالته الأصلية بعد الإرسال
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'إرسال الطلب';
       }
     }
 
-    // ========= 743 إرسال طلب الصيانة =========
+
+
+    // =========  إرسال طلب الصيانة =========
     async function submitMaintenanceRequest() {
       const form = document.getElementById('maintenanceForm');
       const formData = new FormData(form);
@@ -819,6 +840,7 @@
 
         // Save request ID
         requestId = data[0].id;
+        document.getElementById('order-id').textContent = 'رقم طلبك: ' + requestId;
 
         // Prepare email data
         const storeName = document.getElementById('store_id').options[document.getElementById('store_id').selectedIndex].text;
@@ -1124,5 +1146,10 @@
       }
     });
   </script>
+  <!-- ========= تشغيل خاصية التحفيز المنبثق  ========= -->
+    <div id="motivation-overlay" class="hidden fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center     justify-center">
+    <iframe id="motivation-iframe" class="w-full max-w-md h-[80%] rounded-lg shadow-lg border-4 border-yellow-400 bg-white" allow="autoplay"></iframe>
+    </div>
+  <!-- ========= نهاية الصفحة ========= -->
  </body>
 </html>
