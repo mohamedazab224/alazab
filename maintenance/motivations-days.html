@@ -254,16 +254,49 @@
             {
                 quote: "المعرفة قوة، ولكن الممارسة هي التي تحقق النتائج.",
                 author: "توني روبنز"
+            },
+            {
+                quote: "لا تقلق من الفشل، قلق من الفرص التي ستضيع إن لم تجرب",
+                author: "جاك ما"
+            },
+            {
+                quote: "أعظم مجد في الحياة ليس في عدم السقوط، بل في النهوض كلما سقطنا",
+                author: "نيلسون مانديلا"
+            },
+            {
+                quote: "النجاح هو مجموع الجهود الصغيرة المتكررة يومياً",
+                author: "روبرت كولير"
+            },
+            {
+                quote: "كن أنت التغيير الذي تريد أن تراه في العالم",
+                author: "غاندي"
+            },
+            {
+                quote: "المستقبل ينتمي لأولئك الذين يؤمنون بجمال أحلامهم",
+                author: "إليانور روزفلت"
+            },
+            {
+                quote: "كل شيء صعب قبل أن يصبح سهلاً",
+                author: "يوهان فولفغانغ فون غوته"
+            },
+            {
+                quote: "الإبداع هو الذكاء الذي يستمتع",
+                author: "ألبرت أينشتاين"
+            },
+            {
+                quote: "التميز ليس مهارة، إنه موقف",
+                author: "رالف مارستون"
             }
         ];
         
         // أصوات تنبيه
         const sounds = [
-            new Audio('https://assets.mixkit.co/sfx/preview/mixkit-positive-interface-beep-221.mp3'),
-            new Audio('https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3'),
-            new Audio('https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3')
+          new Audio('/maintenance/sounds/better-day-186374.mp3'),
+          new Audio('/maintenance/sounds/byte-story-id2-11824.mp3'),
+          new Audio('/maintenance/sounds/emotional-piano-sad.mp3'),
+          new Audio('/maintenance/sounds/Producer.mp3')
         ];
-        
+
         // عرض اقتباس عشوائي
         function showRandomQuote() {
             const randomIndex = Math.floor(Math.random() * motivations.length);
@@ -328,8 +361,34 @@
         // حدث الضغط على الزر
         btn.addEventListener('click', showRandomQuote);
         
-        // عرض اقتباس عشوائي عند تحميل الصفحة
-        window.onload = showRandomQuote;
+        //  المحفز اليومي
+                const dailyTips = [
+            "الفحص الدوري للمنشآت يقلل من تكاليف الصيانة الكبرى بنسبة 40%",
+            "استخدام المواد الأصلية في الصيانة يضمن عمرًا أطول للإصلاحات",
+            "التخطيط المسبق للصيانة يوفر وقتك ومالك",
+            "الصيانة الوقائية أفضل من الانتظار حتى حدوث الأعطال",
+            "توثيق أعمال الصيانة يساعد في متابعة حالة المنشأة بشكل أفضل",
+            "اختيار المقاول المناسب هو نصف نجاح عملية الصيانة",
+            "الاهتمام بالصيانة الدورية يحافظ على قيمة العقار"
+        ];
+
+        // Listen for message from parent
+        window.addEventListener('message', function(event) {
+            if (event.data.type === 'userData') {
+                document.getElementById('customer-name').textContent = event.data.name;
+                document.getElementById('today-date').textContent = event.data.date;
+                
+                // Select random tip
+                const randomTip = dailyTips[Math.floor(Math.random() * dailyTips.length)];
+                document.getElementById('daily-tip').textContent = randomTip;
+            }
+        });
+
+        // Show random tip initially
+        document.getElementById('daily-tip').textContent = 
+            dailyTips[Math.floor(Math.random() * dailyTips.length)];
+        document.getElementById('today-date').textContent = 
+            new Date().toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     </script>
 </body>
 </html>
