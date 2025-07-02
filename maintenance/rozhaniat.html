@@ -73,189 +73,104 @@
             font-size: 26px;
             line-height: 1.8;
             position: relative;
-            padding: 0 20px;
-            color: #1a5276;
-        }
-        
-        .dhikr-text::before, .dhikr-text::after {
-            content: '"';
-            font-size: 50px;
-            color: #28b463;
-            position: absolute;
-            opacity: 0.3;
-        }
-        
-        .dhikr-text::before {
-            top: -25px;
-            left: -5px;
-        }
-        
-        .dhikr-text::after {
-            bottom: -40px;
-            right: -5px;
+            margin-bottom: 15px;
         }
         
         .reference {
-            margin-top: 15px;
             font-size: 18px;
-            color: #1d8348;
+            color: #2874a6;
             font-style: italic;
+            margin-top: 15px;
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .btn {
             background: linear-gradient(135deg, #1d8348, #28b463);
             color: white;
             border: none;
-            padding: 15px 40px;
+            padding: 15px 30px;
+            font-size: 18px;
             border-radius: 50px;
-            font-size: 20px;
-            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(40, 180, 99, 0.3);
-            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             font-family: 'Amiri', serif;
+            margin-top: 20px;
         }
         
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(40, 180, 99, 0.4);
-            background: linear-gradient(135deg, #28b463, #1d8348);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
         
         .btn:active {
             transform: translateY(1px);
         }
         
-        .footer {
-            margin-top: 30px;
-            font-size: 16px;
-            color: #1d8348;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 1s ease-out;
-        }
-        
-        .islamic-pattern {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            opacity: 0.05;
-            z-index: 0;
-        }
-        
-        .pattern-1 {
-            top: -50px;
-            right: -50px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%231d8348" d="M50 0 L100 50 L50 100 L0 50 Z"/></svg>');
-        }
-        
-        .pattern-2 {
-            bottom: -50px;
-            left: -50px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle fill="%231d8348" cx="50" cy="50" r="50"/></svg>');
-        }
-        
         .counter {
-            margin-top: 20px;
-            font-size: 16px;
-            color: #1d8348;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .counter-number {
+            position: absolute;
+            top: 20px;
+            left: 20px;
             background-color: #1d8348;
             color: white;
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .leaf {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.6;
+            z-index: -1;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="islamic-pattern pattern-1"></div>
-        <div class="islamic-pattern pattern-2"></div>
+        <div class="counter" id="counter">0</div>
         
         <div class="header">
             <h1>حديقة الأذكار</h1>
             <div class="divider"></div>
-            <p>اضغط على الزر لتقطف وردة من أذكار الصالحين</p>
         </div>
         
         <div class="dhikr-box">
-            <p id="dhikr" class="dhikr-text fade-in">سبحان الله وبحمده سبحان الله العظيم</p>
-            <p id="reference" class="reference">- حديث شريف</p>
+            <div class="dhikr-text fade-in" id="dhikr"></div>
+            <div class="reference fade-in" id="reference"></div>
         </div>
         
-        <div class="counter">
-            <span>عدد الأذكار اليوم:</span>
-            <span id="counter" class="counter-number">0</span>
-        </div>
-        
-        <button id="btn" class="btn">ذكر جديد 🌸</button>
-        
-        <div class="footer">
-            تطمئن به القلوب وتنشرح به الصدور
-        </div>
+        <button class="btn" id="btn">ذكر جديد</button>
     </div>
 
     <script>
+        // عناصر DOM
         const dhikrElement = document.getElementById('dhikr');
         const referenceElement = document.getElementById('reference');
         const btn = document.getElementById('btn');
         const counterElement = document.getElementById('counter');
         
-        // مكتبة الأذكار والمواعظ الروحانية
+        // قائمة الأذكار
         const dhikrList = [
             {
-                text: "اللهم إني أسألك علماً نافعاً، ورزقاً طيباً، وعملاً متقبلاً",
+                text: "سبحان الله وبحمده، سبحان الله العظيم",
                 reference: "حديث شريف"
-            },
-            {
-                text: "من قال: سبحان الله وبحمده، غرست له نخلة في الجنة",
-                reference: "حديث صحيح"
-            },
-            {
-                text: "اللهم إني أعوذ بك من علم لا ينفع، ومن قلب لا يخشع، ومن نفس لا تشبع، ومن دعوة لا يستجاب لها",
-                reference: "حديث شريف"
-            },
-            {
-                text: "استغفروا ربكم إنه كان غفاراً، يرسل السماء عليكم مدراراً، ويمددكم بأموال وبنين ويجعل لكم جنات ويجعل لكم أنهاراً",
-                reference: "سورة نوح"
-            },
-            {
-                text: "إن الله لا ينظر إلى صوركم وأموالكم، ولكن ينظر إلى قلوبكم وأعمالكم",
-                reference: "حديث شريف"
-            },
-            {
-                text: "اللهم اغفر لي ذنبي، ووسع لي في داري، وبارك لي في رزقي",
-                reference: "حديث صحيح"
-            },
-            {
-                text: "من لزم الاستغفار جعل الله له من كل ضيق مخرجاً، ومن كل هم فرجاً، ورزقه من حيث لا يحتسب",
-                reference: "حديث شريف"
-            },
-            {
-                text: "اللهم إني أسألك الثبات في الأمر، والعزيمة على الرشد، وأسألك موجبات رحمتك، وعزائم مغفرتك",
-                reference: "دعاء نبوي"
-            },
-            {
-                text: "يا مقلب القلوب ثبت قلبي على دينك، يا مصرف القلوب صرف قلبي إلى طاعتك",
-                reference: "دعاء مأثور"
             },
             {
                 text: "اللهم إني أعوذ بك من زوال نعمتك، وتحول عافيتك، وفجاءة نقمتك، وجميع سخطك",
@@ -325,8 +240,9 @@
         
         // أصوات روحانية
         const sounds = [
-            new Audio('https://assets.mixkit.co/sfx/preview/mixkit-positive-interface-beep-221.mp3'),
-            new Audio('https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3')
+            new Audio('https://al-azab.co/maintenance/sounds/Evening-Improvisation-with-Ethera(chosic.com).mp3'),
+            new Audio('https://al-azab.co/maintenance/sounds/hope.mp3'),
+            new Audio('https://al-azab.co/maintenance/sounds/emotional-piano-sad.mp3')
         ];
         
         let counter = 0;
