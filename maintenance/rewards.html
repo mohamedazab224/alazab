@@ -130,9 +130,14 @@
             </button>
         </div>
         
-        <div id="surpriseResult" class="mt-8 p-6 bg-gray-50 rounded-xl hidden fade-in"></div>
+        <div id="surpriseResult" class="mt-8 p-6 bg-gray-50 rounded-xl hidden fade-in relative">
+    <button id="closeSurpriseBtn" onclick="closeSurprise()" class="absolute top-2 left-2 text-gray-500 hover:text-red-600 text-xl font-bold focus:outline-none">
+        &times;
+    </button>
+</div>
+
         
-        <a href="https://al-azab.co/maintenance" class="mt-8 inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
+        <a href="https://al-azab.co/maintenance" target="_blank" rel="noopener" class="mt-8 inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
