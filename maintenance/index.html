@@ -550,12 +550,12 @@
       </div>
     </div>
   </div>
-  <!-- ========= 522 تسجيل في تطبيق العزب - منبثقة ========= -->
+  <!-- =========  تسجيل في تطبيق العزب - منبثقة ========= -->
   <div id="register-overlay" class="fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center justify-center hidden">
     <div class="bg-white rounded-xl p-6 max-w-sm w-full text-center shadow-2xl border border-yellow-400">
       <h2 class="text-xl font-bold mb-4 text-yellow-500">✨ سجّل في تطبيق العزب ✨</h2>
       <p class="mb-4 text-gray-700">للحصول على أفضل تجربة ومتابعة طلباتك بسهولة</p>
-      <a href="https://alazab.com/app" target="_blank"
+      <a href="https://alazab-co.daftra.com/contents/register" target="_blank"
         class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded-full transition block mb-2">
        سجل في التطبيق الآن
       </a>
@@ -563,7 +563,7 @@
     </div>
   </div>
 
-  <!-- ========= 535 تذييل الصفحة ========= -->
+  <!-- =========  تذييل الصفحة ========= -->
 <div class="max-w-3xl mx-auto mt-4">
   <footer class="text-center py-4 bg-gray-100 rounded-lg shadow border border-gray-300">
     <p class="text-gray-700 text-sm md:text-base">
@@ -578,7 +578,7 @@
   </footer>
 </div>
 
-  <!-- ========= 548 روابط JavaScript ========= -->
+  <!-- =========  روابط JavaScript ========= -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.3.2/uuid.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -599,7 +599,7 @@
     let uploadedFiles = [];
     let motivationShown = false;
 
-    // ========= 569 نظام التحفيز =========
+    // ========= نظام التحفيز =========
     function preloadMotivationContent() {
       const iframe = document.createElement('iframe');
       iframe.src = './rewards.html';
@@ -613,7 +613,7 @@
         document.body.appendChild(dailyMotivation);
       }, 3000);
     }
-    // ========= 583 عرض المحتوى التحفيزي =========
+    // ========= عرض المحتوى التحفيزي =========
     function showMotivation(type = 'reward') {
       const iframe = document.getElementById('motivation-iframe');
       const overlay = document.getElementById('motivation-overlay');
@@ -668,7 +668,7 @@
       }
     }
 
-    // ========= 638 تحميل أنواع الخدمات =========
+    // =========  تحميل أنواع الخدمات =========
     async function loadServiceTypes() {
       const serviceSelect = document.getElementById('maintenance_services');
       try {
@@ -909,7 +909,7 @@
       }
     }
 
-    // ========= 858 إدارة خطوات النموذج =========
+    // =========  إدارة خطوات النموذج =========-->
     function updateProgressBar(step) {
       const progressBar = document.getElementById('main-progress-bar');
       const percentages = [0, 25, 50, 75, 100];
@@ -1058,7 +1058,7 @@
       document.getElementById('error-message').classList.add('hidden');
     }
 
-    // ========= 1007 معاينة المرفقات =========
+    // ========= معاينة المرفقات =========
     var attachmentsInput = document.getElementById('attachments');
     if (attachmentsInput) {
       attachmentsInput.addEventListener('change', function () {
@@ -1090,7 +1090,7 @@
       });
     }
 
-    // ========= 1039 تهيئة الأحداث =========
+    // ========= تهيئة الأحداث =========
     document.addEventListener('DOMContentLoaded', function () {
       // تحميل البيانات الأولية
       loadStores();
@@ -1121,25 +1121,25 @@
         finalSubmitBtn.addEventListener('click', submitMaintenanceRequest);
       }
 
-      // تحديث شريط التقدم الأولي
+      //--------- تحديث شريط التقدم الأولي --------->
       updateProgressBar(currentStep);
     });
   </script>
   <script>
-    // 1075إظهار المنبثقة
+    //---------- إظهار المنبثقة --------->
     function showRegisterOverlay() {
       const overlay = document.getElementById('register-overlay');
       overlay.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
     }
 
-    // 1082إخفاء المنبثقة يدويًا
+    //------ إخفاء المنبثقة يدويًا --------->
     function hideRegisterOverlay() {
       document.getElementById('register-overlay').classList.add('hidden');
       document.body.style.overflow = 'auto';
     }
 
-    // تشغيل المنبثقة تلقائيًا بعد 5 ثواني لأول زيارة فقط
+    //---------- تشغيل المنبثقة تلقائيًا بعد 5 ثواني لأول زيارة فقط --------->
     document.addEventListener('DOMContentLoaded', function () {
       if (!sessionStorage.getItem('registerShown')) {
         setTimeout(() => {
@@ -1152,16 +1152,15 @@
   <!-- ========= تشغيل خاصية التحفيز المنبثق  ========= -->
  <div id="motivation-overlay" class="hidden fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center justify-center">
    <div class="relative w-full flex flex-col items-center">
-    <!-- زر الغلق أعلى اليسار -->
+    <!----- زر الغلق أعلى اليسار ----->
     <button
       onclick="hideMotivation()"
       class="absolute left-3 top-3 bg-red-600 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg z-10 hover:bg-red-800 transition"
       aria-label="إغلاق"
       style="font-size: 2rem;"
     >&times;</button>
-    <iframe id="motivation-iframe" class="w-full max-w-md h-[80%] rounded-lg shadow-lg border-4 border-yellow-400 bg-white" allow="autoplay"></iframe>
+    <iframe id="motivation-iframe" class="w-full max-w-md rounded-lg shadow-lg border-4 border-yellow-400 bg-white" style="height:80vh;" allow="autoplay"></iframe>
+   </div>
   </div>
-</div>
-  <!-- ========= نهاية الصفحة ========= -->
  </body>
 </html>
