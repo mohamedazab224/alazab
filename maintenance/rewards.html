@@ -137,12 +137,11 @@
 </div>
 
         
-<a href="#" onclick="closeModalAndRedirect('https://al-azab.co/maintenance')" ...>
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-    </svg>
-    العودة إلى نموذج الطلب
-</a>
+<button onclick="hideMotivation()" 
+  class="mt-4 underline text-blue-700 hover:text-blue-900 font-bold">
+  العودة إلى نموذج الطلب
+</button>
+        
     <script>
         // تحسينات الأمان: إخفاء مفتاح API في بيئة الإنتاج الحقيقية
         const API_CONFIG = {
@@ -290,11 +289,11 @@ async function handleSurprise(type) {
                 });
             }
         }
-        function closeModalAndRedirect(url) {
-    // مثال: إذا كنت تستخدم modal بإضافة أو إزالة كلاس
-    document.getElementById('modal').classList.add('hidden');
-    // إعادة توجيه في نفس التبويب
-    window.location.href = url;
+function hideMotivation() {
+  // إذا كان هناك منبثقة رئيسية لها id="motivation-overlay"
+  var overlay = document.getElementById('motivation-overlay');
+  if (overlay) { overlay.classList.add('hidden'); }
+  document.body.style.overflow = 'auto';
 }
     </script>
 </body>
