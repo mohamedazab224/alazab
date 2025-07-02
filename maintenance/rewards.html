@@ -243,6 +243,11 @@
         async function handleSurprise(type) {
             const resultContainer = document.getElementById('surpriseResult');
             const buttons = document.querySelectorAll('#buttonsContainer button');
+            // إضافة تحقق لمنع التكرار
+             if (resultContainer.classList.contains('processing')) {
+                  return;
+            }
+            resultContainer.classList.add('processing');
 
             // عند أول ضغط، أخفِ باقي الأزرار وأبق فقط الزر الذي تم اختياره
             buttons.forEach(btn => {
