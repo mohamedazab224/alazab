@@ -149,23 +149,27 @@
             apiKey: "3A15FLTht1EF6IGbCkqLO9oWYyNPBz2gLMzvLfswfkzGg9mN6Sx9JQQJ99BDACfhMk5XJ3w3AAAAACOGVynh"
         };
 
-        async function handleSurprise(type) {
-            const resultContainer = document.getElementById('surpriseResult');
-            const buttons = document.querySelectorAll('#buttonsContainer button');
-            
-            // تعطيل الأزرار أثناء التحميل
-            buttons.forEach(btn => {
-                btn.disabled = true;
-                btn.innerHTML = `<span class="loading"></span> جاري التحميل...`;
-            });
-            
-            // إظهار حالة التحميل
-            resultContainer.classList.remove('hidden');
-            resultContainer.innerHTML = `
-                <div class="flex items-center justify-center space-x-2">
-                    <span class="loading"></span>
-                    <span>جاري تحضير مفاجأتك الخاصة...</span>
-                </div>
+async function handleSurprise(type) {
+    const resultContainer = document.getElementById('surpriseResult');
+    const buttons = document.querySelectorAll('#buttonsContainer button');
+
+    // عند أول ضغط، أخفِ باقي الأزرار وأبق فقط الزر الذي تم اختياره
+    buttons.forEach(btn => {
+        if (!btn.id.includes(type)) {
+            btn.style.display = 'none';
+        } else {
+            btn.disabled = true;
+            btn.innerHTML = `<span class="loading"></span> جاري التحميل...`;
+        }
+    });
+
+    // إظهار حالة التحميل
+    resultContainer.classList.remove('hidden');
+    resultContainer.innerHTML = `
+        <div class="flex items-center justify-center space-x-2">
+            <span class="loading"></span>
+            <span>جاري تحضير مفاجأتك الخاصة...</span>
+        </div>
             `;
             
             try {
