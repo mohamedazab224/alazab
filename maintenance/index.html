@@ -605,20 +605,14 @@
       iframe.src = './rewards.html';
       iframe.style.display = 'none';
       document.body.appendChild(iframe);
-
-      setTimeout(() => {
-        const dailyMotivation = document.createElement('iframe');
-        dailyMotivation.src = './motivations-days.html';
-        dailyMotivation.style.display = 'none';
-        document.body.appendChild(dailyMotivation);
-      }, 3000);
     }
+    
     // ========= عرض المحتوى التحفيزي =========
     function showMotivation(type = 'reward') {
       const iframe = document.getElementById('motivation-iframe');
       const overlay = document.getElementById('motivation-overlay');
 
-      iframe.src = type === 'reward' ? './rewards.html' : './motivations-days.html';
+      iframe.src = './rewards.html';
       overlay.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
 
