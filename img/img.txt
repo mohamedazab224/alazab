@@ -1,0 +1,1 @@
+~/alazab-bench/apps/frappe_theme/frappe_theme/public/assets/img/
