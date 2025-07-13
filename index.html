@@ -2026,52 +2026,115 @@ div.form-header-group.hasImage {
 <!-- client logo section ends -->
 
 <!-- footer section starts -->
-<footer class="w-full bg-black text-white py-8">
+<footer class="w-full bg-gradient-to-b from-gray-900 to-black text-white pt-12 pb-6 border-t-4 border-yellow-500">
     <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
         <!-- Logo and Description -->
         <div class="space-y-4">
-            <img src="https://i.postimg.cc/tTqTvz4P/logo-alazab-w.png" alt="al-azab.co logo" class="w-32">
-            <p class="text-gray-400 text-sm">
-                شركة العزب لإدارة المشاريع الصناعية والخدمية والسكنية والتوريدات العامة، نلتزم بالجودة العالمية للحفاظ على منشآتك في أفضل حالة.
+            <div class="flex items-center">
+                <img src="https://i.postimg.cc/tTqTvz4P/logo-alazab-w.png" alt="al-azab.co logo" class="w-32">
+                <span class="text-yellow-400 font-bold text-xl mr-2">العزب</span>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed">
+                شركة العزب الرائدة في إدارة المشاريع الصناعية والخدمية بالسعودية، نقدم حلولاً متكاملة بمعايير الجودة العالمية لضمان استمرارية عملك بكفاءة عالية.
             </p>
+            <div class="flex space-x-2 space-x-reverse">
+                <div class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center">
+                    <i class="fas fa-award text-yellow-400 text-xs"></i>
+                </div>
+                <div class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center">
+                    <i class="fas fa-check-circle text-yellow-400 text-xs"></i>
+                </div>
+                <div class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center">
+                    <i class="fas fa-shield-alt text-yellow-400 text-xs"></i>
+                </div>
+            </div>
         </div>
 
         <!-- Quick Links -->
         <div>
-            <h3 class="text-lg font-bold mb-3 text-yellow-400">روابط سريعة</h3>
-            <ul class="space-y-1 text-gray-400 text-sm">
-                <li><a href="/" class="hover:text-yellow-400">الرئيسية</a></li>
-                <li><a href="/services.html" class="hover:text-yellow-400">خدماتنا</a></li>
-                <li><a href="/projects.html" class="hover:text-yellow-400">مشاريعنا</a></li>
-                <li><a href="/contact.html" class="hover:text-yellow-400">اتصل بنا</a></li>
+            <h3 class="text-lg font-bold mb-4 text-yellow-400 border-b border-gray-700 pb-2">روابط سريعة</h3>
+            <ul class="space-y-3 text-gray-300">
+                <li><a href="/" class="hover:text-yellow-400 transition duration-300 flex items-center">
+                    <i class="fas fa-chevron-left text-yellow-400 text-xs ml-2"></i> الرئيسية
+                </a></li>
+                <li><a href="/services.html" class="hover:text-yellow-400 transition duration-300 flex items-center">
+                    <i class="fas fa-chevron-left text-yellow-400 text-xs ml-2"></i> خدماتنا
+                </a></li>
+                <li><a href="/projects.html" class="hover:text-yellow-400 transition duration-300 flex items-center">
+                    <i class="fas fa-chevron-left text-yellow-400 text-xs ml-2"></i> مشاريعنا
+                </a></li>
+                <li><a href="/about.html" class="hover:text-yellow-400 transition duration-300 flex items-center">
+                    <i class="fas fa-chevron-left text-yellow-400 text-xs ml-2"></i> عن الشركة
+                </a></li>
+                <li><a href="/contact.html" class="hover:text-yellow-400 transition duration-300 flex items-center">
+                    <i class="fas fa-chevron-left text-yellow-400 text-xs ml-2"></i> اتصل بنا
+                </a></li>
             </ul>
         </div>
 
         <!-- Contact Info -->
         <div>
-            <h3 class="text-lg font-bold mb-3 text-yellow-400">تواصل معنا</h3>
-            <p class="text-gray-400 text-sm">8/500 شارع المعادي، القاهرة، مصر</p>
-            <p class="text-gray-400 text-sm">📞 +201004006620</p>
-            <p class="text-gray-400 text-sm">✉️ info@al-azab.co</p>
-            <div class="flex space-x-3 mt-2">
-                <a href="https://facebook.com/alazab24" target="_blank" class="hover:text-yellow-400"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://instagram.com/alazab.co" target="_blank" class="hover:text-yellow-400"><i class="fab fa-instagram"></i></a>
+            <h3 class="text-lg font-bold mb-4 text-yellow-400 border-b border-gray-700 pb-2">تواصل معنا</h3>
+            <div class="space-y-3 text-gray-300">
+                <div class="flex items-start">
+                    <i class="fas fa-map-marker-alt text-yellow-400 mt-1 ml-2"></i>
+                    <p>8/500 شارع المعادي، القاهرة، مصر</p>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-phone-alt text-yellow-400 ml-2"></i>
+                    <p>+201004006620</p>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-envelope text-yellow-400 ml-2"></i>
+                    <p>info@al-azab.co</p>
+                </div>
+            </div>
+            
+            <h4 class="text-md font-bold mt-6 mb-3 text-gray-300">وسائل التواصل الاجتماعي</h4>
+            <div class="flex space-x-3 space-x-reverse">
+                <a href="https://facebook.com/alazab24" target="_blank" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-black transition duration-300">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com/alazab_co" target="_blank" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-black transition duration-300">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://instagram.com/alazab.co" target="_blank" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-black transition duration-300">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://linkedin.com/company/alazab" target="_blank" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-black transition duration-300">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
             </div>
         </div>
 
-        <!-- Subscribe -->
+        <!-- Newsletter -->
         <div>
-            <h3 class="text-lg font-bold mb-3 text-yellow-400">اشترك معنا</h3>
-            <p class="text-gray-400 text-sm mb-3">اشترك لتصلك عروضنا الجديدة والعروض الحصرية.</p>
-            <form action="#" class="flex">
-                <input type="email" placeholder="البريد الإلكتروني" class="p-2 rounded-l bg-gray-800 text-white flex-1 focus:outline-none focus:ring focus:ring-yellow-400">
-                <button type="submit" class="bg-yellow-400 text-black px-4 rounded-r hover:bg-yellow-500">إرسال</button>
+            <h3 class="text-lg font-bold mb-4 text-yellow-400 border-b border-gray-700 pb-2">النشرة البريدية</h3>
+            <p class="text-gray-300 text-sm mb-4">
+                اشترك في نشرتنا البريدية لتصلك آخر عروضنا وأخبار المشاريع الجديدة مباشرة إلى بريدك الإلكتروني.
+            </p>
+            <form class="space-y-3">
+                <input type="text" placeholder="اسمك الكريم" class="w-full p-3 bg-gray-800 rounded text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                <input type="email" placeholder="بريدك الإلكتروني" class="w-full p-3 bg-gray-800 rounded text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                <button type="submit" class="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 px-4 rounded transition duration-300 flex items-center justify-center">
+                    <i class="fas fa-paper-plane ml-2"></i> اشترك الآن
+                </button>
             </form>
         </div>
     </div>
 
-    <div class="text-center text-gray-500 text-xs mt-6">
-        &copy; 2025 al-azab.co جميع الحقوق محفوظة
+    <!-- Copyright -->
+    <div class="max-w-7xl mx-auto px-6 mt-8 pt-6 border-t border-gray-800">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-500 text-sm">
+                &copy; 2025 شركة العزب لإدارة المشاريع. جميع الحقوق محفوظة.
+            </p>
+            <div class="flex space-x-4 space-x-reverse mt-4 md:mt-0">
+                <a href="#" class="text-gray-500 hover:text-yellow-400 text-sm">شروط الخدمة</a>
+                <a href="#" class="text-gray-500 hover:text-yellow-400 text-sm">سياسة الخصوصية</a>
+                <a href="#" class="text-gray-500 hover:text-yellow-400 text-sm">خريطة الموقع</a>
+            </div>
+        </div>
     </div>
 </footer>
 <!-- footer section ends -->
