@@ -945,134 +945,257 @@ ul {
   color: #757575;
   font-size: 15px;
 }
+/* Footer Styles - Modern Arabic Theme */
+.footer {
+  position: relative;
+  background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+  overflow: hidden;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://example.com/arabic-pattern.png') repeat;
+  opacity: 0.05;
+  z-index: 1;
+}
+
 .footer-content {
   position: relative;
   z-index: 2;
+  padding: 60px 0 30px;
 }
-.footer-pattern img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 330px;
-  background-size: cover;
-  background-position: 100% 100%;
-}
+
 .footer-logo {
-  margin-bottom: 30px;
+  margin-bottom: 25px;
+  text-align: right;
 }
+
 .footer-logo img {
-    max-width: 200px;
+  max-width: 180px;
+  height: auto;
 }
+
 .footer-text p {
-  margin-bottom: 14px;
-  font-size: 14px;
-      color: #7e7e7e;
-  line-height: 28px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: #a0a0a0;
+  line-height: 1.8;
+  text-align: right;
 }
+
+.footer-social-icon {
+  margin-top: 30px;
+}
+
 .footer-social-icon span {
   color: #fff;
   display: block;
-  font-size: 20px;
-  font-weight: 700;
-  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
   margin-bottom: 20px;
+  text-align: right;
 }
+
 .footer-social-icon a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: #333;
   color: #fff;
-  font-size: 16px;
-  margin-right: 15px;
-}
-.footer-social-icon i {
-  height: 40px;
-  width: 40px;
-  text-align: center;
-  line-height: 38px;
+  font-size: 18px;
   border-radius: 50%;
+  margin-left: 10px;
+  transition: all 0.3s ease;
 }
-.facebook-bg{
-  background: #3B5998;
+
+.footer-social-icon a:hover {
+  transform: translateY(-3px);
 }
-.twitter-bg{
-  background: #55ACEE;
+
+.footer-social-icon .facebook-bg:hover { background: #3B5998; }
+.footer-social-icon .twitter-bg:hover { background: #1DA1F2; }
+.footer-social-icon .youtube-bg:hover { background: #FF0000; }
+.footer-social-icon .linkedin-bg:hover { background: #0077B5; }
+.footer-social-icon .instagram-bg:hover { 
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
 }
-.google-bg{
-  background: #DD4B39;
-}
+
 .footer-widget-heading h3 {
   color: #fff;
   font-size: 20px;
   font-weight: 600;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   position: relative;
+  text-align: right;
+  padding-bottom: 15px;
 }
+
 .footer-widget-heading h3::before {
   content: "";
   position: absolute;
-  left: 0;
-  bottom: -15px;
+  right: 0;
+  bottom: 0;
   height: 2px;
   width: 50px;
-  background: #ff5e14;
+  background: #FFC107;
 }
+
 .footer-widget ul li {
-  display: inline-block;
-  float: left;
-  width: 50%;
+  display: block;
+  width: 100%;
   margin-bottom: 12px;
+  text-align: right;
 }
-.footer-widget ul li a:hover{
-  color: #ff5e14;
-}
+
 .footer-widget ul li a {
-  color: #878787;
-  text-transform: capitalize;
+  color: #a0a0a0;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
 }
+
+.footer-widget ul li a:hover {
+  color: #FFC107;
+  transform: translateX(-5px);
+}
+
+.footer-widget ul li a i {
+  margin-left: 8px;
+  color: #FFC107;
+  font-size: 12px;
+}
+
 .subscribe-form {
   position: relative;
-  overflow: hidden;
+  margin-top: 20px;
 }
+
 .subscribe-form input {
   width: 100%;
-  padding: 14px 28px;
-  background: #2E2E2E;
-  border: 1px solid #2E2E2E;
+  padding: 14px 20px;
+  background: #2a2a2a;
+  border: 1px solid #444;
   color: #fff;
+  border-radius: 4px;
+  text-align: right;
+  transition: all 0.3s;
 }
+
+.subscribe-form input:focus {
+  border-color: #FFC107;
+  box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.2);
+}
+
 .subscribe-form button {
-    position: absolute;
-    right: 0;
-    background: #ff5e14;
-    padding: 13px 20px;
-    border: 1px solid #ff5e14;
-    top: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: #FFC107;
+  color: #000;
+  border: none;
+  padding: 0 25px;
+  font-weight: 600;
+  border-radius: 4px 0 0 4px;
+  transition: all 0.3s;
+  cursor: pointer;
 }
-.subscribe-form button i {
-  color: #fff;
-  font-size: 22px;
-  transform: rotate(-6deg);
+
+.subscribe-form button:hover {
+  background: #ffab00;
 }
-.copyright-area{
-  background: #202020;
-  padding: 25px 0;
+
+.copyright-area {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 20px 0;
+  margin-top: 50px;
+  border-top: 1px solid #333;
 }
+
+.copyright-text {
+  text-align: center;
+}
+
 .copyright-text p {
   margin: 0;
   font-size: 14px;
-  color: #878787;
+  color: #a0a0a0;
 }
-.copyright-text p a{
-  color: #ff5e14;
+
+.copyright-text p a {
+  color: #FFC107;
+  transition: all 0.3s;
 }
+
+.copyright-text p a:hover {
+  text-decoration: underline;
+}
+
+.footer-menu {
+  text-align: center;
+  margin-top: 15px;
+}
+
 .footer-menu li {
   display: inline-block;
-  margin-left: 20px;
+  margin: 0 10px;
 }
-.footer-menu li:hover a{
-  color: #ff5e14;
-}
+
 .footer-menu li a {
+  color: #a0a0a0;
+  transition: all 0.3s;
   font-size: 14px;
-  color: #878787;
+}
+
+.footer-menu li a:hover {
+  color: #FFC107;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+  .footer-widget {
+    margin-bottom: 30px;
+  }
+  
+  .footer-widget-heading h3 {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer-content {
+    padding: 40px 0 20px;
+  }
+  
+  .footer-logo {
+    text-align: center;
+  }
+  
+  .footer-text p,
+  .footer-widget-heading h3,
+  .footer-widget ul li {
+    text-align: center;
+  }
+  
+  .footer-widget-heading h3::before {
+    right: 50%;
+    transform: translateX(50%);
+  }
+  
+  .footer-social-icon {
+    text-align: center;
+  }
+  
+  .footer-menu li {
+    margin: 0 5px;
+  }
 }
 
 @media (max-width: 1200px) {
