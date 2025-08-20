@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Simple Footer</title>
+
+  <!-- Bootstrap & Icons -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+        crossorigin="anonymous" />
+
+  <!-- مشروعك -->
+  <link rel="stylesheet" href="./style.css" />
+
+  <style>
+    :root{
+      --brand-yellow:#F5BF23;
+      --brand-navy:#0B0B3B;
+      --brand-black:#111111;
+    }
+
+    footer{
+      background: var(--brand-navy);
+      color:#fff;
+      padding: 40px 0 0;
+      font-weight: 400;
+    }
+    footer a{ color:#fff; text-decoration:none; }
+    footer a:hover{ color: var(--brand-yellow); text-decoration:none; }
+
+    .about-footer h3{ color: var(--brand-yellow); font-weight:700; }
+    .about-footer .red-btn{
+      background: var(--brand-yellow);
+      border: none;
+      color: var(--brand-black);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight:600;
+    }
+    .about-footer ul{ padding-left:0; list-style:none; }
+    .about-footer ul li{ margin-bottom:8px; }
+
+    .footer-title h4{
+      color:#fff;
+      font-weight:700;
+      margin-bottom:12px;
+      position:relative;
+    }
+
+    .page-more-info ul{ list-style:none; padding-left:0; }
+    .page-more-info ul li{ margin:6px 0; }
+
+    .footer-social{ list-style:none; padding-left:0; margin:0; }
+    .footer-social li{ display:inline-block; margin-right:10px; }
+    .footer-social a{
+      width:34px; height:34px; display:inline-flex; align-items:center; justify-content:center;
+      border:1px solid rgba(255,255,255,.25); border-radius:50%;
+      transition:.25s;
+    }
+    .footer-social a:hover{
+      border-color: var(--brand-yellow);
+      color: var(--brand-yellow);
+    }
+
+    /* روابط الخدمات التفاعلية */
+    .services{ margin-top:8px; }
+    .service-link{
+      display:block;
+      padding:10px 12px;
+      margin-bottom:8px;
+      border-left:3px solid transparent;
+      color:#fff;
+      background: rgba(255,255,255,.03);
+      border-radius:6px;
+      transition:.3s;
+    }
+    .service-link i{ margin-right:8px; color: var(--brand-yellow); }
+    .service-link small{ color:#C7C7C7; }
+    .service-link:hover{
+      border-left-color: var(--brand-yellow);
+      background: rgba(255,255,255,.06);
+      color:#fff;
+    }
+
+    /* شريط السينما */
+    .footer-logo{ margin-top:18px; }
+    .film-strip{
+      position:relative;
+      overflow:hidden;
+      height:60px;
+      border-top: 1px dashed rgba(255,255,255,.15);
+      border-bottom: 1px dashed rgba(255,255,255,.15);
+      padding:10px 0;
+    }
+    .film-track{
+      display:flex;
+      align-items:center;
+      gap: 28px;
+      width: max-content;
+      animation: film-marquee 22s linear infinite;
+    }
+    @keyframes film-marquee{
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .film-track img{
+      height:40px;
+      width:auto;
+      filter: grayscale(100%);
+      opacity:.9;
+      transition: .25s;
+    }
+    .film-track img:hover{
+      filter: none;
+      opacity:1;
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom{
+      border-top:1px solid rgba(255,255,255,.12);
+      margin-top:28px;
+      padding:14px 0;
+      font-size:.95rem;
+      color:#e9e9e9;
+    }
+    .footer-bottom .credits a{ color: var(--brand-yellow); }
+  </style>
+</head>
+<body>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="row">
+        <!-- About -->
+        <div class="col-md-6 col-lg-3 about-footer">
+          <h3>Alazab Construction</h3>
+          <ul>
+            <li>
+              <a href="tel:(+20) 1004006620">
+                <i class="fas fa-phone fa-flip-horizontal"></i> (+20) 1004006620
+              </a>
+            </li>
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              8 / 500 Maadi New, Cairo, Egypt
+              <br/>38 Elmahta Street, Nabaroh, Daqahlia
+              <br/>LIC Alazab 4234570
+            </li>
+          </ul>
+          <a href="https://alazab.com/book" class="btn red-btn">Book Now</a>
+
+          <div class="footer-title"><h4>Quick links</h4></div>
+          <ul class="list-unstyled two-col">
+        <li><a href="/services">Services</a></li>
+        </div>
+
+        <!-- Page Links -->
+        <div class="col-md-6 col-lg-2 page-more-info">
+          <div class="footer-title"><h4>Page links</h4></div>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Testimonial</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Clients</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- More Info -->
+        <div class="col-md-6 col-lg-3 page-more-info">
+          <div class="footer-title"><h4>More Info</h4></div>
+          <ul>
+            <li><a href="#">About Alazab Company</a></li>
+            <li><a href="#">Construction Services</a></li>
+            <li><a href="#">Brand Assets </a></li>
+            <li><a href="#">Clients & Partners</a></li>
+            <li><a href="#">Downloads & Catalogs</a></li>
+            <li><a href="#">Support & Maintenance</a></li>
+            <li><a href="#">Request a Quote</a></li>
+            <li><a href="#">Careers at Alazab</a></li>
+          </ul>
+        </div>
+
+        <!-- Interactive Services + Film Strip Logos + Quick Links -->
+        <div class="col-md-6 col-lg-4 open-hours">
+          <div class="footer-title">
+            <h4>Interactive Services</h4>
+            <ul class="footer-social">
+              <li><a href="https://www.facebook.com/alazab24" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a href="https://instagram.com/alazab.co" target="_blank"><i class="fab fa-instagram"></i></a></li>
+              <li><a href="https://www.linkedin.com/company/alazab" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+            </ul>
+          </div>
+
+          <ul class="list-unstyled services">
+            <li>
+              <a href="https://ai.azab.com" class="service-link">
+                <i class="fas fa-robot"></i> ChatingHub
+                <small class="d-block text-muted">A smart assistant to answer your inquiries</small>
+              </a>
+            </li>
+            <li>
+              <a href="https://al-azab.co/maintenance" class="service-link">
+                <i class="fas fa-plus-circle"></i> New maintenance request
+                <small class="d-block text-muted">Submit a new maintenance request</small>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="service-link">
+                <i class="fas fa-tasks"></i> Track requests
+                <small class="d-block text-muted">Track the status of maintenance requests</small>
+              </a>
+            </li>
+          </ul>
+
+          <div class="footer-logo">
+            <div class="film-strip">
+              <div class="film-track">
+                <img src="https://al-azab.co/images/client-logo-1.png" alt="Client 1" />
+                <img src="https://al-azab.co/images/client-logo-2.png" alt="Client 2" />
+                <img src="https://al-azab.co/images/client-logo-3.png" alt="Client 3" />
+                <img src="https://al-azab.co/images/client-logo-4.png" alt="Client 4" />
+                <img src="https://al-azab.co/images/client-logo-5.png" alt="Client 5" />
+                <img src="https://al-azab.co/images/client-logo-1.png" alt="Client 1 duplicate" />
+                <img src="https://al-azab.co/images/client-logo-2.png" alt="Client 2 duplicate" />
+                <img src="https://al-azab.co/images/client-logo-3.png" alt="Client 3 duplicate" />
+                <img src="https://al-azab.co/images/client-logo-4.png" alt="Client 4 duplicate" />
+                <img src="https://al-azab.co/images/client-logo-5.png" alt="Client 5 duplicate" />
+              </div>
+            </div>
+          </div>
+
+    <div class="footer-bottom">
+      <div class="row">
+        <div class="col-sm-4">
+          <a href="https://al-azab.co/policy.html">Privacy policy</a>
+        </div>
+        <div class="col-sm-8">
+          <div class="container copyright text-center mt-1">
+            <p>© <span>Copyright</span>
+              <strong class="px-1 sitename">Alazab Construction</strong>
+              <span>All Rights Reserved</span>
+            </p>
+            <div class="credits">
+              Designed by <a href="https://alazab.com/">Alazab.dev</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
