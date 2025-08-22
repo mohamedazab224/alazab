@@ -24,12 +24,6 @@
    <!-- Google tag (gtag.js) -->
    <!-- كود إضافي من Google Analytics -->
    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9H1PKWHK1G"></script>
-   <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-9H1PKWHK1G');
-   </script>
    
    <!-- font awesome cdn link -->
    <!-- مكتبة الأيقونات -->
@@ -47,38 +41,16 @@
    <!-- ملف التنسيق الخاص -->
    <link rel="stylesheet" href="css/style.css">
    
-   <!-- Microsoft Clarity tracking code -->
-   <!-- كود تتبع Microsoft Clarity -->
-   <script type="text/javascript">
-      (function(c,l,a,r,i,t,y){
-         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "p512rzxtax");
-   </script>
-   <!-- End of Microsoft Clarity tracking code -->
-   <!-- starts facebook login code -->
-    <script>
-      window.fbAsyncInit = function() {
-          FB.init({
-          appId      : '615557577912061',
-	  cookie     : true,
-          xfbml      : true,
-          version    : 'v19.0'
-    });
-       FB.AppEvents.logPageView();   
-    };
- 
-        (function(d, s, id){
-           var js, fjs = d.getElementsByTagName(s)[0];
-           if (d.getElementById(id)) return;
-           js = d.createElement(s); js.id = id;
-           js.src = "https://connect.facebook.net/en_US/sdk.js";
-           fjs.parentNode.insertBefore(js, fjs);
-           }(document, 'script', 'facebook-jssdk'));
+<!-- Microsoft Clarity tracking code (disabled until correct Web Project ID) -->
+<!--
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "YOUR_CLARITY_WEB_PROJECT_ID");
 </script>
-<!-- End of Facebook login code -->
-
+<!-- End of Microsoft Clarity tracking code -->
 </head>
 <body>
 
@@ -742,7 +714,7 @@
       <div class="box">
          <i class="fas fa-home"></i>
          <h3>basic plan</h3>
-         <div class="price"><span>EGP</span>4000<span>/YU</span></div>
+         <div class="price"><span>EGP</span>4000<span>/yr</span></div>
          <div class="list">
             <p>interior design</p>
             <p>refurbishment</p>
@@ -756,7 +728,7 @@
       <div class="box">
          <i class="fas fa-building"></i>
          <h3>premium plan</h3>
-         <div class="price"><span>EGP</span>8000<span>/YU</span></div>
+         <div class="price"><span>EGP</span>8000<span>/yr</span></div>
          <div class="list">
             <p>interior design</p>
             <p>refurbishment</p>
@@ -770,7 +742,7 @@
       <div class="box">
          <i class="fas fa-city"></i>
          <h3>ultimate plan</h3>
-         <div class="price"><span>EGP</span>12000<span>/YU</span></div>
+         <div class="price"><span>EGP</span>12000<span>/yr</span></div>
          <div class="list">
             <p>interior design</p>
             <p>refurbishment</p>
@@ -2162,17 +2134,12 @@ div.form-header-group.hasImage {
 <!-- footer section ends -->
 
 <!-- script section starts  -->
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
-<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+<script defer src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
 <!-- custom js file link  -->
-<script src="js/script.js"></script>
-<!-- إضافة ملف JavaScript لإرسال نموذج الاتصال -->
-<script src="js/emailjs_contact_form.js"></script>
-<script>
-   lightGallery(document.querySelector('.projects .box-container'));
-</script>
-	
+<script defer src="js/script.js"></script>
+<!-- JavaScript لإرسال نموذج الاتصال -->
+<script defer src="js/emailjs_contact_form.js"></script>
 <!-- script section ends -->
 	
 <!--Start of Tawk.to Script-->
