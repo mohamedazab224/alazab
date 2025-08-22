@@ -1870,7 +1870,16 @@ div.form-header-group.hasImage {
 </section>
 
 <!-- client logo section ends -->
+<!-- Alazab Footer section starts -->	
+<div id="footer"></div>
 
+<script>
+  fetch("/includes/alazab_footer.html")
+    .then(res => res.text())
+    .then(html => document.getElementById("footer").innerHTML = html);
+</script>
+<!-- Alazab Footer Section Ends -->
+	
 <!-- footer section starts -->
 <footer id="azab-footer">
   <div class="container">
