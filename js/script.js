@@ -36,7 +36,7 @@ window.onscroll = () =>{
    contactInfo.classList.remove('active');
 }
 
-var swiper = new Swiper(".home-slider", {
+const homeSwiper = new Swiper('.home-slider',  {
    loop:true,
    grabCursor:true,
    navigation: {
@@ -45,7 +45,7 @@ var swiper = new Swiper(".home-slider", {
    },
 });
 
-var swiper = new Swiper(".reviews-slider", {
+const reviewsSwiper = new Swiper('.reviews-slider',  {
    loop:true,
    grabCursor:true,
    spaceBetween: 20,
@@ -62,7 +62,7 @@ var swiper = new Swiper(".reviews-slider", {
    },
 });
 
-var swiper = new Swiper(".blogs-slider", {
+const blogsSwiper = new Swiper('.blogs-slider',  {
    loop:true,
    grabCursor:true,
    spaceBetween: 20,
@@ -78,7 +78,7 @@ var swiper = new Swiper(".blogs-slider", {
       },
    },
 });
-var swiper = new Swiper(".logo-slider", {
+const logoSwiper = new Swiper('.logo-slider',  {
    loop:true,
    grabCursor:true,
    spaceBetween: 20,
@@ -96,4 +96,11 @@ var swiper = new Swiper(".logo-slider", {
         slidesPerView: 5,
       },
    },
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const gallery = document.querySelector('.projects .box-container');
+  if (gallery && typeof lightGallery === 'function') {
+    lightGallery(gallery);
+  }
 });
