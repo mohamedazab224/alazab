@@ -109,13 +109,16 @@
             font-size: 14px;
             background-color: white;
             cursor: pointer;
+            font-weight: bold;
         }
         
-        .status-1 { background-color: #ffeaa7; color: #d35400; } /* تحت التصنيع */
-        .status-2 { background-color: #a29bfe; color: white; }   /* مرحلة الدهان */
-        .status-3 { background-color: #55efc4; color: #00b894; } /* جاهز للتسليم */
-        .status-4 { background-color: #dfe6e9; color: #636e72; } /* تم التسليم */
-        .status-5 { background-color: #ff7675; color: white; }   /* تم انتهاء التصنيع */
+        /* حالات التصنيع الجديدة */
+        .status-1 { background-color: #ff9ff3; color: #8b008b; } /* بدء التصنيع */
+        .status-2 { background-color: #74b9ff; color: white; }   /* بدء التجهيز */
+        .status-3 { background-color: #fdcb6e; color: #d35400; } /* اعتماد بدء الدهانات */
+        .status-4 { background-color: #a29bfe; color: white; }   /* فنش الدهانات */
+        .status-5 { background-color: #55efc4; color: #00b894; } /* جاهز للتسليم */
+        .status-6 { background-color: #00b894; color: white; }   /* تم التسليم */
         
         .totals {
             margin-top: 30px;
@@ -201,6 +204,36 @@
             padding: 5px 10px;
             border-radius: 4px;
             font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .progress-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .progress-item {
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .progress-number {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .progress-label {
+            font-size: 14px;
+            color: #666;
         }
         
         @media print {
@@ -246,33 +279,47 @@
                 flex-direction: column;
                 align-items: center;
             }
+            
+            .progress-summary {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="invoice-container">
         <div class="header">
-            <h1>فاتورة شراء</h1>
+            <h1>نموذج تصنيع اثاث رستيك</h1>
             <h2>Alazab Construction</h2>
             <div class="company-info">
-                <p>571219804 :رقم ضريبي</p>
-                <p>145760 :سجل تجاري</p>
+                <p>قائمه متابعة اعمال تصنيع اثاث شقه 281 الاندلس</p>
+                <p>تاريخ البدء 06/07/2025</p>
                 <p>A8, Street 500, Maadi New Cairo. El-Basatin Sharkeya 4234570</p>
                 <p>201092750351+</p>
             </div>
         </div>
         
         <div class="controls no-print">
-            <button class="btn btn-primary" onclick="window.print()">طباعة الفاتورة</button>
-            <button class="btn btn-success" onclick="resetStatuses()">إعادة تعيين الحالات</button>
+            <button class="btn btn-primary btn-click-effect" onclick="window.print()">
+                <span>📄</span> طباعة الفاتورة
+            </button>
+            <button class="btn btn-success btn-click-effect" onclick="resetStatuses()">
+                <span>🔄</span> إعادة تعيين الحالات
+            </button>
         </div>
         
         <div class="status-legend no-print">
-            <div class="status-item status-1">تحت التصنيع</div>
-            <div class="status-item status-2">مرحلة الدهان</div>
-            <div class="status-item status-5">تم انتهاء التصنيع</div>
-            <div class="status-item status-3">جاهز للتسليم</div>
-            <div class="status-item status-4">تم التسليم</div>
+            <div class="status-item status-1">تصنيع</div>
+            <div class="status-item status-2">تجهيز</div>
+            <div class="status-item status-3">الدهانات</div>
+            <div class="status-item status-4">فنش الدهانات</div>
+            <div class="status-item status-5">جاهز للتسليم</div>
+            <div class="status-item status-6">تم التسليم</div>
+            <div class="status-item status-7">مكتمل</div>
+        </div>
+        
+        <div class="progress-summary no-print" id="progressSummary">
+            <!-- سيتم ملؤها بواسطة JavaScript -->
         </div>
         
         <div class="invoice-details">
@@ -308,27 +355,27 @@
         <div class="totals">
             <div>
                 <span>المجموع:</span>
-                <span>93,500</span>
+                <span>107,000.00</span>
             </div>
             <div>
                 <span>الخصم:</span>
-                <span>0</span>
+                <span>2,000.00</span>
             </div>
             <div>
                 <span>الإجمالي:</span>
-                <span>93,500</span>
+                <span>105,000.00</span>
             </div>
             <div>
                 <span>الدفعة الثانية:</span>
-                <span>0</span>
+                <span>10,000.00</span>
             </div>
             <div>
                 <span>المدفوع:</span>
-                <span>0</span>
+                <span>90,000.00</span>
             </div>
             <div>
                 <span>الرصيد المستحق:</span>
-                <span>93,500</span>
+                <span>15,000.00</span>
             </div>
         </div>
         
@@ -366,13 +413,15 @@
             { item: "قطعه سنط لدهر الأولى سم 30*15", description: "تجهيز قطعه خشب سنط لدهر الأولى أبراه مستطيل مفرع على وضعه مقاس 30*15 سم السمر محول من حساب العرق", price: "70", quantity: "2", total: "140" }
         ];
 
-        // حالات التصنيع
+        // حالات التصنيع المحدثة
         const statuses = [
-            { id: 1, name: "تحت التصنيع", class: "status-1" },
-            { id: 2, name: "مرحلة الدهان", class: "status-2" },
-            { id: 5, name: "تم انتهاء التصنيع", class: "status-5" },
-            { id: 3, name: "جاهز للتسليم", class: "status-3" },
-            { id: 4, name: "تم التسليم", class: "status-4" }
+            { id: 1, name: "تصنيع", class: "status-1" },
+            { id: 2, name: "تجهيز", class: "status-2" },
+            { id: 3, name: "الدهانات", class: "status-3" },
+            { id: 4, name: "فنش الدهانات", class: "status-4" },
+            { id: 5, name: "جاهز للتسليم", class: "status-5" },
+            { id: 6, name: "تم التسليم", class: "status-6" },
+            { id: 7, name: "مكتمل", class: "status-7" }
         ];
 
         // تهيئة البيانات عند تحميل الصفحة
@@ -384,8 +433,8 @@
             items.forEach((item, index) => {
                 const tr = document.createElement('tr');
                 
-                // الحصول على الحالة المحفوظة أو استخدام الحالة الافتراضية (مرحلة الدهان)
-                const statusId = savedStatuses[index] || 2;
+                // الحصول على الحالة المحفوظة أو استخدام الحالة الافتراضية (تصنيع)
+                const statusId = savedStatuses[index] || 1;
                 const status = statuses.find(s => s.id == statusId);
                 
                 tr.innerHTML = `
@@ -405,6 +454,9 @@
                 
                 tbody.appendChild(tr);
             });
+            
+            // تحديث ملخص التقدم
+            updateProgressSummary();
         });
 
         // تحديث حالة العنصر
@@ -421,6 +473,9 @@
             savedStatuses[index] = parseInt(statusId);
             localStorage.setItem('itemStatuses', JSON.stringify(savedStatuses));
             
+            // تحديث ملخص التقدم
+            updateProgressSummary();
+            
             // إظهار رسالة الحفظ
             const saveStatus = document.getElementById('saveStatus');
             saveStatus.classList.add('show');
@@ -430,6 +485,31 @@
             }, 2000);
         }
 
+        // تحديث ملخص التقدم
+        function updateProgressSummary() {
+            const progressSummary = document.getElementById('progressSummary');
+            let savedStatuses = JSON.parse(localStorage.getItem('itemStatuses')) || {};
+            
+            // حساب عدد العناصر لكل حالة
+            const statusCounts = {};
+            statuses.forEach(status => {
+                statusCounts[status.id] = 0;
+            });
+            
+            items.forEach((item, index) => {
+                const statusId = savedStatuses[index] || 1;
+                statusCounts[statusId]++;
+            });
+            
+            // إنشاء عرض ملخص التقدم
+            progressSummary.innerHTML = statuses.map(status => `
+                <div class="progress-item ${status.class}">
+                    <div class="progress-number">${statusCounts[status.id]}</div>
+                    <div class="progress-label">${status.name}</div>
+                </div>
+            `).join('');
+        }
+
         // إعادة تعيين جميع الحالات
         function resetStatuses() {
             if (confirm('هل أنت متأكد من أنك تريد إعادة تعيين جميع حالات التصنيع؟')) {
@@ -437,12 +517,15 @@
                 
                 // إعادة تعيين القائمة المنسدلة لكل عنصر
                 document.querySelectorAll('.status-select').forEach(select => {
-                    select.value = 2;
-                    const status = statuses.find(s => s.id == 2);
+                    select.value = 1;
+                    const status = statuses.find(s => s.id == 1);
                     select.className = `status-select ${status.class}`;
                 });
                 
-                alert('تم إعادة تعيين جميع الحالات إلى "مرحلة الدهان"');
+                // تحديث ملخص التقدم
+                updateProgressSummary();
+                
+                alert('تم إعادة تعيين جميع الحالات إلى "تصنيع"');
             }
         }
     </script>
