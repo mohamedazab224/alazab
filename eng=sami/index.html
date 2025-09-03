@@ -1,1 +1,450 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فاتورة شراء - Alazab Construction</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7f9;
+            color: #333;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .invoice-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #2c3e50;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header h2 {
+            color: #e74c3c;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .company-info {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .company-info p {
+            margin: 5px 0;
+        }
+        
+        .invoice-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .invoice-details div {
+            flex: 1;
+        }
+        
+        .section-title {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 20px 0 15px 0;
+            font-size: 18px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: right;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #34495e;
+            color: white;
+            position: sticky;
+            top: 0;
+        }
+        
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .status-select {
+            padding: 6px 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            width: 100%;
+            font-size: 14px;
+            background-color: white;
+            cursor: pointer;
+        }
+        
+        .status-1 { background-color: #ffeaa7; color: #d35400; } /* تحت التصنيع */
+        .status-2 { background-color: #a29bfe; color: white; }   /* مرحلة الدهان */
+        .status-3 { background-color: #55efc4; color: #00b894; } /* جاهز للتسليم */
+        .status-4 { background-color: #dfe6e9; color: #636e72; } /* تم التسليم */
+        .status-5 { background-color: #ff7675; color: white; }   /* تم انتهاء التصنيع */
+        
+        .totals {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .totals div {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-success {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+        
+        .save-status {
+            margin-top: 10px;
+            text-align: center;
+            color: #27ae60;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .show {
+            opacity: 1;
+        }
+        
+        .status-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+        
+        .status-item {
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .invoice-container {
+                box-shadow: none;
+                padding: 0;
+            }
+            
+            .no-print {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .invoice-details {
+                flex-direction: column;
+            }
+            
+            .invoice-details div {
+                margin-bottom: 15px;
+            }
+            
+            table {
+                font-size: 14px;
+                display: block;
+                overflow-x: auto;
+            }
+            
+            th, td {
+                padding: 8px 10px;
+            }
+            
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .status-legend {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="header">
+            <h1>فاتورة شراء</h1>
+            <h2>Alazab Construction</h2>
+            <div class="company-info">
+                <p>571219804 :رقم ضريبي</p>
+                <p>145760 :سجل تجاري</p>
+                <p>A8, Street 500, Maadi New Cairo. El-Basatin Sharkeya 4234570</p>
+                <p>201092750351+</p>
+            </div>
+        </div>
+        
+        <div class="controls no-print">
+            <button class="btn btn-primary" onclick="window.print()">طباعة الفاتورة</button>
+            <button class="btn btn-success" onclick="resetStatuses()">إعادة تعيين الحالات</button>
+        </div>
+        
+        <div class="status-legend no-print">
+            <div class="status-item status-1">تحت التصنيع</div>
+            <div class="status-item status-2">مرحلة الدهان</div>
+            <div class="status-item status-5">تم انتهاء التصنيع</div>
+            <div class="status-item status-3">جاهز للتسليم</div>
+            <div class="status-item status-4">تم التسليم</div>
+        </div>
+        
+        <div class="invoice-details">
+            <div>
+                <p><strong>رقم أمر الشراء:</strong> غير محدد</p>
+                <p><strong>تاريخ أمر الشراء:</strong> غير محدد</p>
+            </div>
+            <div>
+                <p><strong>أمر شراء إلى:</strong></p>
+                <p>الاسم: إبراهيم سعد شيرمنت</p>
+                <p>شيرامنت الجيزة</p>
+            </div>
+        </div>
+        
+        <div class="section-title">تفاصيل البنود</div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th width="10%">البند</th>
+                    <th width="35%">الوصف</th>
+                    <th width="10%">سعر الوحدة</th>
+                    <th width="8%">الكمية</th>
+                    <th width="10%">المجموع</th>
+                    <th width="17%">حالة التصنيع</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- سيتم ملء الجدول بالبيانات عبر JavaScript -->
+            </tbody>
+        </table>
+        
+        <div class="totals">
+            <div>
+                <span>المجموع:</span>
+                <span>93,500</span>
+            </div>
+            <div>
+                <span>الخصم:</span>
+                <span>0</span>
+            </div>
+            <div>
+                <span>الإجمالي:</span>
+                <span>93,500</span>
+            </div>
+            <div>
+                <span>الدفعة الثانية:</span>
+                <span>0</span>
+            </div>
+            <div>
+                <span>المدفوع:</span>
+                <span>0</span>
+            </div>
+            <div>
+                <span>الرصيد المستحق:</span>
+                <span>93,500</span>
+            </div>
+        </div>
+        
+        <div class="save-status" id="saveStatus">تم حفظ الحالة بنجاح!</div>
+        
+        <div class="footer">
+            <p>شكراً لتعاملكم معنا</p>
+            <p>Alazab Construction Company هي شركة تابعة للعلامة التجارية المسجلة (D-U-N-S No: 849203826)، تعمل تحت الاسم التجاري القانوني "عزاب لأعمال الإدارة التنفيذية للمشاريع الصناعية والخدمية والتوريدات العامة"</p>
+        </div>
+    </div>
 
+    <script>
+        // بيانات العناصر
+        const items = [
+            { item: "سفره 200*100", description: "سعر طول * 100 سعر عرض قاعدة سفليلة نفس الشكل الرجل الموجود بالورشة", price: "14,000", quantity: "1", total: "14,000" },
+            { item: "طرييره 80*40", description: "سعر طول * 40 سعر عرض قاعدة سفليلة نفس الشكل الرجل الموجود بالورشة بدون أي حديد زوايا حديد يخشت فقط", price: "2,000", quantity: "1", total: "2,000" },
+            { item: "طرييره 40*40", description: "سعر طول * 40 سعر عرض قاعدة سفليلة نفس الشكل الرجل الموجود بالورشة بدون أي حديد زوايا حديد يخشت فقط", price: "1,000", quantity: "2", total: "2,000" },
+            { item: "جزامه 50*60", description: "سعر طول * 35 سعر عرض قاعدة سفليلة نفس الشكل الرجل الموجود بالورشة بدون أي حديد زوايا حديد يخشت فقط", price: "4,000", quantity: "1", total: "4,000" },
+            { item: "وحدة تليفزيون 160*45", description: "سعر طول * 35 سعر عرض قاعدة سفليلة نفس الشكل الرجل الموجود بالورشة بدون أي حديد زوايا حديد يخشت فقط", price: "5,000", quantity: "3", total: "5,000" },
+            { item: "فريم مرايا معدل 90*210", description: "سعر طول * 35 سعر عرض قاعدة سفليلة نفس الشكل الرجل الموجود بالورشة بدون أي حديد زوايا حديد يخشت فقط", price: "5,000", quantity: "2", total: "5,000" },
+            { item: "تسريحة كامه + مرايا جرار 2 درج + كرسدي قنله", description: "90*170 | سعر طول * 35 سعر عرض قاعدة سفليلة نفس الشكل الرجل الموجود بالورشة بدون أي حديد زوايا حديد يخشت فقط", price: "5,000", quantity: "2", total: "10,000" },
+            { item: "لميديره شجرة ديكوريه", description: "90*170 | سعر طول * 35 سعر عرض قاعدة سفليلة نفس الشكل الرجل الموجود بالورشة بدون أي حديد زوايا حديد يخشت فقط", price: "5,000", quantity: "2", total: "10,000" },
+            { item: "شماعة شجارة ديكوريه", description: "90*170 | سعر طول * 35 سعر عرض قاعدة سفليلة نفس الشكل الرجل الموجود بالورشة بدون أي حديد زوايا حديد يخشت فقط", price: "5,000", quantity: "2", total: "10,000" },
+            { item: "كرسدي سفره", description: "كرسدي ريغ اللبي في الورشة نوع الخشب: سنط القرمية قطعة واحدة بدون لحامات", price: "3,000", quantity: "8", total: "24,000" },
+            { item: "طرييره غلق وفتح جديدة", description: "ترابيرة غلق وفتح عرض 40 سم * عمق 50 سم القرمية تكون على حته واحدة نوع الخشب: سنط", price: "3,000", quantity: "1", total: "3,000" },
+            { item: "كمودينو 2 درج", description: "مقاس 40*عمق 50* نفس شكل وحدات التليفزيون عرض 50 سم * عمق 50 سم ارتفاع 50 سم الرجل 5 سم نوع الخشب: سنط", price: "3,500", quantity: "2", total: "7,000" },
+            { item: "طرييره لاب توب", description: "طرييره 70*40 ارتفاع 55*ارجل ديكوريه خشب سنط", price: "2,000", quantity: "1", total: "2,000" },
+            { item: "بنش أمام السرير", description: "دكه أمام السرير مقاس 40*160 ارتفاع 50 نوع الخشب: سنط", price: "3,500", quantity: "1", total: "3,500" },
+            { item: "عرق ديكور للأمناء", description: "عرق ديكور طول 180 سمك 12*12 مجهر للأمناء قطر 10 سم (رسم تقييم 10 السوطات قطر 7 سم والتوزيع متساوي)", price: "1,000", quantity: "1", total: "1,000" },
+            { item: "وحدة ديكور للأمناء", description: "وحدة ديكور للأمناء مقاس 60*120 عاشق ومتساوي مجموع أعلى الصالوب (رسم تقييم 12 السوطات قطر 7 سم والتوزيع متساوي 6 في الصلاح الكبير)", price: "1,500", quantity: "1", total: "1,500" },
+            { item: "دهر سرير سنط", description: "تفصيل دهر سرير مقاس 65*190 نوع الخشب: سنط تعريج بسيط", price: "1,000", quantity: "1", total: "1,000" },
+            { item: "رجل صالوب عدد قطعه", description: "رجل للصالوب تصنيع بدل الأرجل الموجود وعمل تصميم امتن ونفس الخشب بالكامل ونفس الدفعات لتوجيد الآلات متنقل مع بعضه", price: "1,000", quantity: "1", total: "1,000" },
+            { item: "تصنيع سرير سنط", description: "تصنيع سرير سنط مقاس المرتبه استندر سرير سنط مع الدهر المنذور مسبقاً 80*30 ارتفاع 30 سم يتم عمل خاصي بسيط جداً بين المرتبه والجواب والأرتفاع الاجتماعي لسرير 55 وهذا لتزكيب المكنترم لرفع وعلق السرير", price: "1,000", quantity: "1", total: "1,000" },
+            { item: "فرص دائري ديكور سم", description: "تجهيز فرص دائري مفرع على وضعه قطر 30 سم السمر محول من حساب العرق", price: "60", quantity: "6", total: "360" },
+            { item: "قطعه سنط لدهر الأولى سم 30*15", description: "تجهيز قطعه خشب سنط لدهر الأولى أبراه مستطيل مفرع على وضعه مقاس 30*15 سم السمر محول من حساب العرق", price: "70", quantity: "2", total: "140" }
+        ];
+
+        // حالات التصنيع
+        const statuses = [
+            { id: 1, name: "تحت التصنيع", class: "status-1" },
+            { id: 2, name: "مرحلة الدهان", class: "status-2" },
+            { id: 5, name: "تم انتهاء التصنيع", class: "status-5" },
+            { id: 3, name: "جاهز للتسليم", class: "status-3" },
+            { id: 4, name: "تم التسليم", class: "status-4" }
+        ];
+
+        // تهيئة البيانات عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            const tbody = document.querySelector('tbody');
+            let savedStatuses = JSON.parse(localStorage.getItem('itemStatuses')) || {};
+            
+            // إنشاء صفوف الجدول
+            items.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                
+                // الحصول على الحالة المحفوظة أو استخدام الحالة الافتراضية (مرحلة الدهان)
+                const statusId = savedStatuses[index] || 2;
+                const status = statuses.find(s => s.id == statusId);
+                
+                tr.innerHTML = `
+                    <td>${item.item}</td>
+                    <td>${item.description}</td>
+                    <td>${item.price}</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.total}</td>
+                    <td>
+                        <select class="status-select ${status.class}" data-index="${index}" onchange="updateStatus(this)">
+                            ${statuses.map(s => 
+                                `<option value="${s.id}" ${s.id == statusId ? 'selected' : ''}>${s.name}</option>`
+                            ).join('')}
+                        </select>
+                    </td>
+                `;
+                
+                tbody.appendChild(tr);
+            });
+        });
+
+        // تحديث حالة العنصر
+        function updateStatus(select) {
+            const index = select.getAttribute('data-index');
+            const statusId = select.value;
+            const status = statuses.find(s => s.id == statusId);
+            
+            // تحديث التصميم حسب الحالة
+            select.className = `status-select ${status.class}`;
+            
+            // حفظ الحالة في localStorage
+            let savedStatuses = JSON.parse(localStorage.getItem('itemStatuses')) || {};
+            savedStatuses[index] = parseInt(statusId);
+            localStorage.setItem('itemStatuses', JSON.stringify(savedStatuses));
+            
+            // إظهار رسالة الحفظ
+            const saveStatus = document.getElementById('saveStatus');
+            saveStatus.classList.add('show');
+            
+            setTimeout(() => {
+                saveStatus.classList.remove('show');
+            }, 2000);
+        }
+
+        // إعادة تعيين جميع الحالات
+        function resetStatuses() {
+            if (confirm('هل أنت متأكد من أنك تريد إعادة تعيين جميع حالات التصنيع؟')) {
+                localStorage.removeItem('itemStatuses');
+                
+                // إعادة تعيين القائمة المنسدلة لكل عنصر
+                document.querySelectorAll('.status-select').forEach(select => {
+                    select.value = 2;
+                    const status = statuses.find(s => s.id == 2);
+                    select.className = `status-select ${status.class}`;
+                });
+                
+                alert('تم إعادة تعيين جميع الحالات إلى "مرحلة الدهان"');
+            }
+        }
+    </script>
+</body>
+</html>
