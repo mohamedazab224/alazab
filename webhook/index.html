@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Al-azab.co Webhook Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background-color: #111;
+      color: white;
+      padding: 10px 0;
+    }
+    header img {
+      height: 60px;
+    }
+    .banner {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+    }
+    form {
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 400px;
+      text-align: left;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background: #111;
+      color: #f5bf23;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #333;
+    }
+    #response {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <!-- Logo -->
+  <header>
+    <img src="https://al-azab.co/b.png" alt="Al-azab.co Logo">
+  </header>
+
+  <!-- Banner -->
+  <img class="banner" src="https://al-azab.co/images/baner.jpg" alt="Al-azab.co Banner">
+
+  <!-- Form -->
+  <h2>Webhook Test Form</h2>
+  <form id="webhookForm">
+    <label>
+      Event:
+      <input type="text" name="event" placeholder="مثال: user.signup" required>
+    </label>
+
+    <label>
+      Email:
+      <input type="email" name="email" placeholder="user@example.com" required>
+    </label>
+
+    <label>
+      Status:
+      <select name="status">
+        <option value="success">Success</option>
+        <option value="failed">Failed</option>
+      </select>
+    </label>
+
+    <button type="submit">Send Webhook</button>
+  </form>
+
+  <p id="response"></p>
+
+  <script>
+    document.getElementById('webhookForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(e.target);
+      const data = {
+        company: "Al-azab.co",
+        event: formData.get('event'),
+        email: formData.get('email'),
+        status: formData.get('status')
+      };
+
+      try {
+        const res = await fetch('http://localhost:3000/webhook', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        const result = await res.json();
+        document.getElementById('response').innerText = "✅ " + result.message;
+      } catch (err) {
+        document.getElementById('response').innerText = "❌ Error: " + err;
+      }
+    });
+  </script>
+</body>
+</html>
