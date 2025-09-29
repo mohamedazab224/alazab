@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Al-azab.co Webhook Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{--bg:#f9f9f9;--ink:#111;--brand:#f5bf23;--card:#fff;--muted:#666;--line:#ddd;}
+    *{box-sizing:border-box}
+    body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);margin:0;color:var(--ink)}
+    header{background:#111;color:#fff;padding:10px 0;text-align:center}
+    header img{height:56px}
+    .banner{width:100%;max-height:300px;object-fit:cover;display:block}
+    main{max-width:1100px;margin:20px auto;padding:0 14px}
+    .card{background:var(--card);border-radius:12px;box-shadow:0 6px 16px rgba(0,0,0,.08);padding:18px;margin:16px 0}
+    h2{margin:.2em 0 .6em 0}
+    label{display:block;margin:.6em 0 .25em}
+    input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px}
+    textarea{min-height:130px;font-family:ui-monospace,Menlo,Consolas,monospace;direction:ltr}
+    .row{display:grid;gap:14px}
+    @media (min-width:680px){.row-2{grid-template-columns:1fr 1fr}}
+    button{background:#111;color:var(--brand);padding:10px 14px;border:none;border-radius:9px;cursor:pointer}
+    button:hover{background:#333}
+    button:disabled{opacity:.6;cursor:not-allowed}
+    .inline{display:flex;gap:10px;align-items:center}
+    .inline input{flex:1}
+    .hint{color:var(--muted);font-size:.9em}
+    #response{margin-top:10px;font-weight:bold}
+    table{width:100%;border-collapse:collapse;margin-top:12px;background:#fff}
+    th,td{padding:10px;border:1px solid var(--line);text-align:left}
+    th{background:#111;color:var(--brand)}
+    .custom-vars{font: .92em/1.4 ui-monospace,Menlo,Consolas,monospace;color:#444;direction:ltr}
+    .ok{color:#0a8a0a}.err{color:#c00}
+  </style>
+</head>
+<body>
+  <!-- Logo -->
+  <header>
+    <img src="https://al-azab.co/b.png" alt="Al-azab.co Logo" />
+  </header>
+
+  <!-- Banner -->
+  <img class="banner" src="https://al-azab.co/images/baner.jpg" alt="Al-azab.co Banner" />
+
+  <main>
+    <!-- Endpoint -->
+    <div class="card">
+      <h2>إعداد وجهة الـWebhook</h2>
+      <div class="inline">
+        <input id="endpoint" type="url" placeholder="مثال: https://your-host/webhook" />
+        <button id="copyEp" type="button">Copy</button>
+        <button id="saveEp" type="button">Save</button>
+      </div>
+      <div class="hint">الافتراضي: origin الحالي + ‎<code>/webhook</code>‎ — يتم حفظه في المتصفح.</div>
+      <div id="epMsg" class="hint"></div>
+    </div>
+
+    <!-- Form -->
+    <div class="card">
+      <h2>Webhook Test Form</h2>
+      <form id="webhookForm" class="row row-2">
+        <div>
+          <label>Event</label>
+          <input type="text" name="event" placeholder="مثال: user.signup" required />
+        </div>
+        <div>
+          <label>Email</label>
+          <input type="email" name="email" placeholder="user@example.com" required />
+        </div>
+        <div>
+          <label>Status</label>
+          <select name="status">
+            <option value="success">Success</option>
+            <option value="failed">Failed</option>
+          </select>
+        </div>
+        <div style="align-self:end">
+          <button id="sendFormBtn" type="submit">Send Webhook</button>
+        </div>
+      </form>
+      <p id="response"></p>
+    </div>
+
+    <!-- Raw JSON -->
+    <div class="card">
+      <h2>إرسال Raw JSON (Batch/Single)</h2>
+      <label>Payload JSON</label>
+      <textarea id="rawJson" spellcheck="false">
+{
+  "events": [
+    {
+      "event": "delivery",
+      "category": "Password reset",
+      "custom_variables": { "variable_a": "value", "variable_b": "value2" },
+      "message_id": "1df37d17-0286-4d8b-8edf-bc4ec5be86e6",
+      "email": "receiver@example.com",
+      "event_id": "bede7236-2284-43d6-a953-1fdcafd0fdbc",
+      "timestamp": 1733497282,
+      "sending_domain_name": "examplesender.com",
+      "sending_stream": null
+    },
+    {
+      "event": "delivery",
+      "category": "Email confirmation",
+      "custom_variables": { "foo": "bar", "baz": 123 },
+      "message_id": "ca7974af-7212-42aa-99fb-cc4742d0658b",
+      "email": "another@example.com",
+      "event_id": "657b8544-6a95-4c47-997f-6e47922a5052",
+      "timestamp": 1733497341,
+      "sending_domain_name": "examplesender.com",
+      "sending_stream": null
+    }
+  ]
+}
+      </textarea>
+      <div class="inline" style="margin-top:10px">
+        <button id="sendRawBtn" type="button">Send Raw JSON</button>
+        <span id="rawMsg" class="hint"></span>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="card">
+      <h2>Webhook Events</h2>
+      <table id="eventsTable">
+        <thead>
+          <tr>
+            <th>Event</th>
+            <th>Category</th>
+            <th>Email</th>
+            <th>Message ID</th>
+            <th>Event ID</th>
+            <th>Timestamp</th>
+            <th>Sending Domain</th>
+            <th>Custom Variables</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script>
+    // ===== Helpers =====
+    const tz = 'Africa/Cairo'; // عرض الوقت محليًا
+    const $ = (sel) => document.querySelector(sel);
+    const tableBody = $("#eventsTable tbody");
+    const escapeHtml = (s) => String(s)
+      .replaceAll("&", "&amp;").replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;").replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+
+    function toArrayEvents(body){
+      if(!body) return [];
+      if(Array.isArray(body)) return body;
+      if(Array.isArray(body.events)) return body.events;
+      return [body];
+    }
+
+    function renderEvent(ev){
+      const tr = document.createElement('tr');
+      const ts = ev.timestamp ? new Date(ev.timestamp * 1000) : new Date();
+      const when = ts.toLocaleString('ar-EG', { timeZone: tz });
+      tr.innerHTML = `
+        <td>${escapeHtml(ev.event ?? '')}</td>
+        <td>${escapeHtml(ev.category ?? '')}</td>
+        <td>${escapeHtml(ev.email ?? '')}</td>
+        <td class="custom-vars">${escapeHtml(ev.message_id ?? '')}</td>
+        <td class="custom-vars">${escapeHtml(ev.event_id ?? '')}</td>
+        <td>${when}</td>
+        <td>${escapeHtml(ev.sending_domain_name ?? '')}</td>
+        <td class="custom-vars">${escapeHtml(JSON.stringify(ev.custom_variables ?? {}))}</td>
+      `;
+      tableBody.prepend(tr);
+    }
+
+    // ===== Endpoint management =====
+    const epInput = $("#endpoint");
+    const epMsg = $("#epMsg");
+    const defaultEP = `${location.origin}/webhook`;
+    epInput.value = localStorage.getItem('webhook_ep') || defaultEP;
+
+    $("#copyEp").onclick = async () => {
+      await navigator.clipboard.writeText(epInput.value.trim());
+      epMsg.textContent = "تم النسخ ✔";
+      setTimeout(()=> epMsg.textContent = "", 1200);
+    };
+    $("#saveEp").onclick = () => {
+      const url = epInput.value.trim();
+      try { new URL(url); localStorage.setItem('webhook_ep', url); epMsg.textContent = "تم الحفظ ✔"; }
+      catch { epMsg.textContent = "رابط غير صالح ✖"; }
+      setTimeout(()=> epMsg.textContent = "", 1600);
+    };
+
+    // ===== Seed sample data (اختياري) =====
+    try {
+      const sample = JSON.parse($("#rawJson").value);
+      toArrayEvents(sample).forEach(renderEvent);
+    } catch {}
+
+    // ===== Form submit =====
+    $("#webhookForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = $("#sendFormBtn");
+      btn.disabled = true;
+
+      const fd = new FormData(e.target);
+      const data = {
+        company: "Al-azab.co",
+        event: fd.get('event'),
+        email: fd.get('email'),
+        status: fd.get('status')
+      };
+
+      try{
+        const res = await fetch(epInput.value.trim(), {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify(data)
+        });
+        const js = await res.json().catch(()=>({}));
+        $("#response").innerHTML = res.ok
+          ? `<span class="ok">✅ ${escapeHtml(js.message || 'OK')}</span>`
+          : `<span class="err">❌ HTTP ${res.status}</span>`;
+
+        // اعرضه في الجدول كحدث محلي
+        renderEvent({
+          event: data.event, category: data.status,
+          email: data.email, message_id: '(local form)',
+          event_id: crypto?.randomUUID?.() || String(Date.now()),
+          timestamp: Math.floor(Date.now()/1000),
+          sending_domain_name: location.hostname,
+          custom_variables: { company: data.company, source: 'form' }
+        });
+      }catch(err){
+        $("#response").innerHTML = `<span class="err">❌ ${escapeHtml(err.message || err)}</span>`;
+      }finally{
+        btn.disabled = false;
+      }
+    });
+
+    // ===== Send Raw JSON =====
+    $("#sendRawBtn").onclick = async () => {
+      const btn = $("#sendRawBtn");
+      btn.disabled = true;
+      $("#rawMsg").textContent = "جارٍ الإرسال...";
+      try{
+        const payload = JSON.parse($("#rawJson").value);
+        const res = await fetch(epInput.value.trim(), {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify(payload)
+        });
+        const ok = res.ok;
+        $("#rawMsg").innerHTML = ok ? '<span class="ok">تم ✔</span>' : `<span class="err">فشل HTTP ${res.status}</span>`;
+
+        // اعرض كل الأحداث في الجدول
+        toArrayEvents(payload).forEach(renderEvent);
+      }catch(err){
+        $("#rawMsg").innerHTML = `<span class="err">خطأ: ${escapeHtml(err.message || err)}</span>`;
+      }finally{
+        setTimeout(()=> $("#rawMsg").textContent = "", 2000);
+        btn.disabled = false;
+      }
+    };
+  </script>
+</body>
+</html>
