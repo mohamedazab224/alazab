@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعم العملاء - شركة العزاب للمقاولات</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #e74c3c;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: -20px;
+        }
+        
+        .logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: #ecf0f1;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            color: #bdc3c7;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .support-card {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid #e74c3c;
+        }
+        
+        .support-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .support-card i {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .support-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .support-card p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .contact-btn {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .contact-btn:hover {
+            background: linear-gradient(135deg, #c0392b, #a93226);
+            transform: scale(1.05);
+        }
+        
+        .services-section {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .services-section h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .service-item {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-right: 4px solid #3498db;
+        }
+        
+        .service-item i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+            color: #3498db;
+        }
+        
+        .faq-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border: 2px solid #ecf0f1;
+        }
+        
+        .faq-section h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        
+        .faq-item {
+            background: #f8f9fa;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            border-right: 4px solid #27ae60;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            background: #34495e;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            padding: 20px;
+            display: none;
+            background: white;
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .contact-section {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 50px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .contact-section h2 {
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .contact-method {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-method:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-method i {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .contact-method h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .contact-method p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .emergency-contact {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 40px;
+            border: 3px solid #f1c40f;
+        }
+        
+        .emergency-contact h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .emergency-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 20px 0;
+            direction: ltr;
+        }
+        
+        .working-hours {
+            background: #f39c12;
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: #34495e;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            transform: scale(1.2);
+            background: #e74c3c;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .emergency-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://al-azab.co/b.png" alt="شعار شركة العزاب للمقاولات" class="logo" onerror="this.style.display='none'">
+            <h1>📞 دعم العملاء</h1>
+            <p>شركة العزاب للمقاولات العامة - نعمل من أجلكم على مدار الساعة</p>
+        </div>
+
+        <!-- بطاقات الدعم السريع -->
+        <div class="support-grid">
+            <div class="support-card">
+                <i>🏗️</i>
+                <h3>الدعم الفني للمشاريع</h3>
+                <p>استشارات فنية ومتابعة سير العمل في المشاريع الإنشائية</p>
+                <a href="tel:+966123456789" class="contact-btn">اتصل الآن</a>
+            </div>
+            
+            <div class="support-card">
+                <i>💰</i>
+                <h3>الشؤون المالية</h3>
+                <p>استفسارات حول الفواتير والدفعات والشؤون المالية</p>
+                <a href="tel:+966123456790" class="contact-btn">اتصل الآن</a>
+            </div>
+            
+            <div class="support-card">
+                <i>📋</i>
+                <h3>متابعة العقود</h3>
+                <p>استعلامات حول بنود العقود والتعديلات والملاحق</p>
+                <a href="tel:+966123456791" class="contact-btn">اتصل الآن</a>
+            </div>
+            
+            <div class="support-card">
+                <i>🛠️</i>
+                <h3>خدمات مابعد البيع</h3>
+                <p>الصيانة الدورية والإصلاحات وخدمات الضمان</p>
+                <a href="tel:+966123456792" class="contact-btn">اتصل الآن</a>
+            </div>
+        </div>
+
+        <!-- خدمات الدعم -->
+        <div class="services-section">
+            <h2>🎯 خدمات الدعم المتاحة</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <i>📞</i>
+                    <h4>الدعم الهاتفي</h4>
+                    <p>خدمة العملاء عبر الهاتف على مدار الساعة</p>
+                </div>
+                <div class="service-item">
+                    <i>📧</i>
+                    <h4>الدعم الإلكتروني</h4>
+                    <p>الرد على الاستفسارات عبر البريد الإلكتروني</p>
+                </div>
+                <div class="service-item">
+                    <i>💬</i>
+                    <h4>الدعم المباشر</h4>
+                    <p>محادثات مباشرة مع ممثلي خدمة العملاء</p>
+                </div>
+                <div class="service-item">
+                    <i>🏢</i>
+                    <h4>زيارات ميدانية</h4>
+                    <p>زيارات فنية للمواقع عند الحاجة</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- الأسئلة الشائعة -->
+        <div class="faq-section">
+            <h2>❓ الأسئلة الشائعة</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    كيف أتتبع سير العمل في مشروعي؟
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    يمكنك متابعة سير العمل عبر:
+                    - النظام الإلكتروني للمتابعة
+                    - التقارير الدورية الشهرية
+                    - الزيارات الميدانية المتفق عليها
+                    - التواصل مع مدير المشروع المخصص
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    ما هي مدة الضمان على المشاريع؟
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    - الهيكل الإنشائي: 10 سنوات
+                    - التشطيبات: سنتان
+                    - الشبكات والتمديدات: سنة واحدة
+                    - الأجهزة والمعدات: حسب ضمان المصنع
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    كيف أقدم شكوى أو اقتراحاً؟
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    يمكنك تقديم الشكاوى والاقتراحات عبر:
+                    - نموذج الشكاوى الإلكتروني
+                    - البريد الإلكتروني: complaints@al-azab.co
+                    - الهاتف: 920000000
+                    - زيارة مقر الشركة
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    ما هي أوقات العمل الرسمية؟
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    - الأحد - الخميس: 8:00 ص - 5:00 م
+                    - الجمعة والسبت: إجازة رسمية
+                    - خدمة الطوارئ: متاحة 24/7 للمشاكل الحرجة
+                </div>
+            </div>
+        </div>
+
+        <!-- معلومات الاتصال -->
+        <div class="contact-section">
+            <h2>📞 قنوات الاتصال</h2>
+            
+            <div class="contact-grid">
+                <div class="contact-method">
+                    <i>📞</i>
+                    <h3>المركز الرئيسي</h3>
+                    <p>+966 12 345 6789</p>
+                    <p>الهاتف الأرضي</p>
+                </div>
+                
+                <div class="contact-method">
+                    <i>📱</i>
+                    <h3>الواتساب</h3>
+                    <p>+966 50 123 4567</p>
+                    <p>للرسائل النصية</p>
+                </div>
+                
+                <div class="contact-method">
+                    <i>📧</i>
+                    <h3>البريد الإلكتروني</h3>
+                    <p>info@al-azab.co</p>
+                    <p>للرسائل الرسمية</p>
+                </div>
+                
+                <div class="contact-method">
+                    <i>🏢</i>
+                    <h3>المقر الرئيسي</h3>
+                    <p>المملكة العربية السعودية</p>
+                    <p>زيارة المقر بعد موعد</p>
+                </div>
+            </div>
+
+            <!-- خدمة الطوارئ -->
+            <div class="emergency-contact">
+                <h3>🚨 خدمة الطوارئ</h3>
+                <p>للمشاكل الحرجة والعاجلة في المشاريع</p>
+                <div class="emergency-number">+966 55 123 4567</div>
+                <p>متاحة 24 ساعة، 7 أيام في الأسبوع</p>
+            </div>
+
+            <!-- أوقات العمل -->
+            <div class="working-hours">
+                <h3>⏰ أوقات العمل الرسمية</h3>
+                <p>الأحد - الخميس: 8:00 صباحاً - 5:00 مساءً</p>
+                <p>الجمعة والسبت: إجازة رسمية</p>
+            </div>
+
+            <!-- وسائل التواصل الاجتماعي -->
+            <div class="social-links">
+                <a href="#" class="social-link" title="تويتر">🐦</a>
+                <a href="#" class="social-link" title="فيسبوك">📘</a>
+                <a href="#" class="social-link" title="إنستغرام">📷</a>
+                <a href="#" class="social-link" title="لينكدإن">💼</a>
+                <a href="#" class="social-link" title="يوتيوب">📺</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('span');
+            
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+                icon.textContent = '+';
+            } else {
+                answer.style.display = 'block';
+                icon.textContent = '-';
+            }
+        }
+
+        // فتح أول سؤال تلقائياً
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstFAQ = document.querySelector('.faq-question');
+            if (firstFAQ) {
+                toggleFAQ(firstFAQ);
+            }
+        });
+    </script>
+</body>
+</html>
