@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض صور UberFix</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            padding: 20px;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .description {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .search-container {
+            flex-grow: 1;
+            max-width: 500px;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 14px 20px;
+            border: 2px solid #e1e5ee;
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .search-box:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.2);
+        }
+        
+        .github-input {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .github-input input {
+            padding: 12px 15px;
+            border: 2px solid #e1e5ee;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            min-width: 250px;
+        }
+        
+        .github-input input:focus {
+            border-color: #6a11cb;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(106, 17, 203, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .icons-count {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            color: #6a11cb;
+            border: 2px solid #e1e5ee;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2rem;
+            color: #6a11cb;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(106, 17, 203, 0.2);
+            border-radius: 50%;
+            border-top: 4px solid #6a11cb;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .icons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+            justify-content: center;
+        }
+        
+        .icon-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px 15px;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .icon-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+        }
+        
+        .icon-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .icon-image {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.1));
+            transition: transform 0.3s ease;
+        }
+        
+        .icon-card:hover .icon-image {
+            transform: scale(1.1);
+        }
+        
+        .icon-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #444;
+            word-break: break-word;
+            max-width: 100%;
+            padding: 0 5px;
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 20px;
+            width: 100%;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            grid-column: 1 / -1;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .no-results h3 {
+            color: #6a11cb;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 25px;
+            color: #666;
+            font-size: 0.95rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        @media (max-width: 768px) {
+            .icons-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 20px;
+            }
+            
+            .icon-card {
+                height: 200px;
+                padding: 15px 10px;
+            }
+            
+            .icon-image {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-container {
+                max-width: 100%;
+            }
+            
+            .github-input {
+                flex-direction: column;
+            }
+            
+            .github-input input {
+                min-width: auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .icons-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 15px;
+            }
+            
+            .icon-card {
+                height: 190px;
+            }
+            
+            .icon-image {
+                width: 70px;
+                height: 70px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .description {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>معرض صور UberFix</h1>
+            <p class="description">عرض جميع الصور من أي مجلد على GitHub</p>
+        </header>
+        
+        <div class="controls">
+            <div class="github-input">
+                <input type="text" id="repoUrl" placeholder="أدخل رابط مستودع GitHub (مثال: owner/repo)" value="uberfix/shop">
+                <input type="text" id="folderPath" placeholder="المسار إلى المجلد (مثال: public/icons)" value="public/icons/pin-pro">
+                <button id="loadImages">تحميل الصور</button>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-box" placeholder="ابحث في الصور..." id="searchInput">
+            </div>
+            
+            <div class="icons-count">عدد الصور: <span id="iconsCount">0</span></div>
+        </div>
+        
+        <div id="loadingIndicator" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>جاري تحميل الصور من GitHub...</p>
+        </div>
+        
+        <div class="icons-grid" id="iconsContainer">
+            <div class="no-results">
+                <h3>لم يتم تحميل أي صور بعد</h3>
+                <p>أدخل معلومات المستودع واضغط على "تحميل الصور"</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>معرض صور UberFix - يعرض الصور مباشرة من مستودعات GitHub</p>
+        </footer>
+    </div>
+
+    <script>
+        // العناصر الرئيسية في الصفحة
+        const iconsContainer = document.getElementById('iconsContainer');
+        const searchInput = document.getElementById('searchInput');
+        const iconsCount = document.getElementById('iconsCount');
+        const loadImagesBtn = document.getElementById('loadImages');
+        const repoUrlInput = document.getElementById('repoUrl');
+        const folderPathInput = document.getElementById('folderPath');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        
+        // دالة لتحميل الصور من GitHub
+        async function loadImagesFromGitHub(repo, folderPath) {
+            try {
+                // إظهار مؤشر التحميل
+                loadingIndicator.style.display = 'block';
+                iconsContainer.innerHTML = '';
+                
+                // بناء رابط API لGitHub
+                const apiUrl = `https://api.github.com/repos/${repo}/contents/${folderPath}`;
+                
+                // جلب محتويات المجلد من GitHub
+                const response = await fetch(apiUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`خطأ في جلب البيانات: ${response.status}`);
+                }
+                
+                const files = await response.json();
+                
+                // تصفية الملفات للحصول على الصور فقط
+                const imageFiles = files.filter(file => {
+                    const extension = file.name.toLowerCase().split('.').pop();
+                    return ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'].includes(extension);
+                });
+                
+                // عرض الصور
+                displayImages(imageFiles, repo, folderPath);
+                
+                // إخفاء مؤشر التحميل
+                loadingIndicator.style.display = 'none';
+                
+            } catch (error) {
+                console.error('خطأ في تحميل الصور:', error);
+                loadingIndicator.style.display = 'none';
+                iconsContainer.innerHTML = `
+                    <div class="no-results">
+                        <h3>حدث خطأ في تحميل الصور</h3>
+                        <p>${error.message}</p>
+                        <p>تأكد من صحة رابط المستودع ومسار المجلد</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // دالة لعرض الصور
+        function displayImages(images, repo, folderPath) {
+            iconsContainer.innerHTML = '';
+            
+            if (images.length === 0) {
+                iconsContainer.innerHTML = `
+                    <div class="no-results">
+                        <h3>لا توجد صور في هذا المجلد</h3>
+                        <p>تأكد من أن المجلد يحتوي على ملفات صور</p>
+                    </div>
+                `;
+                iconsCount.textContent = '0';
+                return;
+            }
+            
+            images.forEach(image => {
+                const imageCard = createImageCard(image, repo, folderPath);
+                iconsContainer.appendChild(imageCard);
+            });
+            
+            // تحديث عدد الصور المعروضة
+            iconsCount.textContent = images.length;
+        }
+        
+        // دالة لإنشاء بطاقة صورة
+        function createImageCard(image, repo, folderPath) {
+            const card = document.createElement('div');
+            card.className = 'icon-card';
+            
+            // استخدام رابط raw للصورة
+            const imageUrl = `https://raw.githubusercontent.com/${repo}/main/${folderPath}/${image.name}`;
+            
+            const imageImg = document.createElement('img');
+            imageImg.className = 'icon-image';
+            imageImg.src = imageUrl;
+            imageImg.alt = image.name;
+            imageImg.loading = 'lazy'; // تحميل كسول لتحسين الأداء
+            
+            // في حالة عدم تحميل الصورة، نعرض عنصر بديل
+            imageImg.onerror = function() {
+                this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiByeD0iMTUiIGZpbGw9IiM2YTExY2IiLz4KPHN2Zz4KPHN2Zz4KPHBhdGggZD0iTTQwIDQ0QzQzLjMxMzcgNDQgNDYgNDEuMzEzNyA0NiAzOEM0NiAzNC42ODYzIDQzLjMxMzcgMzIgNDAgMzJDMzYuNjg2MyAzMiAzNCAzNC42ODYzIDM0IDM4QzM0IDQxLjMxMzcgMzYuNjg2MyA0NCA0MCA0NFoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik00OC41IDI2SDMxLjVDMjkuMDE0NyAyNiAyNyAyOC4wMTQ3IDI3IDMwLjVWNDguNUMyNyA1MC45ODUzIDI5LjAxNDcgNTMgMzEuNSA1M0g0OC41QzUwLjk4NTMgNTMgNTMgNTAuOTg1MyA1MyA0OC41VjMwLjVDNTMgMjguMDE0NyA1MC45ODUzIDI2IDQ4LjUgMjZaIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+Cjwvc3ZnPgo8L3N2Zz4=';
+            };
+            
+            const nameElement = document.createElement('div');
+            nameElement.className = 'icon-name';
+            nameElement.textContent = image.name;
+            
+            card.appendChild(imageImg);
+            card.appendChild(nameElement);
+            
+            return card;
+        }
+        
+        // دالة للبحث في الصور
+        function filterImages() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const allCards = iconsContainer.querySelectorAll('.icon-card');
+            let visibleCount = 0;
+            
+            allCards.forEach(card => {
+                const imageName = card.querySelector('.icon-name').textContent.toLowerCase();
+                if (imageName.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // تحديث عدد الصور المرئية
+            iconsCount.textContent = visibleCount;
+            
+            // عرض رسالة إذا لم توجد نتائج
+            if (visibleCount === 0 && allCards.length > 0) {
+                iconsContainer.innerHTML = `
+                    <div class="no-results">
+                        <h3>لم يتم العثور على صور تطابق البحث</h3>
+                        <p>جرب استخدام كلمات بحث أخرى</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // إضافة مستمعات الأحداث
+        loadImagesBtn.addEventListener('click', () => {
+            const repo = repoUrlInput.value.trim();
+            const folderPath = folderPathInput.value.trim();
+            
+            if (!repo) {
+                alert('يرجى إدخال رابط المستودع (مثال: owner/repo)');
+                return;
+            }
+            
+            loadImagesFromGitHub(repo, folderPath);
+        });
+        
+        searchInput.addEventListener('input', filterImages);
+        
+        // تحميل الصور افتراضياً عند فتح الصفحة (اختياري)
+        window.addEventListener('load', () => {
+            // يمكنك إزالة التعليق من السطر التالي لتحميل الصور تلقائياً
+            // loadImagesFromGitHub('uberfix/shop', 'public/icons/pin-pro');
+        });
+    </script>
+</body>
+</html>
