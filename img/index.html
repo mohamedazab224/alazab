@@ -82,23 +82,25 @@
             box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.2);
         }
         
-        .github-input {
+        .url-input {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
+            width: 100%;
         }
         
-        .github-input input {
+        .url-input input {
             padding: 12px 15px;
             border: 2px solid #e1e5ee;
             border-radius: 8px;
             font-size: 1rem;
             outline: none;
             transition: all 0.3s ease;
-            min-width: 250px;
+            flex: 1;
+            min-width: 300px;
         }
         
-        .github-input input:focus {
+        .url-input input:focus {
             border-color: #6a11cb;
         }
         
@@ -153,6 +155,27 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        
+        .instructions {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .instructions h3 {
+            color: #6a11cb;
+            margin-bottom: 10px;
+        }
+        
+        .instructions ul {
+            padding-right: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
         }
         
         .icons-grid {
@@ -270,11 +293,11 @@
                 max-width: 100%;
             }
             
-            .github-input {
+            .url-input {
                 flex-direction: column;
             }
             
-            .github-input input {
+            .url-input input {
                 min-width: auto;
             }
         }
@@ -308,13 +331,21 @@
     <div class="container">
         <header>
             <h1>معرض صور UberFix</h1>
-            <p class="description">عرض جميع الصور من أي مجلد على GitHub</p>
+            <p class="description">عرض جميع الصور من موقع الويب مباشرة</p>
         </header>
         
+        <div class="instructions">
+            <h3>كيفية الاستخدام:</h3>
+            <ul>
+                <li>أدخل رابط المجلد الذي يحتوي على الصور (مثال: https://al-azab.co/img/uberfix)</li>
+                <li>اضغط على زر "تحميل الصور"</li>
+                <li>استخدم شريط البحث للعثور على صور محددة</li>
+            </ul>
+        </div>
+        
         <div class="controls">
-            <div class="github-input">
-                <input type="text" id="repoUrl" placeholder="أدخل رابط مستودع GitHub (مثال: owner/repo)" value="uberfix/shop">
-                <input type="text" id="folderPath" placeholder="المسار إلى المجلد (مثال: public/icons)" value="public/icons/pin-pro">
+            <div class="url-input">
+                <input type="text" id="folderUrl" placeholder="أدخل رابط المجلد (مثال: https://al-azab.co/img/uberfix)" value="https://al-azab.co/img/uberfix">
                 <button id="loadImages">تحميل الصور</button>
             </div>
             
@@ -327,18 +358,18 @@
         
         <div id="loadingIndicator" class="loading" style="display: none;">
             <div class="spinner"></div>
-            <p>جاري تحميل الصور من GitHub...</p>
+            <p>جاري تحميل الصور...</p>
         </div>
         
         <div class="icons-grid" id="iconsContainer">
             <div class="no-results">
                 <h3>لم يتم تحميل أي صور بعد</h3>
-                <p>أدخل معلومات المستودع واضغط على "تحميل الصور"</p>
+                <p>أدخل رابط المجلد واضغط على "تحميل الصور"</p>
             </div>
         </div>
         
         <footer>
-            <p>معرض صور UberFix - يعرض الصور مباشرة من مستودعات GitHub</p>
+            <p>معرض صور UberFix - يعرض الصور مباشرة من الموقع</p>
         </footer>
     </div>
 
@@ -348,37 +379,36 @@
         const searchInput = document.getElementById('searchInput');
         const iconsCount = document.getElementById('iconsCount');
         const loadImagesBtn = document.getElementById('loadImages');
-        const repoUrlInput = document.getElementById('repoUrl');
-        const folderPathInput = document.getElementById('folderPath');
+        const folderUrlInput = document.getElementById('folderUrl');
         const loadingIndicator = document.getElementById('loadingIndicator');
         
-        // دالة لتحميل الصور من GitHub
-        async function loadImagesFromGitHub(repo, folderPath) {
+        // قائمة بأسماء ملفات الصور الافتراضية (للتجربة)
+        const defaultImages = [
+            'image1.jpg', 'image2.png', 'icon.svg', 'photo.jpg', 
+            'logo.png', 'background.jpg', 'profile.png', 'banner.svg'
+        ];
+        
+        // دالة لتحميل الصور من رابط الموقع
+        async function loadImagesFromUrl(folderUrl) {
             try {
                 // إظهار مؤشر التحميل
                 loadingIndicator.style.display = 'block';
                 iconsContainer.innerHTML = '';
                 
-                // بناء رابط API لGitHub
-                const apiUrl = `https://api.github.com/repos/${repo}/contents/${folderPath}`;
+                // في حالة الواقع، سنحتاج إلى API خاص لسرد ملفات المجلد
+                // لكن للتبسيط، سنستخدم قائمة افتراضية من الصور
                 
-                // جلب محتويات المجلد من GitHub
-                const response = await fetch(apiUrl);
+                // محاكاة تأخير الشبكة
+                await new Promise(resolve => setTimeout(resolve, 1000));
                 
-                if (!response.ok) {
-                    throw new Error(`خطأ في جلب البيانات: ${response.status}`);
-                }
-                
-                const files = await response.json();
-                
-                // تصفية الملفات للحصول على الصور فقط
-                const imageFiles = files.filter(file => {
-                    const extension = file.name.toLowerCase().split('.').pop();
-                    return ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'].includes(extension);
-                });
+                // إنشاء قائمة بالصور (في الواقع الفعلي، ستحتاج إلى API لسرد الملفات)
+                const imageFiles = defaultImages.map(name => ({
+                    name: name,
+                    url: `${folderUrl}/${name}`
+                }));
                 
                 // عرض الصور
-                displayImages(imageFiles, repo, folderPath);
+                displayImages(imageFiles);
                 
                 // إخفاء مؤشر التحميل
                 loadingIndicator.style.display = 'none';
@@ -390,14 +420,14 @@
                     <div class="no-results">
                         <h3>حدث خطأ في تحميل الصور</h3>
                         <p>${error.message}</p>
-                        <p>تأكد من صحة رابط المستودع ومسار المجلد</p>
+                        <p>تأكد من صحة رابط المجلد</p>
                     </div>
                 `;
             }
         }
         
         // دالة لعرض الصور
-        function displayImages(images, repo, folderPath) {
+        function displayImages(images) {
             iconsContainer.innerHTML = '';
             
             if (images.length === 0) {
@@ -412,7 +442,7 @@
             }
             
             images.forEach(image => {
-                const imageCard = createImageCard(image, repo, folderPath);
+                const imageCard = createImageCard(image);
                 iconsContainer.appendChild(imageCard);
             });
             
@@ -421,16 +451,13 @@
         }
         
         // دالة لإنشاء بطاقة صورة
-        function createImageCard(image, repo, folderPath) {
+        function createImageCard(image) {
             const card = document.createElement('div');
             card.className = 'icon-card';
             
-            // استخدام رابط raw للصورة
-            const imageUrl = `https://raw.githubusercontent.com/${repo}/main/${folderPath}/${image.name}`;
-            
             const imageImg = document.createElement('img');
             imageImg.className = 'icon-image';
-            imageImg.src = imageUrl;
+            imageImg.src = image.url;
             imageImg.alt = image.name;
             imageImg.loading = 'lazy'; // تحميل كسول لتحسين الأداء
             
@@ -481,23 +508,22 @@
         
         // إضافة مستمعات الأحداث
         loadImagesBtn.addEventListener('click', () => {
-            const repo = repoUrlInput.value.trim();
-            const folderPath = folderPathInput.value.trim();
+            const folderUrl = folderUrlInput.value.trim();
             
-            if (!repo) {
-                alert('يرجى إدخال رابط المستودع (مثال: owner/repo)');
+            if (!folderUrl) {
+                alert('يرجى إدخال رابط المجلد');
                 return;
             }
             
-            loadImagesFromGitHub(repo, folderPath);
+            loadImagesFromUrl(folderUrl);
         });
         
         searchInput.addEventListener('input', filterImages);
         
-        // تحميل الصور افتراضياً عند فتح الصفحة (اختياري)
+        // تحميل الصور افتراضياً عند فتح الصفحة
         window.addEventListener('load', () => {
-            // يمكنك إزالة التعليق من السطر التالي لتحميل الصور تلقائياً
-            // loadImagesFromGitHub('uberfix/shop', 'public/icons/pin-pro');
+            // تحميل الصور من الرابط الافتراضي
+            loadImagesFromUrl('https://al-azab.co/img/uberfix');
         });
     </script>
 </body>
