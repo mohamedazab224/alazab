@@ -1689,7 +1689,7 @@
         "defaultTravelMode": "DRIVING",
         "distanceMeasurementType": "IMPERIAL",
         "mapOptions": {"center":{"lat":29.9865449,"lng":31.2790291},"fullscreenControl":true,"mapTypeControl":false,"streetViewControl":false,"zoom":14,"zoomControl":true,"maxZoom":20,"mapId":""},
-        "mapsApiKey": "AIzaSyAPcl7sl72xKYhWCPM6U3YxHQ1BcpyFUJM"
+        "mapsApiKey": "<%= process.env.GOOGLE_MAPS_API_KEY %>"
       };
 
       function initMap() {
@@ -1698,4 +1698,5 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPcl7sl72xKYhWCPM6U3YxHQ1BcpyFUJM&callback=initMap&libraries=places,geometry&solution_channel=GMP_QB_commutes_v3_c" async defer></script>
   </body>
+
 </html>
