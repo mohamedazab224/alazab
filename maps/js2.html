@@ -74,7 +74,7 @@ const CONFIGURATION = {
     maxZoom: 17,
     mapId: "",
   },
-  mapsApiKey: "AIzaSyAg5N-IY-PV5miRlQHLaqB0obX_XsnHUDE",
+  mapsApiKey: "<%= process.env.GOOGLE_MAPS_API_KEY %>",
   capabilities: {
     input: true,
     autocomplete: true,
@@ -84,6 +84,7 @@ const CONFIGURATION = {
     actions: false,
   },
 };
+
 
   </script>
 </body>
