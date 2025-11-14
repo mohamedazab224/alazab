@@ -930,7 +930,7 @@
         "centerMarker": {"icon":"circle"},
         "mapRadius": 2000,
         "mapOptions": {"center":{"lat":29.9877909,"lng":31.2761117},"fullscreenControl":true,"mapTypeControl":true,"streetViewControl":false,"zoom":16,"zoomControl":true,"maxZoom":20,"mapId":""},
-        "mapsApiKey": "AIzaSyAPcl7sl72xKYhWCPM6U3YxHQ1BcpyFUJM"   //AIzaSyDrSEYA_2HoB3IQuIg6OThed9r53I8gRGk
+        "mapsApiKey": "<%= process.env.GOOGLE_MAPS_API_KEY %>"
       };
 
       function initMap() {
@@ -1128,4 +1128,5 @@
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrSEYA_2HoB3IQuIg6OThed9r53I8gRGk&callback=initMap&libraries=places,geometry&solution_channel=GMP_QB_neighborhooddiscovery_v3_cABCDEF" async defer></script>
   </body>
+
 </html>
