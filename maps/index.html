@@ -1,342 +1,62 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UberFix Maps | منصة الصيانة الذكية</title>
-
-  <!-- هوية UberFix -->
-  <link rel="icon" type="image/svg+xml" href="/upload/uberfix-icon.svg">
-
-  <!-- خطوط القالب الأصلية -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <!-- ستايل البارالاكس -->
-  <link href="tooplate-parallax-depth.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مجموعة خرائط العزب</title>
 
   <style>
-    /* تعديلات هوية UberFix فوق ستايل القالب */
-
     body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 40px;
       direction: rtl;
       text-align: right;
-      background-color: #02030a;
-      color: #f5f5f5;
     }
-
-    .logo-container {
-      right: auto;
-      left: 40px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    h1 {
+      color: #111;
+      margin-bottom: 20px;
     }
-
-    .logo-img {
-      height: 40px;
+    .container {
+      max-width: 600px;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-
-    .logo-text {
-      font-size: 18px;
-      font-weight: 600;
-      color: #f5bf23;
-      letter-spacing: 0.5px;
-    }
-
-    .hero-title {
-      font-size: 40px;
-      color: #f5bf23;
-      letter-spacing: 1px;
-    }
-
-    .hero-subtitle {
-      font-size: 18px;
-      color: #e5e7eb;
-      max-width: 520px;
-    }
-
-    .hero-buttons {
-      margin-top: 24px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: flex-start;
-    }
-
-    .btn-primary,
-    .btn-outline {
-      padding: 10px 20px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.25s ease;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: #f5bf23;
-      color: #111827;
-    }
-
-    .btn-primary:hover {
-      background: #ffffff;
-      color: #0b0b3b;
-      transform: translateY(-2px);
-    }
-
-    .btn-outline {
-      border: 1px solid #f5bf23;
-      color: #f5bf23;
-      background: transparent;
-    }
-
-    .btn-outline:hover {
-      background: rgba(245,191,35,0.12);
-      transform: translateY(-2px);
-    }
-
-    /* قسم الخرائط */
-    #maps-section {
-      padding: 80px 24px 60px;
-      max-width: 1180px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 5;
-    }
-
-    #maps-section h2 {
-      font-size: 26px;
+    a {
+      display: block;
+      padding: 12px 15px;
+      background: #eee;
       margin-bottom: 10px;
-      color: #f5bf23;
-    }
-
-    #maps-section p {
-      font-size: 14px;
-      color: #d1d5db;
-      margin-bottom: 30px;
-    }
-
-    .maps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-    }
-
-    .map-card {
-      background: rgba(10,16,35,0.96);
-      border-radius: 14px;
-      padding: 14px 14px 16px;
-      border: 1px solid rgba(245,191,35,0.15);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      transition: all 0.22s ease;
-    }
-
-    .map-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 35px rgba(0,0,0,0.5);
-      border-color: #f5bf23;
-    }
-
-    .map-label {
-      font-size: 13px;
-      color: #9ca3af;
-    }
-
-    .map-title {
-      font-size: 16px;
-      color: #f9fafb;
-      font-weight: 600;
-    }
-
-    .map-desc {
-      font-size: 13px;
-      color: #9ca3af;
-    }
-
-    .map-link {
-      margin-top: 4px;
-      align-self: flex-start;
-      font-size: 13px;
-      color: #f5bf23;
+      border-radius: 8px;
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      color: #222;
+      font-size: 16px;
+      transition: 0.2s;
     }
-
-    .map-link span {
-      font-size: 17px;
-      line-height: 1;
-    }
-
-    footer {
-      padding: 14px 20px 18px;
-      font-size: 11px;
-      color: #9ca3af;
-      text-align: center;
-      background: radial-gradient(circle at top, rgba(245,191,35,0.04), #02030a);
-      border-top: 1px solid rgba(148,163,253,0.05);
-      margin-top: 20px;
-    }
-
-    @media (max-width: 768px) {
-      .logo-container {
-        left: 16px;
-      }
-      .hero-title {
-        font-size: 30px;
-      }
-      #maps-section {
-        padding: 40px 16px 32px;
-      }
+    a:hover {
+      background: #dcdcdc;
     }
   </style>
 </head>
 
 <body>
-  <!-- مؤشر الماوس والتأثيرات من القالب -->
-  <div class="mouse-follower" id="mouseFollower"></div>
-  <div class="stars" id="stars"></div>
+  <div class="container">
+    <h1>🗺️ جميع نماذج الخرائط – UberFix</h1>
 
-  <!-- حاوية الهيرو مع طبقات البارالاكس الأصلية -->
-  <div class="hero-container" id="hero">
-    <div class="grid-overlay">
-      <div class="grid-diagonal-1"></div>
-      <div class="grid-diagonal-2"></div>
-    </div>
+    <a href="./index.html" target="_blank">index.html – النموذج الرئيسي</a>
+    <a href="./js.html" target="_blank">js.html – خرائط JavaScript</a>
+    <a href="./js2.html" target="_blank">js2.html – نسخة متقدمة</a>
+    <a href="./landing.html" target="_blank">landing.html – صفحة الهبوط</a>
+    <a href="./maps.html" target="_blank">maps.html – Map Base</a>
+    <a href="./maps1.html" target="_blank">maps1.html – Marker & Controls</a>
+    <a href="./maps2.html" target="_blank">maps2.html – Advanced Components</a>
 
-    <!-- لوجو UberFix -->
-    <div class="logo-container">
-      <img src="/upload/uberfix.svg" alt="UberFix.shop" class="logo-img">
-      <div class="logo-text">UberFix.shop • منصة الصيانة الذكية</div>
-    </div>
+    <hr />
 
-    <!-- طبقات القالب (كما هي) -->
-    <div class="parallax-layer layer-back">
-      <div class="floating-dots"></div>
-      <div class="floating-lines"></div>
-    </div>
-    <div class="parallax-layer layer-mid">
-      <div class="parallax-planet planet-1"></div>
-      <div class="parallax-planet planet-2"></div>
-    </div>
-    <div class="parallax-layer layer-float">
-      <div class="rectangles-bottom-left">
-        <div class="rect rect-bl-1"></div>
-        <div class="rect rect-bl-2"></div>
-        <div class="rect rect-bl-3"></div>
-        <div class="rect rect-bl-4"></div>
-        <div class="rect rect-bl-5"></div>
-        <div class="rect rect-bl-6"></div>
-      </div>
-      <div class="rectangles-top-right">
-        <div class="rect rect-tr-1"></div>
-        <div class="rect rect-tr-2"></div>
-        <div class="rect rect-tr-3"></div>
-        <div class="rect rect-tr-4"></div>
-      </div>
-    </div>
-    <div class="parallax-layer layer-fg">
-      <div class="glowing-orb orb-1"></div>
-      <div class="glowing-orb orb-2"></div>
-    </div>
-
-    <!-- محتوى الهيرو المعدّل لـ UberFix -->
-    <div class="hero-content">
-      <h1 class="hero-title">UberFix Maps Center</h1>
-      <p class="hero-subtitle">
-        كل خرائط UberFix في مكان واحد: تتبّع الفنيين، اعرف أقرب نقطة خدمة، واعرض تجارب مختلفة للخرائط
-        مبنية على Google Maps وواجهات مخصّصة لمنصّة الصيانة الذكية.
-      </p>
-
-      <div class="hero-buttons">
-        <!-- حدث الروابط الفعلية للتطبيق عندك -->
-        <a href="#maps-section" class="btn-primary">استعرض طرق عرض الخرائط</a>
-        <a href="/" class="btn-outline">العودة إلى المنصّة الرئيسية</a>
-      </div>
-    </div>
+    <p>جميع الصفحات يتم تشغيلها مباشرة عبر GitHub Pages.</p>
   </div>
-
-  <!-- قسم ربط الخرائط الخمسة -->
-  <section id="maps-section">
-    <h2>طرق عرض الخرائط في UberFix</h2>
-    <p>
-      اختر أسلوب العرض المناسب للتجربة أو الاختبار. كل خريطة مبنية على نفس بيانات UberFix،
-      لكن بواجهة مختلفة لخدمة حالات استخدام متنوّعة (لوحات، تتبّع فنيين، تجربة مواقع، إلخ).
-    </p>
-
-    <div class="maps-grid">
-      <div class="map-card">
-        <div class="map-label">عرض 1</div>
-        <div class="map-title">خريطة GNFF – نمط اللوكيشن السريع</div>
-        <div class="map-desc">
-          واجهة بسيطة لعرض نقطة UberFix الرئيسية وتسهيل مشاركة اللوكيشن.
-        </div>
-        <a class="map-link" href="maps-gfnf.html">
-          فتح الخريطة <span>↗</span>
-        </a>
-      </div>
-
-      <div class="map-card">
-        <div class="map-label">عرض 2</div>
-        <div class="map-title">خريطة JSFiddle – تجارب واجهات مخصصة</div>
-        <div class="map-desc">
-          نسخة تجريبية لتصميم واجهات مدمجة مع Google Maps لاختبار أفكار الواجهة.
-        </div>
-        <a class="map-link" href="maps-jsfiddle.html">
-          فتح الخريطة <span>↗</span>
-        </a>
-      </div>
-
-      <div class="map-card">
-        <div class="map-label">عرض 3</div>
-        <div class="map-title">خريطة RFDFB – لوحة فنيين متقدّمة</div>
-        <div class="map-desc">
-          طبقة عرض توضح مواقع الفنيين مع تفاصيل إضافية، مناسبة للداشبورد.
-        </div>
-        <a class="map-link" href="maps-rfdfb.html">
-          فتح الخريطة <span>↗</span>
-        </a>
-      </div>
-
-      <div class="map-card">
-        <div class="map-label">عرض 4</div>
-        <div class="map-title">خريطة SFSF – توزيع الخدمات</div>
-        <div class="map-desc">
-          توضح انتشار الخدمات حسب المناطق، لاختبار سيناريوهات التوسّع.
-        </div>
-        <a class="map-link" href="maps-sfsf.html">
-          فتح الخريطة <span>↗</span>
-        </a>
-      </div>
-
-      <div class="map-card">
-        <div class="map-label">عرض 5</div>
-        <div class="map-title">خريطة SSS – تجربة واجهة تجارية</div>
-        <div class="map-desc">
-          واجهة عرض أقرب لشكل المنتج النهائي لعملاء الشركات.
-        </div>
-        <a class="map-link" href="maps-sss.html">
-          فتح الخريطة <span>↗</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    © 2025 UberFix.shop – منصة الصيانة الذكية. جميع الحقوق محفوظة.
-  </footer>
-
-  <!-- سكربت القالب الأصلي للبارالاكس والحركة -->
-  <script src="tooplate-2144-parallax-scripts.js"></script>
 </body>
 </html>
