@@ -1,11 +1,12 @@
 https://al-azab.co/logo/favicon.ico
 https://al-azab.co/logo/android-chrome.png
 https://al-azab.co/logo/apple-touch-icon.png
-https://al-azab.co/logo/favicon.png
-https://al-azab.co/logo/favicon-16.png
-https://al-azab.co/logo/favicon-32.png
-https://al-azab.co/logo/logo-512.png
-https://al-azab.co/logo/logo-alazab.gif
-https://al-azab.co/b.png
-https://al-azab.co/w.png
-
+https://al-azab.co/logo/favicon.png  
+https://al-azab.co/logo/favicon-16.png  شعار 16*16
+https://al-azab.co/logo/favicon-32.png  شعار 32*32
+https://al-azab.co/logo/logo-512.png    شعار 512*512
+https://al-azab.co/logo/logo-alazab.gif   العزب متحرك
+https://al-azab.co/logo/logo-b.png  ايقونه ابيض شفاف
+https://al-azab.co/logo/logo-w.png  ايقونه ابيض شفاف
+https://al-azab.co/b.png   العزب اسود شفاف
+https://al-azab.co/w.png   العزب ابيض شفاف
