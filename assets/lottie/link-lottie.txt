@@ -1,0 +1,10 @@
+https://al-azab.co/assets/lottie/
+https://al-azab.co/assets/lottie/road-square-composition.json
+https://al-azab.co/assets/lottie/docs.json
+https://al-azab.co/assets/lottie/shop.json
+https://al-azab.co/assets/lottie/animation.json
+https://al-azab.co/assets/lottie/maintenance.json
+https://al-azab.co/assets/lottie/shop-blou.json
+https://al-azab.co/assets/lottie/waiting-construction.json
+https://al-azab.co/assets/lottie/under-construction.json
+https://al-azab.co/assets/lottie/404-error.json
