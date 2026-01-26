@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
-@import url('/assets/fonts/jozoor') format('woff2');
+/* =========================
+   Color from al-azab.co
+========================= */
 :root {
   --yellow:#ffb900;
   --black:#111;
@@ -9,10 +11,113 @@
   --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
   --border:.1rem solid rgba(0,0,0,.3);
 }
+/* =========================
+   Fonts from al-azab.co
+========================= */
 
+@font-face {
+  font-family: 'GE SS Two';
+  src: url('https://al-azab.co/assets/fonts/GE-SS-Two-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Jozoor';
+  src: url('https://al-azab.co/assets/fonts/Jozoor.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Jozoor AZ';
+  src: url('https://al-azab.co/assets/fonts/Jozoor-az.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Jozoor Regular';
+  src: url('https://al-azab.co/assets/fonts/jozoor-font-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Libre Baskerville';
+  src: url('https://al-azab.co/assets/fonts/LibreBaskerville-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Libre Baskerville';
+  src: url('https://al-azab.co/assets/fonts/LibreBaskerville-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Libre Baskerville';
+  src: url('https://al-azab.co/assets/fonts/LibreBaskerville-BoldItalic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('https://al-azab.co/assets/fonts/Roboto-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HF Winter Rose';
+  src: url('https://al-azab.co/assets/fonts/HFWinterRose.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+/* =========================
+   Arabic Font (Unicode)
+========================= */
+@font-face {
+  font-family: 'Azab Auto Font';
+  src: url('https://al-azab.co/assets/fonts/Jozoor.otf') format('opentype');
+  unicode-range:
+    U+0600-06FF,   /* Arabic */
+    U+0750-077F,
+    U+08A0-08FF,
+    U+FB50-FDFF,
+    U+FE70-FEFF;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =========================
+   English Font (Unicode)
+========================= */
+@font-face {
+  font-family: 'Azab Auto Font';
+  src: url('https://al-azab.co/assets/fonts/LibreBaskerville-Regular.ttf') format('truetype');
+  unicode-range:
+    U+0000-00FF,   /* Basic Latin */
+    U+0100-024F;  /* Latin Extended */
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 * {
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
+  font-family: 'Azab Auto Font', sans-serif;
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
