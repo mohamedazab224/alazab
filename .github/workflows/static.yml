@@ -31,13 +31,54 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # enablement: true allows this action to automatically enable GitHub Pages
+      # if it is not already enabled in the repository settings.
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
           path: '.'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      # Verify that key pages are accessible (HTTP 2xx/3xx) after deployment.
+      # This step checks index.html and a selection of other important pages.
+      # The workflow fails if any critical page is inaccessible.
+      - name: Verify pages are accessible
+        run: |
+          BASE_URL="${{ steps.deployment.outputs.page_url }}"
+          echo "Deployed site URL: $BASE_URL"
+
+          PAGES=(
+            "index.html"
+            "contact.html"
+            "project.html"
+            "services/index.html"
+          )
+
+          ALL_OK=true
+          for PAGE in "${PAGES[@]}"; do
+            URL="${BASE_URL}${PAGE}"
+            STATUS=$(curl -o /dev/null -s -w "%{http_code}" --max-time 15 "$URL" || echo "CURL_ERROR")
+            if [ "$STATUS" = "200" ] || [ "$STATUS" = "301" ] || [ "$STATUS" = "302" ]; then
+              echo "✅ $URL -> HTTP $STATUS"
+            else
+              echo "❌ $URL -> HTTP $STATUS  (page may be missing or inaccessible)"
+              ALL_OK=false
+            fi
+          done
+
+          if [ "$ALL_OK" = "false" ]; then
+            echo "::error::One or more pages did not return a successful HTTP status. Deployment verification failed."
+            exit 1
+          else
+            echo "All verified pages returned a successful HTTP status."
+          fi
